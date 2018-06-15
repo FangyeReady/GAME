@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3945929973
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5d77d6e644c7a63d63b1482fa82bf75a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6e91bf4d7bfc7c90eaa9aea5318d52d8
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Pic/stage_bg_1.jpg
+- Assets/Pic/Materials/stage_bg_2.mat
+Dependencies: []

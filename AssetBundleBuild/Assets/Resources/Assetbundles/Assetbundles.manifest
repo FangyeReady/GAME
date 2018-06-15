@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1687496234
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: image0.assetbundle
+      Dependencies:
+        Dependency_0: pic.assetbundle
+    Info_1:
+      Name: image1.assetbundle
+      Dependencies:
+        Dependency_0: pic.assetbundle
+    Info_2:
+      Name: image2.assetbundle
+      Dependencies:
+        Dependency_0: pic.assetbundle
+    Info_3:
+      Name: pic.assetbundle
+      Dependencies: {}

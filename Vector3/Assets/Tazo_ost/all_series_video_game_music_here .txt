@@ -1,0 +1,59 @@
+If you like these music.
+I will recommend our classic and useful music category system especially for video game to you.
+Since Sugiyama Koichi composed for RPG Game: "Dragon Quest".
+He became a paragon to build classic category for RPG Game in japan.He sort it to eight species which are: 
+[1]Opening[2]Castle[3]Village[4]Wilderness[5]Maze[6]Battle[7]Boss[8]Ending 
+
+According to this.We improved it to be more practical.We defined they are:
+
+[1]Village(Serene&Sad)
+[2]Castle(Honor&Mighty)
+[3]Maze(Restless&Mystery)
+[4]Wilderness(Vast&Ethnic)
+[5]Battle(Enthusiastic&Valor)
+[6]Boss(Devastating&Evil)
+[7]Festival(Happy&Funny)
+[8]Opening&Ending(Shiny&Hopeful) 
+
+We consider they can adapt most of RPG games.So We have prepare two theme for video game RPG music: 
+
+RPG scene theme
+>Village
+https://www.assetstore.unity3d.com/en/#!/content/56394
+>Castle
+https://www.assetstore.unity3d.com/en/#!/content/59742
+>Maze
+https://www.assetstore.unity3d.com/en/#!/content/58110
+>Wilderness
+https://www.assetstore.unity3d.com/en/#!/content/61438
+>Battle
+https://www.assetstore.unity3d.com/en/#!/content/62189
+>Boss
+https://www.assetstore.unity3d.com/en/#!/content/60983
+>Festival
+https://www.assetstore.unity3d.com/en/#!/content/58786
+>Opening&Ending
+https://www.assetstore.unity3d.com/#!/content/61969
+
+Emotion theme 
+>Serene&Sad
+https://www.assetstore.unity3d.com/en/#!/content/57494
+>Honor&Mighty
+https://www.assetstore.unity3d.com/#!/content/62195
+>Restless&Mystery
+https://www.assetstore.unity3d.com/#!/content/62197
+>Vast&Ethnic
+https://www.assetstore.unity3d.com/#!/content/62194
+>Enthusiastic&Valor
+https://www.assetstore.unity3d.com/en/#!/content/62192
+>Devastating&Evil
+https://www.assetstore.unity3d.com/#!/content/62191
+>Happy&Funny
+https://www.assetstore.unity3d.com/#!/content/62199
+>Hopeful&Shiny
+https://www.assetstore.unity3d.com/en/#!/content/62193
+
+We hope you enjoy and like it~THX~ 
+
+>> More about Dr.Game
+https://www.assetstore.unity3d.com/en/#!/publisher/11890

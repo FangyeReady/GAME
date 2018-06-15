@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 3423175790
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4a23ebe7f80834cf338c367765fd8e6d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 87623bb9f607f4edb72c2338fde167fc
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+Assets:
+- Assets/Prefabs/image1.prefab
+Dependencies:
+- Assets/Assetbundles/pic.assetbundle
