@@ -35,6 +35,7 @@ public class PanelManager : MonoBehaviour {
         scrollView.onDragFinished = ResetDrag;
         resetBtn.onClick.Add(new EventDelegate(ResetGridPos));        
         Reset();
+        centerOnChild.CenterOn(pos[43 + 2].transform);
         stopwatch.Stop();
         UnityEngine.Debug.LogError(stopwatch.Elapsed.ToString());
     }
