@@ -11,6 +11,18 @@ public static class StaticData {
     }
 
     /// <summary>
+    /// 角色信息
+    /// </summary>
+    public struct PlayerInfo
+    {
+        string name;
+        int level;
+        int allexp;
+        string[] team;
+
+    }
+
+    /// <summary>
     /// 窗口预制体的路径
     /// </summary>
     public const string POPUP_PATH = "Popup/";
