@@ -14,7 +14,7 @@ public class PopupHall : PopupBase {
 
     private SoundType m_soundType = SoundType.Song;
 
-    private int CurrenSongIndex = StaticData.Song[0];
+    private int CurrenSongIndex = 0;
 
     protected override void Init()
     {
@@ -22,7 +22,7 @@ public class PopupHall : PopupBase {
 
         muteMusic.onValueChanged.AddListener(MuteMusic);
         playMusic.onValueChanged.AddListener(PlayOrPauseMusic);       
-        SoundManager.Instance.PlaySound(m_soundType, CurrenSongIndex);
+        //SoundManager.Instance.PlaySound(m_soundType, CurrenSongIndex);
     }
 
 
@@ -34,19 +34,19 @@ public class PopupHall : PopupBase {
 
     private void PreMusic()
     {
-        if (CurrenSongIndex - 1 >= StaticData.Song[0])
+        if (CurrenSongIndex - 1 >= 0)
         {
             SoundManager.Instance.PauseMusic(m_soundType);
-            SoundManager.Instance.PlaySound(m_soundType, --CurrenSongIndex);
+            SoundManager.Instance.PlaySound(m_soundType, StaticData.Song[--CurrenSongIndex]);
         }
     }
 
     private void NextMusic()
     {
-        if (CurrenSongIndex + 1 <= StaticData.Song[StaticData.Song.Length - 1])
+        if (CurrenSongIndex + 1 <= StaticData.Song.Length - 1)
         {
             SoundManager.Instance.PauseMusic(m_soundType);
-            SoundManager.Instance.PlaySound(m_soundType, ++CurrenSongIndex);
+            SoundManager.Instance.PlaySound(m_soundType, StaticData.Song[++CurrenSongIndex]);
         }
     }
 
@@ -54,7 +54,7 @@ public class PopupHall : PopupBase {
     {
         if (isActive)
         {
-            SoundManager.Instance.PlaySound(m_soundType, CurrenSongIndex);
+            SoundManager.Instance.PlaySound(m_soundType, StaticData.Song[CurrenSongIndex]);
             playImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "Pause");
         }
         else

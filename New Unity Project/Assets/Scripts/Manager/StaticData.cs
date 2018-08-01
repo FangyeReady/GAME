@@ -33,20 +33,16 @@ public static class StaticData {
 
 
 
-    //100为失败BGM,001为序列号
-    //101为成功BGM,001为序列号
-    //102为进入Game场景开始的BGM,001为序列号
-    //103为升级BGM,001为序列号
-    //201为事件BGM,001为序列号,以此类推
-    //301001为点击BGM
-    //401开始为歌曲
-
-    public const int Failed = 0;
-    public const int Success = 1;
-    public const int EnterScene = 2;
-    public const int LevelUp = 0;
-    public const int ClickA = 1;
-    public static int[] Song = new int[3] { 0,1,2};
+  
+    //BGM
+    public const string failed = "failed";
+    public const string Success = "Success";
+    public const string EnterScene = "EnterScene";
+    public const string LevelUp = "LevelUp";
+    //Clcik
+    public const string Click = "click";
+    //Song
+    public static string[] Song = new string[3] { "weinixieshi","konggangqu","qitian"};
 
 
 }

@@ -14,8 +14,7 @@ public class ButtonNew : Button {
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
-        Debug.Log("ButtonClick!");
-        SoundManager.Instance.PlaySound(sound, StaticData.ClickA);//此处ID暂时不填，因为还没有做好资源准备
+        SoundManager.Instance.PlaySound(sound, StaticData.Click);//此处ID暂时不填，因为还没有做好资源准备
 
         //SendMessageUpwards(MethodName, this.gameObject, SendMessageOptions.DontRequireReceiver);
         target.SendMessage(MethodName, this.gameObject, SendMessageOptions.DontRequireReceiver);

@@ -13,7 +13,7 @@ public enum SoundType
 
 public class SoundPlayer : ObjBase
 {
-    public int ID = 0;
+    public string ID = string.Empty;
     public SoundType type;
 
     private AudioClip audioClip;
@@ -42,7 +42,7 @@ public class SoundPlayer : ObjBase
         }
     }
 
-    public SoundPlayer(int id, SoundType type, AudioClip clip)
+    public SoundPlayer(string id, SoundType type, AudioClip clip)
     {
         ID = id;
         this.type = type;
@@ -96,7 +96,7 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
     /// </summary>
     /// <param name="sound"></param>
     /// <param name="id"> </param>
-    public void PlaySound(SoundType sound, int id)
+    public void PlaySound(SoundType sound, string id)
     {
         if (!AudioPlayers.ContainsKey(sound))
         {
@@ -153,7 +153,7 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
 
 
 
-    private AudioClip FetchAudioClip(SoundType sound, int id)
+    private AudioClip FetchAudioClip(SoundType sound, string id)
     {
         if (!AudioResourcesDic.ContainsKey(sound))
         {
