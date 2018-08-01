@@ -8,6 +8,9 @@ public class PopupStart : ObjBase {
     private void BeginToGame()
     {
         Utility.SwitchScene(StaticData.Scenes.Game);
+        LoggerM.Log("Log Test");
+        LoggerM.LogError("Log Test");
+        LoggerM.LogWarning("Log Test");
     }
 
   
