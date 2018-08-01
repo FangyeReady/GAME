@@ -31,7 +31,7 @@ public class PopupHall : PopupBase {
         SettingGrid.SetActive(!SettingGrid.activeSelf);
     }
 
-
+    #region PlayMusic
     private void PreMusic()
     {
         if (CurrenSongIndex - 1 >= 0)
@@ -76,4 +76,12 @@ public class PopupHall : PopupBase {
             muteImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "SoundOff"); 
         }
     }
+    #endregion
+
+    #region UI
+    private void ShowSolider()
+    {
+
+    }
+    #endregion
 }
