@@ -1,24 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using uObject = UnityEngine.Object;
 
 
 public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
 
-    private Dictionary<int, object> allResources = new Dictionary<int, object>();
-    public T LoadResources<T>(string path)where T:Object
+    private Dictionary<string, uObject> resourcesCache = new Dictionary<string, uObject>();
+    public T LoadResources<T>(string path, string name)where T:Object
     {
-        T val = Resources.Load<T>(path);
-        return val;
-    }
-
-    private T FetchResources<T>(int hashCode) where T : Object
-    {
-
-        if (allResources.ContainsKey(hashCode))
+        if (!resourcesCache.ContainsKey(name))
         {
-            return allResources[hashCode] as T;
+            T val = Resources.Load<T>(path + name);
+            if (val)
+            {
+                resourcesCache.Add(name, val);
+                return resourcesCache[name] as T;
+            }
+            return null;
         }
-        return null;
+        return resourcesCache[name] as T;
     }
+
 }

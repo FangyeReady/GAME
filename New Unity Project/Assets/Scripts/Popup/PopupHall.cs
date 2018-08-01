@@ -55,12 +55,12 @@ public class PopupHall : PopupBase {
         if (isActive)
         {
             SoundManager.Instance.PlaySound(m_soundType, CurrenSongIndex);
-            playImg.mainTexture.name = "Pause";
+            playImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "Pause");
         }
         else
         {
             SoundManager.Instance.PauseMusic(m_soundType);
-            playImg.mainTexture.name = "Play";
+            playImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "Play");
         }
     }
 
@@ -69,11 +69,11 @@ public class PopupHall : PopupBase {
         SoundManager.Instance.MuteMusic(m_soundType);
         if (isActive)
         {        
-            muteImg.mainTexture.name = "SoundOn";
+            muteImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "SoundOn"); 
         }
         else
         {
-            muteImg.mainTexture.name = "SoundOff";
+            muteImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "SoundOff"); 
         }
     }
 }

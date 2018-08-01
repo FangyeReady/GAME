@@ -95,7 +95,7 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
     /// 播放声音
     /// </summary>
     /// <param name="sound"></param>
-    /// <param name="id"> 音频ID，创建一个ID用来表示不同作用的音频：如：100101，100为类型区别，101为编号</param>
+    /// <param name="id"> </param>
     public void PlaySound(SoundType sound, int id)
     {
         if (!AudioPlayers.ContainsKey(sound))
@@ -162,7 +162,7 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
         AudioClip audio = AudioResourcesDic[sound].Find( clip => clip.name == id.ToString() );
         if (audio == null)
         {
-            audio = Resources.Load<AudioClip>(StaticData.AUDIO_CLIP_PATH + sound.ToString() + "/" + id.ToString());
+            audio = ResourcesLoader.Instance.LoadResources<AudioClip>(StaticData.AUDIO_CLIP_PATH + sound.ToString() + "/" , id.ToString());
             AudioResourcesDic[sound].Add(audio);
         }
         return audio; 

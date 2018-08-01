@@ -25,7 +25,12 @@ public static class StaticData {
     /// </summary>
     public const string HEAD_ICON_PATH = "Pic/Head/";
 
-    
+    /// <summary>
+    /// UI按钮路径
+    /// </summary>
+    public const string UI_PIC = "Pic/ColorfulButtons/";
+
+
 
 
     //100为失败BGM,001为序列号
@@ -36,12 +41,12 @@ public static class StaticData {
     //301001为点击BGM
     //401开始为歌曲
 
-    public const int Failed = 100001;
-    public const int Success = 101001;
-    public const int EnterScene = 102001;
-    public const int LevelUp = 103001;
-    public const int ClickA = 301001;
-    public static int[] Song = new int[3] { 401001,401002,401003};
+    public const int Failed = 0;
+    public const int Success = 1;
+    public const int EnterScene = 2;
+    public const int LevelUp = 0;
+    public const int ClickA = 1;
+    public static int[] Song = new int[3] { 0,1,2};
 
 
 }
