@@ -79,9 +79,6 @@ public class PopupHall : PopupBase {
     #endregion
 
     #region UI
-    private void ShowSolider()
-    {
 
-    }
     #endregion
 }

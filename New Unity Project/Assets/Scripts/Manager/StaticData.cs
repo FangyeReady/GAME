@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 角色信息
+/// </summary>
+public class PlayerInfo
+{
+   public string name { set; get; }
+   public int level { set; get; }
+   public int allexp { set; get; }
+   public int[] team { set; get; }
+
+}
+
 public static class StaticData {
 
     public enum Scenes
     {
         Start = 0,
         Game = 1,
-    }
-
-    /// <summary>
-    /// 角色信息
-    /// </summary>
-    public struct PlayerInfo
-    {
-        string name;
-        int level;
-        int allexp;
-        string[] team;
-
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public static class StaticData {
     /// </summary>
     public const string UI_PIC = "Pic/ColorfulButtons/";
 
-
+    public const string CONFIG_PATH = "Config/";
 
 
   

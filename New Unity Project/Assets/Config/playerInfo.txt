@@ -1,10 +1,10 @@
 {
-    "Player": [
+    "Player": 
         {
             "name": "fy",
             "level":0,
             "allexp":0,
             "team":["101","102","103"]
         }	
-	]
+	
 }
