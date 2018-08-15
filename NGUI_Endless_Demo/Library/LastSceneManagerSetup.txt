@@ -1,1 +1,4 @@
-sceneSetups: []
+sceneSetups:
+- path: Assets/Conditional_Demo.unity
+  isLoaded: 1
+  isActive: 1

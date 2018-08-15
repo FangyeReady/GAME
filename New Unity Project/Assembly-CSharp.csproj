@@ -64,11 +64,29 @@
     <Compile Include="Assets\blooddemo\blooddemo.cs" />
     <Compile Include="Assets\blooddemo\MouseRayDemo.cs" />
     <Compile Include="Assets\blooddemo\scrollViewDemo.cs" />
-    <Compile Include="Assets\Fonts\Script\scriptTexttest.cs" />
+    <Compile Include="Assets\LitJson\IJsonWrapper.cs" />
+    <Compile Include="Assets\LitJson\JsonData.cs" />
+    <Compile Include="Assets\LitJson\JsonException.cs" />
+    <Compile Include="Assets\LitJson\JsonMapper.cs" />
+    <Compile Include="Assets\LitJson\JsonMockWrapper.cs" />
+    <Compile Include="Assets\LitJson\JsonReader.cs" />
+    <Compile Include="Assets\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\LitJson\Lexer.cs" />
+    <Compile Include="Assets\LitJson\Netstandard15Polyfill.cs" />
+    <Compile Include="Assets\LitJson\obj\Debug\net45\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="Assets\LitJson\obj\Debug\net45\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="Assets\LitJson\obj\Debug\net45\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Assets\LitJson\obj\Debug\netstandard1.5\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="Assets\LitJson\obj\Debug\netstandard1.5\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="Assets\LitJson\obj\Debug\netstandard1.5\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Assets\LitJson\ParserToken.cs" />
+    <Compile Include="Assets\Resources\Fonts\Script\scriptTexttest.cs" />
     <Compile Include="Assets\Scripts\Frame\AutoStaticInstance.cs" />
     <Compile Include="Assets\Scripts\Frame\ButtonNew.cs" />
+    <Compile Include="Assets\Scripts\Frame\LogerM.cs" />
     <Compile Include="Assets\Scripts\Frame\ObjBase.cs" />
     <Compile Include="Assets\Scripts\Frame\PopupBase.cs" />
+    <Compile Include="Assets\Scripts\Frame\ReadData.cs" />
     <Compile Include="Assets\Scripts\Frame\StaticUpdater.cs" />
     <Compile Include="Assets\Scripts\Manager\ResourcesLoader.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
@@ -77,9 +95,16 @@
     <Compile Include="Assets\Scripts\Manager\Utility.cs" />
     <Compile Include="Assets\Scripts\Popup\PopupHall.cs" />
     <Compile Include="Assets\Scripts\Popup\PopupStart.cs" />
-    <None Include="Assets\Fonts\Documentation\JazzCreateBubble_VersionHistory_1.1.txt" />
-    <None Include="Assets\Pic\ColorfulButtons\Credits.txt" />
-    <None Include="Assets\Fonts\Documentation\JazzCreateAltKeys_BubbleFont.txt" />
+    <Compile Include="Assets\Scripts\User\Player.cs" />
+    <None Include="Assets\LitJson\obj\Debug\net45\LitJSON.csproj.FileListAbsolute.txt" />
+    <None Include="Assets\LitJson\obj\Debug\net20\LitJSON.csproj.FileListAbsolute.txt" />
+    <None Include="Assets\Resources\Fonts\Documentation\JazzCreateBubble_VersionHistory_1.1.txt" />
+    <None Include="Assets\LitJson\obj\Debug\net35\LitJSON.csproj.FileListAbsolute.txt" />
+    <None Include="Assets\Resources\Pic\ColorfulButtons\Credits.txt" />
+    <None Include="Assets\Config\playerInfo.txt" />
+    <None Include="Assets\TimeLine.txt" />
+    <None Include="Assets\LitJson\obj\Debug\net40\LitJSON.csproj.FileListAbsolute.txt" />
+    <None Include="Assets\Resources\Fonts\Documentation\JazzCreateAltKeys_BubbleFont.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -274,6 +299,18 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJSON">
+      <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Assets/LitJson/bin/Debug/net20/LitJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJSON">
+      <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Assets/LitJson/bin/Debug/net35/LitJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJSON">
+      <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Assets/LitJson/obj/Debug/net20/LitJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJSON">
+      <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Assets/LitJson/obj/Debug/net35/LitJSON.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/fy/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
