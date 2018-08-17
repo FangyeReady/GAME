@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Conditional_Demo.unity
+- path: Assets/CanvasMode_Demo/CanvasMode_Demo.unity
   isLoaded: 1
   isActive: 1
