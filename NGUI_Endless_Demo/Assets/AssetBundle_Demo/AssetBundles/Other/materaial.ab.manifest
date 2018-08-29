@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 1241146095
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5ba252e10feef2226bcaed6f6a4ca8a3
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: abb9b9167ab0d9f4af2beeb617361f49
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle_Demo/belnd.mat
+- Assets/AssetBundle_Demo/addtive.mat
+Dependencies: []

@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 2771973970
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d731d10c88ec9147181b14cc271258a5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 410dba6e243ff5f7441acba2f75f1a07
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle_Demo/Sphere.prefab
+Dependencies:
+- C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Assets/AssetBundle_Demo/AssetBundles/Other/materaial.ab

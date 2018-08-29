@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 1373657933
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9a772f2844bdb1df585284cedb66adc4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6be903a478995b577e6d51bbd66651f7
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle_Demo/Capsule.prefab
+Dependencies:
+- C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Assets/AssetBundle_Demo/AssetBundles/Other/materaial.ab

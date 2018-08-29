@@ -61,8 +61,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetBundle_Demo\AssetBundle_Demo.cs" />
     <Compile Include="Assets\CanvasMode_Demo\Player.cs" />
     <Compile Include="Assets\Conditional_Demo\Conditional_Demo.cs" />
+    <Compile Include="Assets\ExpSlider_Demo\ExpSlider.cs" />
+    <Compile Include="Assets\New_Demo\NewDemo.cs" />
     <Compile Include="Assets\Utilty.cs" />
     <None Include="Assets\CanvasMode_Demo\ReadMe.txt" />
     <None Include="Assets\MultiCameraRender_Demo\ReadMe.txt" />

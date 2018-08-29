@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 3283861615
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: capsule.ab
+      Dependencies:
+        Dependency_0: materaial.ab
+    Info_1:
+      Name: cube.ab
+      Dependencies:
+        Dependency_0: materaial.ab
+    Info_2:
+      Name: sphere.ab
+      Dependencies:
+        Dependency_0: materaial.ab
+    Info_3:
+      Name: materaial.ab
+      Dependencies: {}
