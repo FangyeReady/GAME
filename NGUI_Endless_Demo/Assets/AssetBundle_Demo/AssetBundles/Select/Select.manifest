@@ -1,19 +1,23 @@
 ManifestFileVersion: 0
-CRC: 4050862643
+CRC: 3677583513
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: capsule.ab
       Dependencies:
-        Dependency_0: materaial.ab
+        Dependency_0: addtive.ab
+        Dependency_1: belnd.ab
     Info_1:
       Name: cube.ab
       Dependencies:
-        Dependency_0: materaial.ab
+        Dependency_0: addtive.ab
     Info_2:
       Name: sphere.ab
       Dependencies:
-        Dependency_0: materaial.ab
+        Dependency_0: addtive.ab
     Info_3:
-      Name: materaial.ab
+      Name: addtive.ab
+      Dependencies: {}
+    Info_4:
+      Name: belnd.ab
       Dependencies: {}

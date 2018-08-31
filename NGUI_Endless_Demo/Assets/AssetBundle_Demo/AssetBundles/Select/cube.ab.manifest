@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1373657933
+CRC: 1238978052
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ca565ab4568adba3a908df2c348e621b
+    Hash: 33cbe7f4f39891bb7891979fec94692a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 6be903a478995b577e6d51bbd66651f7
+    Hash: 53722e4b463365a6659fd0b3f07eaef0
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -21,11 +21,9 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 43
   Script: {instanceID: 0}
-- Class: 64
-  Script: {instanceID: 0}
-- Class: 136
+- Class: 65
   Script: {instanceID: 0}
 Assets:
-- Assets/AssetBundle_Demo/Capsule.prefab
+- Assets/AssetBundle_Demo/Cube.prefab
 Dependencies:
-- C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Assets/AssetBundle_Demo/AssetBundles/Other/materaial.ab
+- C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Assets/AssetBundle_Demo/AssetBundles/Select/addtive.ab

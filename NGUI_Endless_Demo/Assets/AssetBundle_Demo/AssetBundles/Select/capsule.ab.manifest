@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1373657933
+CRC: 4073192861
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ca565ab4568adba3a908df2c348e621b
+    Hash: b89b688205e0a6aa2dead64149eb0ab9
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6be903a478995b577e6d51bbd66651f7
@@ -28,4 +28,5 @@ ClassTypes:
 Assets:
 - Assets/AssetBundle_Demo/Capsule.prefab
 Dependencies:
-- C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Assets/AssetBundle_Demo/AssetBundles/Other/materaial.ab
+- C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Assets/AssetBundle_Demo/AssetBundles/Select/addtive.ab
+- C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Assets/AssetBundle_Demo/AssetBundles/Select/belnd.ab

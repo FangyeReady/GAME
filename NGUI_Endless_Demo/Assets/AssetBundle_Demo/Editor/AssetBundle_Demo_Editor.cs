@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
+using System.IO;
 
 /// <summary>
 /// 测试打包AB依赖和Shader加载问题
@@ -46,5 +46,23 @@ public static class AssetBundle_Demo_Editor {
 
         BuildPipeline.BuildAssetBundles(outPath + "/Other/", bundleBuild, BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
 
+    }
+
+    [MenuItem("Assets/Select Build")]
+    static void BuildAssetBundleSelect()
+    {
+        Object[] objets =  Selection.objects;
+        AssetBundleBuild[] assetBundles = new AssetBundleBuild[objets.Length];
+        string[] paths = new string[objets.Length];
+        for (int i = 0; i < paths.Length; i++)
+        {
+            paths[i] = AssetDatabase.GetAssetPath(objets[i]);
+            assetBundles[i].assetBundleName = Path.GetFileNameWithoutExtension(paths[i]);
+            assetBundles[i].assetBundleVariant = "ab";
+            assetBundles[i].assetNames = new string[] { paths[i] };
+        }
+
+        BuildPipeline.BuildAssetBundles(outPath + "/Select/", assetBundles, BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.Android);
+        Debug.Log("build~! success~!");
     }
 }

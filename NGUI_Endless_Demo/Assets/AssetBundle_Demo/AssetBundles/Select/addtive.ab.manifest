@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1241146095
+CRC: 4152137902
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ed0325248eaa611071e137dd3587d914
+    Hash: 6081044f34010bdc45f44d0bb8026cc2
   TypeTreeHash:
     serializedVersion: 2
     Hash: abb9b9167ab0d9f4af2beeb617361f49
@@ -16,6 +16,5 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 Assets:
-- Assets/AssetBundle_Demo/belnd.mat
 - Assets/AssetBundle_Demo/addtive.mat
 Dependencies: []
