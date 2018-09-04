@@ -166,4 +166,3 @@ C:\Users\fy\Desktop\GAME\My\New Unity Project\obj\Debug\Assembly-CSharp.csproj.C
 C:\Users\fy\Desktop\GAME\My\New Unity Project\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\fy\Desktop\GAME\My\New Unity Project\obj\Debug\Assembly-CSharp.dll
 C:\Users\fy\Desktop\GAME\My\New Unity Project\obj\Debug\Assembly-CSharp.pdb
-C:\Users\fy\Desktop\GAME\My\New Unity Project\Temp\bin\Debug\LitJSON.dll

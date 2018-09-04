@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public enum SoundType
@@ -100,10 +101,12 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
     {
         if (!AudioPlayers.ContainsKey(sound))
         {
-            AudioClip audio = FetchAudioClip(sound, id);
-            SoundPlayer soundPlayer = new SoundPlayer(id, sound, audio);
-            AudioPlayers.Add(sound, soundPlayer);
-            AudioPlayers[sound].Play();
+            FetchAudioClip(sound, id, (audio)=>{
+                SoundPlayer soundPlayer = new SoundPlayer(id, sound, audio);
+                AudioPlayers.Add(sound, soundPlayer);
+                AudioPlayers[sound].Play();
+            });
+
         }
         else
         {
@@ -114,10 +117,12 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
             }
             else
             {
-                AudioClip audio = FetchAudioClip(sound, id);
-                AudioPlayers[sound].AudioClipSet = audio;
-                AudioPlayers[sound].ID = id;
-                AudioPlayers[sound].Play();
+                FetchAudioClip(sound, id, (audio)=>{
+                    AudioPlayers[sound].AudioClipSet = audio;
+                    AudioPlayers[sound].ID = id;
+                    AudioPlayers[sound].Play();
+                });
+              
             }
         }
     }
@@ -147,13 +152,12 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
         {
             return;
         }
-
         AudioPlayers[sound].Mute();
     }
 
 
 
-    private AudioClip FetchAudioClip(SoundType sound, string id)
+    private void FetchAudioClip(SoundType sound, string id, Action<AudioClip> callback)
     {
         if (!AudioResourcesDic.ContainsKey(sound))
         {
@@ -161,10 +165,13 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
         }
         AudioClip audio = AudioResourcesDic[sound].Find( clip => clip.name == id.ToString() );
         if (audio == null)
-        {
-            audio = ResourcesLoader.Instance.LoadResources<AudioClip>(StaticData.AUDIO_CLIP_PATH + sound.ToString() + "/" , id.ToString());
-            AudioResourcesDic[sound].Add(audio);
+        {         
+            ResourcesLoader.Instance.GetRes<AudioClip>(id.ToString(),
+                (clip)=> {
+                    audio = clip;
+                    AudioResourcesDic[sound].Add(audio);
+                    callback(audio);
+                });    
         }
-        return audio; 
     }
 }

@@ -100,7 +100,6 @@
     <None Include="Assets\LitJson\obj\Debug\net20\LitJSON.csproj.FileListAbsolute.txt" />
     <None Include="Assets\Resources\Fonts\Documentation\JazzCreateBubble_VersionHistory_1.1.txt" />
     <None Include="Assets\LitJson\obj\Debug\net35\LitJSON.csproj.FileListAbsolute.txt" />
-    <None Include="Assets\Resources\Pic\ColorfulButtons\Credits.txt" />
     <None Include="Assets\Config\playerInfo.txt" />
     <None Include="Assets\TimeLine.txt" />
     <None Include="Assets\LitJson\obj\Debug\net40\LitJSON.csproj.FileListAbsolute.txt" />
@@ -299,18 +298,6 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJSON">
-      <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Assets/LitJson/bin/Debug/net20/LitJSON.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJSON">
-      <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Assets/LitJson/bin/Debug/net35/LitJSON.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJSON">
-      <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Assets/LitJson/obj/Debug/net20/LitJSON.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJSON">
-      <HintPath>C:/Users/fy/Desktop/GAME/My/New Unity Project/Assets/LitJson/obj/Debug/net35/LitJSON.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/fy/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

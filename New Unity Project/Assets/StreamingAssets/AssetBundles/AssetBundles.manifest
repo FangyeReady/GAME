@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3182238007
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: play.ab
+      Dependencies: {}
+    Info_1:
+      Name: pause.ab
+      Dependencies: {}
+    Info_2:
+      Name: soundoff.ab
+      Dependencies: {}
+    Info_3:
+      Name: soundon.ab
+      Dependencies: {}

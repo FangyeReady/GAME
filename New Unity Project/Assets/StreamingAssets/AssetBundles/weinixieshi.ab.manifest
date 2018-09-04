@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 682493117
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f49dd81bcb617b8573695f9e90882451
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Music/Song/weinixieshi.mp3
+Dependencies: []

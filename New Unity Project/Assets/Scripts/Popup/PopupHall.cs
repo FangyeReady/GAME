@@ -55,12 +55,18 @@ public class PopupHall : PopupBase {
         if (isActive)
         {
             SoundManager.Instance.PlaySound(m_soundType, StaticData.Song[CurrenSongIndex]);
-            playImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "Pause");
+            ResourcesLoader.Instance.SetSprite("Pause", (sp) =>
+            {   
+                playImg.overrideSprite = sp;
+            });
         }
         else
         {
             SoundManager.Instance.PauseMusic(m_soundType);
-            playImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "Play");
+            ResourcesLoader.Instance.SetSprite("Play", (sp) =>
+            {
+                playImg.overrideSprite = sp;
+            });
         }
     }
 
@@ -68,12 +74,18 @@ public class PopupHall : PopupBase {
     {
         SoundManager.Instance.MuteMusic(m_soundType);
         if (isActive)
-        {        
-            muteImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "SoundOn"); 
+        {
+            ResourcesLoader.Instance.SetSprite("SoundOn", (sp) =>
+            {
+                muteImg.overrideSprite = sp;
+            }); 
         }
         else
         {
-            muteImg.overrideSprite = ResourcesLoader.Instance.LoadResources<Sprite>(StaticData.UI_PIC, "SoundOff"); 
+            ResourcesLoader.Instance.SetSprite("SoundOff", (sp) =>
+            {
+                muteImg.overrideSprite = sp;
+            }); 
         }
     }
     #endregion

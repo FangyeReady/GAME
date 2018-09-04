@@ -1,4 +1,3 @@
-
 *.ide
 *.dll
 *.mdb
@@ -7,6 +6,8 @@
 *.ide-shm
 *.ide-wal
 *.csproj
+*.pdb
+*.cache
 NGUI_Endless_Demo/.vs/NGUI_Endless_Demo/v15/Server/sqlite3/storage.ide
 NGUI_Endless_Demo/.vs/NGUI_Endless_Demo/v15/Server/sqlite3/storage.ide-shm
 NGUI_Endless_Demo/.vs/NGUI_Endless_Demo/v15/Server/sqlite3/storage.ide-wal
@@ -15,3 +16,5 @@ NGUI_Endless_Demo/Library/metadata/
 NGUI_Endless_Demo/Temp/
 
 New Unity Project/.vs/New Unity Project/v15/Server/
+New Unity Project/Library/metadata/
+New Unity Project/Library/
