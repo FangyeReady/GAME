@@ -23,7 +23,7 @@ public class Player : AutoStaticInstance<Player> {
     public IEnumerator InitInfo()
     {
         ReadData.Instance.GetPlayerData(Application.dataPath + "/" + StaticData.CONFIG_PATH +
-            "playerInfo.txt", out playerInfo);
+            "playerInfoTest.txt", out playerInfo);
         yield return null;
     }
 

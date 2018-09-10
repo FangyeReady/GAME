@@ -9,9 +9,6 @@ using Object = UnityEngine.Object;
 public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
 
     private Dictionary<string, Object> resourcesCache = new Dictionary<string, Object>();
-
-
-
     private IEnumerator LoadResources<T>(string name, Action<T> callback)where T:Object
     {
         if (!resourcesCache.ContainsKey(name))
@@ -80,9 +77,9 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
         }    
     }
 
-    public void SetSprite(string name, Action<Sprite> callBack)
+    public void SetSprite(string path,string name, Action<Sprite> callBack)
     {
-        var sp = Resources.Load<Sprite>("Pic/ColorfulButtons/" + name);
+        var sp = Resources.Load<Sprite>(path + name);
         callBack(sp);
     }
 
