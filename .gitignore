@@ -8,6 +8,8 @@
 *.csproj
 *.pdb
 *.cache
+*.sln
+*.meta
 NGUI_Endless_Demo/.vs/NGUI_Endless_Demo/v15/Server/sqlite3/storage.ide
 NGUI_Endless_Demo/.vs/NGUI_Endless_Demo/v15/Server/sqlite3/storage.ide-shm
 NGUI_Endless_Demo/.vs/NGUI_Endless_Demo/v15/Server/sqlite3/storage.ide-wal
@@ -20,3 +22,4 @@ New Unity Project/Library/metadata/
 New Unity Project/Library/
 New Unity Project/.vs/
 New Unity Project/Temp/
+New Unity Project/obj/
