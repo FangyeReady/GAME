@@ -1,55 +1,55 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : AutoStaticInstance<Player> {
 
-    PlayerInfo playerInfo;
-
-    public string Name
-    { get { return playerInfo.name; } }
-
-    public int Level
-    { get { return playerInfo.level; }
-      private set { playerInfo.level = value; }
+    private PlayerInfo _playerInfo;
+    public PlayerInfo PlayerInfos
+    {
+        get { return _playerInfo; }
     }
 
-    public int AllExp
-    { get { return playerInfo.allexp; } }
 
-    public int CurrentExp
-    { get { return GetCurrentExpAndLevel(); }}
+    private string path = StaticData.CONFIG_PATH + "PlayerInfo.txt";
+
 
     public IEnumerator InitInfo()
     {
-        ReadData.Instance.GetPlayerData(Application.dataPath + "/" + StaticData.CONFIG_PATH +
-            "playerInfoTest.txt", out playerInfo);
+        path = Application.dataPath + path;
+        ReadData.Instance.GetPlayerData(path, out _playerInfo);
         yield return null;
     }
 
 
-    private int GetCurrentExpAndLevel()
+    public void RefreshData()
     {
-        int tempExp = AllExp;
-        int baseExp = 1000;
-        int offset = 150;
-        int level = 0;
-        int curExp = 0;
-        while (true)
-        {
-            tempExp -= baseExp;
-            if (tempExp < 0)
-            {
-                curExp = tempExp;
-                break;
-            }
-            baseExp += offset;
-            ++level;
-        }
-        this.Level = level;
-        return curExp;
+        JsonData data = JsonMapper.ToJson(_playerInfo);
+        ReadData.Instance.SavePlayerData(path, data.ToString());
     }
 
-    
+    public void SetGameTime(float time)
+    {
+        string totaltime = string.Empty;
+        int min = (int)time / 60;//分钟
+        int h = min / 60; //小时
+        int day = h / 24;//天
+
+
+        //show
+        int second = (int)time % 60;
+        int min_show = min % 60;
+        int h_show = h % 24;
+        int day_show = h / 24;
+
+        totaltime = string.Format("{0}d{1}h{2}m{3}s", day_show, h_show, min_show, second);
+
+        _playerInfo.TotalTime = totaltime;
+
+        LoggerM.LogError(totaltime);
+    }
+
 
 }

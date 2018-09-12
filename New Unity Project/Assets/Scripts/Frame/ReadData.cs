@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using System.IO;
+using System.Text;
+using System;
 
 /// <summary>
 /// 读取配置表
@@ -15,14 +17,44 @@ public class ReadData :AutoStaticInstance<ReadData> {
         JsonData data = JsonMapper.ToObject(str);
 
         info = new PlayerInfo();
-        info.name = data["Player"]["name"].ToString();
-        info.level = int.Parse( data["Player"]["level"].ToString() );
-        info.allexp = int.Parse( data["Player"]["allexp"].ToString() );
-        var team = data["Player"]["team"];
-        info.team = new int[team.Count];
-        for (int i = 0; i < team.Count; i++)
+        info.ID = (uint)data["ID"];
+        info.Name = (string)data["Name"];
+        info.Coin = (uint)data["Coin"];
+        info.BusinessLevel = (uint)data["BusinessLevel"];
+        info.MaxServentNum = (uint)data["MaxServentNum"];
+        info.TotalTime = (string)data["TotalTime"];
+        info.Servent = new List<ServentInfo>();
+
+        JsonData servent = JsonMapper.ToObject(data["Servent"].ToJson());
+
+        for (int i = 0; i < servent.Count; i++)
         {
-            info.team[i] = int.Parse(team[i].ToString());
-        }             
+            ServentInfo serventInfo = JsonMapper.ToObject<ServentInfo>(servent[i].ToJson());
+            if (serventInfo.ID == "0")
+            {
+                serventInfo.ID = UnityEngine.Random.Range(4001, 4126).ToString();//待优化
+                //还需要对serventinfo进行填充
+                //to do..
+            }
+            info.Servent.Add(serventInfo);
+        }
+        //存储数据
+        Player.Instance.RefreshData();
     }
+
+
+    public void SavePlayerData(string path, string data)
+    {
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+        //File.WriteAllText(path, data);
+        FileStream fileStream = new FileStream(path, FileMode.CreateNew);
+        byte[] bytes = Encoding.UTF8.GetBytes(data);
+        fileStream.Write(bytes,0,bytes.Length);
+        fileStream.Close();
+    }
+
+    
 }

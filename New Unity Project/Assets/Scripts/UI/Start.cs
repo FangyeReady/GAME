@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.Text;
 
 public class Start : ObjBase {
 
-    private int AllCount = 1;
+    private int AllCount = 2;
     private int count = 0;
     public Slider EnterProgress;
     private Text progressText;
@@ -35,17 +37,17 @@ public class Start : ObjBase {
     {
         yield return Player.Instance.InitInfo();
         ++count;
+        yield return GameManager.Instance.Init();
+        ++count;
         yield return null;
 
         //可以开始游戏的逻辑
-        LoggerM.Log(Time.unscaledTime.ToString() + "~~~");
-        Invoke("Begin", 1f);
+        Begin();
     }
 
     private void Begin()
     {
         startButton.transform.localPosition = resetPos;
-        LoggerM.Log(Time.unscaledTime.ToString());
     }
 
     private void RefeshProgress()

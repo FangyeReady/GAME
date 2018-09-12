@@ -98,6 +98,7 @@ public class Hall : PopupBase {
     #region UI
     private void OnInfoClick()
     {
+        UIManager.Instance.OpenWindow<PopupPlayerInfo>();
         LoggerM.Log("info~!");
     }
 
@@ -117,4 +118,5 @@ public class Hall : PopupBase {
     }
 
     #endregion
+
 }

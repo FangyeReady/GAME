@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,22 @@ using UnityEngine;
 /// </summary>
 public class PlayerInfo
 {
-   public string name { set; get; }
-   public int level { set; get; }
-   public int allexp { set; get; }
-   public int[] team { set; get; }
+    public uint ID;
+    public string Name;
+    public uint Coin;
+    public uint BusinessLevel;
+    public uint MaxServentNum;
+    public string TotalTime;
+    public List<ServentInfo> Servent;
+}
 
+public class ServentInfo
+{
+    public string ID;
+    public string Name;
+    public int Level;
+    public string Desc;
+    public int Loyal;
 }
 
 public static class StaticData {
@@ -35,14 +47,14 @@ public static class StaticData {
     /// <summary>
     /// 头像加载路径
     /// </summary>
-    public const string HEAD_ICON_PATH = "Pic/Head/";
+    public const string HEAD_ICON_PATH = "Pic/Head/RoleHead/";
 
     /// <summary>
     /// UI按钮路径
     /// </summary>
     public const string UI_PIC = "Pic/ColorfulButtons/";
 
-    public const string CONFIG_PATH = "Config/";
+    public const string CONFIG_PATH = "/CFG/";
 
 
   
