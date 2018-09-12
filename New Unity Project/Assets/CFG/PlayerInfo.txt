@@ -1,1 +1,1 @@
-{"ID":123321,"Name":"FY","Coin":1000,"BusinessLevel":1,"MaxServentNum":2,"TotalTime":"0d0h1m18s","Servent":[{"ID":"4004","Name":"","Level":1,"Desc":"","Loyal":100}]}
+{"ID":123321,"Name":"FY","Coin":1000,"BusinessLevel":1,"MaxServentNum":2,"TotalTime":"0d0h2m25s","Servent":[{"ID":4001,"Name":"","Level":1,"skillID":0,"Desc":"","Loyal":100,"star":0}]}

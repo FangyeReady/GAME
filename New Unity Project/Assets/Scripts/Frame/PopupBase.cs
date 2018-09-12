@@ -6,7 +6,6 @@ public class PopupBase : ObjBase {
 
     public virtual void Close()
     {
-        Debug.Log("---Closed!---");
         DisableGameObject();
     }
 }

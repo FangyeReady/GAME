@@ -83,4 +83,14 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
         callBack(sp);
     }
 
+    public T GetSimpleRes<T>(string path, string name) where T : Object
+    {
+        T val = Resources.Load(path + name) as T;
+        if (val)
+        {
+            return val;
+        }
+        return null;
+    }
+
 }

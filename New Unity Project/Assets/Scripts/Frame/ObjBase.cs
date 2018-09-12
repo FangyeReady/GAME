@@ -45,27 +45,27 @@ public class ObjBase : MonoBehaviour {
 
     protected virtual void PreInit()
     {
-        Debug.Log("---PreInit---");
+
     }
 
     protected virtual void Init()
     {
-        Debug.Log("---Init---");
+
     }
 
     protected virtual void OnEnabled()
     {
-        Debug.Log("---OnEnabled---");
+
     }
 
     protected virtual void OnDisabled()
     {
-        Debug.Log("---OnDisabled---");
+
     }
 
     protected virtual void OnDestoryed()
     {
-        Debug.Log("---OnDestoryed---");
+
     }
 
 
@@ -74,7 +74,7 @@ public class ObjBase : MonoBehaviour {
     /// </summary>
     public virtual void UnLoad()
     {
-        Debug.Log("---UnLoad---");
+
     }
 
     public void EnableGameObject()

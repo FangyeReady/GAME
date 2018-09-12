@@ -19,4 +19,9 @@ public class AutoStaticInstance<T> : MonoBehaviour where T: MonoBehaviour
             return _instance as T;
         }
     }
+
+    public virtual void InitManager()
+    {
+
+    }
 }

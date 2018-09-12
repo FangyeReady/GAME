@@ -1,0 +1,14 @@
+{
+
+"HeadPic":4008,
+"GachaCost":100,
+"serventMin":4001,
+"serventMax":4126,
+"StarNone":"4001-4025",
+"StarOne":"4026-4038",
+"StarTwo":"4039-4051",
+"StarThree":"4052-4090",
+"StarFour":"4091-4122",
+"StarFive":"4123-4126"
+
+}

@@ -3,6 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Star
+{
+    one = 1,
+    two,
+    three,
+    four,
+    five,
+    none = 0
+}
 /// <summary>
 /// 角色信息
 /// </summary>
@@ -19,11 +29,31 @@ public class PlayerInfo
 
 public class ServentInfo
 {
-    public string ID;
+    public int ID;
     public string Name;
     public int Level;
+    public int skillID;
     public string Desc;
     public int Loyal;
+    public int star;
+}
+
+public class GameSettingInfo
+{
+    public struct GachaRange {
+        public int min;
+        public int max;
+    }
+    public int HeadPic;
+    public uint GachaCost;
+    public int serventMin;
+    public int serventMax;
+    public GachaRange none;
+    public GachaRange one;
+    public GachaRange two;
+    public GachaRange three;
+    public GachaRange four;
+    public GachaRange five;
 }
 
 public static class StaticData {

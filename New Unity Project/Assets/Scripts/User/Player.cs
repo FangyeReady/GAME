@@ -16,18 +16,18 @@ public class Player : AutoStaticInstance<Player> {
     private string path = StaticData.CONFIG_PATH + "PlayerInfo.txt";
 
 
-    public IEnumerator InitInfo()
+    public override void InitManager()
     {
+        base.InitManager();
         path = Application.dataPath + path;
         ReadData.Instance.GetPlayerData(path, out _playerInfo);
-        yield return null;
     }
 
 
     public void RefreshData()
     {
         JsonData data = JsonMapper.ToJson(_playerInfo);
-        ReadData.Instance.SavePlayerData(path, data.ToString());
+        ReadData.Instance.SaveData(path, data.ToString());
     }
 
     public void SetGameTime(float time)
@@ -48,7 +48,7 @@ public class Player : AutoStaticInstance<Player> {
 
         _playerInfo.TotalTime = totaltime;
 
-        LoggerM.LogError(totaltime);
+        //LoggerM.LogError(totaltime);
     }
 
 

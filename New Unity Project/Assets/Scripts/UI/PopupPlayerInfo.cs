@@ -26,14 +26,17 @@ public class PopupPlayerInfo : PopupBase {
         maxServentNum.text = playerInfo.MaxServentNum.ToString();
         serventNum.text = playerInfo.Servent.Count.ToString();
         totalTime.text = playerInfo.TotalTime.ToString();
-        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + playerInfo.Servent[0].ID.ToString(), (sp) => head.overrideSprite = sp);
+        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + GameManager.Instance.GameSettingInfos.HeadPic.ToString(), (sp) => head.overrideSprite = sp);
         CreateItems(playerInfo.Servent);
+
+        StaticUpdater.Instance.UpdateEvent += UpdateTotalTime;
     }
 
 
     private void OnHeadClick()
     {
         LoggerM.LogError("OnHeadClick");
+        UIManager.Instance.OpenWindow<PopupChooseHead>();
     }
 
     private void OnCloseClick()
@@ -52,6 +55,18 @@ public class PopupPlayerInfo : PopupBase {
                 ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + list[i].ID.ToString(), (sp) => img.overrideSprite = sp);
             }
         }
+    }
+
+
+    private void UpdateTotalTime()
+    {
+        totalTime.text = Player.Instance.PlayerInfos.TotalTime.ToString();
+    }
+
+    public void SetHeadPic(int id)
+    {
+        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + id.ToString(), (sp) => head.overrideSprite = sp);
+        GameManager.Instance.GameSettingInfos.HeadPic = id;
     }
 
     

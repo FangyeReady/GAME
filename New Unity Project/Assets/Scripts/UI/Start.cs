@@ -7,7 +7,7 @@ using System.Text;
 
 public class Start : ObjBase {
 
-    private int AllCount = 2;
+    private int AllCount = 4;
     private int count = 0;
     public Slider EnterProgress;
     private Text progressText;
@@ -35,14 +35,18 @@ public class Start : ObjBase {
 
     IEnumerator InitData()
     {
-        yield return Player.Instance.InitInfo();
+        Player.Instance.InitManager();
         ++count;
-        yield return GameManager.Instance.Init();
+        GameManager.Instance.InitManager();
         ++count;
-        yield return null;
+        UIManager.Instance.InitManager();
+        ++count;
+        ServentManager.Instance.InitManager();
+        ++count;
 
         //可以开始游戏的逻辑
         Begin();
+        yield return null;
     }
 
     private void Begin()
