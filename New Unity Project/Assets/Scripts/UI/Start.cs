@@ -26,7 +26,6 @@ public class Start : ObjBase {
     }
 
 
-
     private void BeginToGame()
     {      
         Utility.SwitchScene(StaticData.Scenes.Game);

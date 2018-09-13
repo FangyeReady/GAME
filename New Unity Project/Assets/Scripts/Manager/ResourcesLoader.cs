@@ -80,7 +80,10 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
     public void SetSprite(string path,string name, Action<Sprite> callBack)
     {
         var sp = Resources.Load<Sprite>(path + name);
-        callBack(sp);
+        if (sp != null)
+        {
+            callBack(sp);
+        }
     }
 
     public T GetSimpleRes<T>(string path, string name) where T : Object

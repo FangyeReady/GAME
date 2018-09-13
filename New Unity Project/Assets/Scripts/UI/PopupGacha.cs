@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PopupGacha : PopupBase {
 
@@ -25,11 +26,11 @@ public class PopupGacha : PopupBase {
     private void OneGachaClick()
     {
         gachaResult.Clear();
-        ServentInfo servent = GetGachaResult(GetRandomVal(1, 100));
+        ServentInfo servent = GetGachaResult(Utility.GetRandomVal(1, 100));
         gachaResult.Add(servent);
         Player.Instance.PlayerInfos.Coin -= gachaCost;
 
-        UIManager.Instance.OpenWindow<PopupGachaResult>(window=>window.CreateItems(gachaResult));
+        StartCoroutine("ShowGacha");
     }
 
     private void ElevenGachaClick()
@@ -37,29 +38,34 @@ public class PopupGacha : PopupBase {
         gachaResult.Clear();
         for (int i = 0; i < 10; i++)
         {
-            ServentInfo servent = GetGachaResult(GetRandomVal(1, 100));
+            ServentInfo servent = GetGachaResult(Utility.GetRandomVal(1, 100));
             gachaResult.Add(servent);
         }
 
         Player.Instance.PlayerInfos.Coin -= gachaCost * 10;
-        UIManager.Instance.OpenWindow<PopupGachaResult>(window => window.CreateItems(gachaResult));
-
+        StartCoroutine("ShowGacha");
     }
 
-    /// <summary>
-    /// 得到一个范围内的随机数
-    /// </summary>
-    /// <param name="min">1，最小角色id</param>
-    /// <param name="max">100，最大角色id</param>
-    /// <returns></returns>
-    private int GetRandomVal(int min, int max)
+
+    private IEnumerator ShowGacha()
     {
-        int seed = Random.Range(int.MinValue, int.MaxValue);
-        System.Random random = new System.Random(seed);
-
-        int result = random.Next(min, max);//包含下限，不包含上限
-
-        return result;
+        int index = 0;
+        bool goOn = false;
+        Action acallback = () => { goOn = true; ++index; };
+        while (index < gachaResult.Count)
+        {
+            goOn = false;
+            UIManager.Instance.OpenWindow<PopupGachaItem>(window => {
+                window.Init(gachaResult[index], acallback);
+                //window.PlayAni();
+            });
+            while (!goOn)
+            {
+                yield return null;
+            }
+        }
+        yield return new WaitForSeconds(0.5f);
+        UIManager.Instance.OpenWindow<PopupGachaResult>(window => window.CreateItems(gachaResult));
     }
 
     private ServentInfo GetGachaResult(int random)
@@ -91,6 +97,7 @@ public class PopupGacha : PopupBase {
             star = Star.five; //5%为五星
         }
 
+        int index = 0;
         int result = 0;
         GameSettingInfo info = GameManager.Instance.GameSettingInfos;
 
@@ -99,28 +106,34 @@ public class PopupGacha : PopupBase {
         switch (star)
         {
             case Star.one:
-                result = GetRandomVal(info.one.min, info.one.max);      
-                break;
-            case Star.two: 
-                result = GetRandomVal(info.two.min, info.two.max);
-                break;
-            case Star.three:
-                result = GetRandomVal(info.three.min, info.three.max);
-                break;
-            case Star.four:
-                result = GetRandomVal(info.four.min, info.four.max);
-                break;
-            case Star.five:
-                result = GetRandomVal(info.five.min, info.five.max);
-                break;
-            case Star.none:
-                result = GetRandomVal(info.none.min, info.none.max);
+                index = Utility.GetRandomVal(0, info.one.Count);
+                result = info.one[index];
+                break;                        
+            case Star.two:                    
+                index = Utility.GetRandomVal(0, info.two.Count);
+                result = info.two[index];
+                break;                        
+            case Star.three:                  
+                index = Utility.GetRandomVal(0, info.three.Count);
+                result = info.three[index];
+                break;                        
+            case Star.four:                   
+                index = Utility.GetRandomVal(0, info.four.Count);
+                result = info.four[index];
+                break;                       
+            case Star.five:                  
+                index = Utility.GetRandomVal(0, info.five.Count);
+                result = info.five[index];
+                break;                       
+            case Star.none:                  
+                index = Utility.GetRandomVal(0, info.none.Count);
+                result = info.none[index];
                 break;
             default:
                 break;
         }
 
-        Debug.LogError("Result:" + result.ToString());
+        //Debug.LogError("Result:" + index.ToString());
         ServentManager.Instance.SetServentInfo(star, result, ref servent);
 
         return servent;

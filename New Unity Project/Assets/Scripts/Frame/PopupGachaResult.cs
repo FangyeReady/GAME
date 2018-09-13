@@ -27,6 +27,14 @@ public class PopupGachaResult : PopupBase {
         }  
     }
 
+    private void PlayItemsAni(ServentInfo servent)
+    {
+        //GachaItem item = Instantiate(itemPrefab, parent).GetComponent<GachaItem>();
+        //item.Init(servent);
+        //item.gameObject.SetActive(true);
+        Player.Instance.PlayerInfos.Servent.Add(servent);//暂时这样做，后续改成只能选择一个加入队伍？
+    }
+
 
 
     private void OnConfirmClick()

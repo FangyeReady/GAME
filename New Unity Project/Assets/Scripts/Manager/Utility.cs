@@ -43,4 +43,20 @@ public static class Utility  {
         TimeSpan toNow = new TimeSpan(lTime); //时间间隔
         return dtStart.Add(toNow); //加上时间间隔得到目标时间
     }
+
+    /// <summary>
+    /// 得到一个范围内的随机数
+    /// </summary>
+    /// <param name="min">1，最小角色id</param>
+    /// <param name="max">100，最大角色id</param>
+    /// <returns></returns>
+    public static int GetRandomVal(int min, int max)
+    {
+        int seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+        System.Random random = new System.Random(seed);
+
+        int result = random.Next(min, max);//包含下限，不包含上限
+
+        return result;
+    }
 }

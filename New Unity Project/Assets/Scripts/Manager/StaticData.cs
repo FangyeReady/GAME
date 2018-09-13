@@ -40,21 +40,24 @@ public class ServentInfo
 
 public class GameSettingInfo
 {
-    public struct GachaRange {
-        public int min;
-        public int max;
-    }
     public int HeadPic;
     public uint GachaCost;
     public int serventMin;
     public int serventMax;
-    public GachaRange none;
-    public GachaRange one;
-    public GachaRange two;
-    public GachaRange three;
-    public GachaRange four;
-    public GachaRange five;
+    public List<int> none;
+    public List<int> one;
+    public List<int> two;
+    public List<int> three;
+    public List<int> four;
+    public List<int> five;
 }
+
+public class ServentSkillInfo
+{
+    public Dictionary<string, int[]> skillID;
+    public Dictionary<string, string> skillDesc;
+}
+
 
 public static class StaticData {
 

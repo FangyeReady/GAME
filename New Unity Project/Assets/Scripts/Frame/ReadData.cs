@@ -65,33 +65,27 @@ public class ReadData :AutoStaticInstance<ReadData> {
             info.HeadPic = Player.Instance.PlayerInfos.Servent[0].ID;
         }
         info.GachaCost = (uint)data["GachaCost"];
-        string[] none = ((string)data["StarNone"]).Split('-');
-        string[] one =  ((string)data["StarOne"]).Split('-');
-        string[] two =   ((string)data["StarTwo"]).Split('-');
-        string[] three = ((string)data["StarThree"]).Split('-');
-        string[] four = ((string)data["StarFour"]).Split('-');
-        string[] five = ((string)data["StarFive"]).Split('-');
-
-        info.none.min = int.Parse(none[0]);
-        info.none.max = int.Parse(none[1]);
-
-        info.one.min = int.Parse(one[0]);
-        info.one.max = int.Parse(one[1]);
-
-        info.two.min = int.Parse(two[0]);
-        info.two.max = int.Parse(two[1]);
-
-        info.three.min = int.Parse(three[0]);
-        info.three.max = int.Parse(three[1]);
-
-        info.four.min = int.Parse(four[0]);
-        info.four.max = int.Parse(four[1]);
-
-        info.five.min = int.Parse(five[0]);
-        info.five.max = int.Parse(five[1]);
-
-
+        info.none = JsonMapper.ToObject<List<int>>(data["none"].ToJson());
+        info.one = JsonMapper.ToObject < List<int> > (data["one"].ToJson());
+        info.two = JsonMapper.ToObject < List<int> > (data["two"].ToJson());
+        info.three = JsonMapper.ToObject < List<int> > (data["three"].ToJson());
+        info.four = JsonMapper.ToObject < List<int> > (data["four"].ToJson());
+        info.five = JsonMapper.ToObject < List<int> > (data["five"].ToJson());  
     }
+
+
+    public void GetServentSkillData(string pathid, string pathdesc, out ServentSkillInfo info)
+    {
+        info = new ServentSkillInfo();
+        //info.skillID = new Dictionary<string, uint>();
+        //info.skillDesc = new Dictionary<string, string>();
+
+        string str = File.ReadAllText(pathid);
+        info.skillID = JsonMapper.ToObject<Dictionary<string, int[]>>(str);
+        str = File.ReadAllText(pathdesc);
+        info.skillDesc = JsonMapper.ToObject<Dictionary<string, string>>(str);
+    }
+
 
     
 }

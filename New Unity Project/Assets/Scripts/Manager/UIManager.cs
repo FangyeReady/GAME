@@ -73,13 +73,19 @@ public class UIManager : AutoStaticInstance<UIManager> {
             {
                 m_AllWindowPrefabs.Add(name, obj);
             }
-        }  
+        }
+        obj = m_AllWindowPrefabs[name];
         return obj;
     }
 
     private PopupBase GetWindow(string name)
     {
         return m_AllWindowLists.Find(window=>window.ObjectName == name);
+    }
+
+    public void RemoveWindow(PopupBase obj)
+    {
+        m_AllWindowLists.Remove(obj).ToString();
     }
 
     public T GetWindow<T>() where T : PopupBase
