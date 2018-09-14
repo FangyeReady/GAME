@@ -12,14 +12,17 @@ public class PopupGachaItem : PopupBase {
 
     public Image avatarPic;
     public Text name;
+    public GameObject newFlag;
 
     private Action action;
+    private int cardID = 0;
 
 
     public void Init(ServentInfo info, Action callBack)
     {
         action = callBack;
         name.text = info.Name;
+        cardID = info.ID;
         ResourcesLoader.Instance.SetSprite("path", "avatar" + info.ID.ToString(), (sp) => avatarPic.overrideSprite = sp);
         bool isDouble = info.star % 2 == 0 ? true : false;
         if (isDouble)
@@ -36,12 +39,12 @@ public class PopupGachaItem : PopupBase {
             {
                 jishuStarAry[i].SetActive(true);
             }
-        }
+        } 
     }
 
-    public void PlayAni()
+    private void ShowNeFlag()
     {
-        //LoggerM.LogError("PlayAni~!!");
+        newFlag.SetActive(!Player.Instance.IsAlreadyHas(cardID));
     }
 
 

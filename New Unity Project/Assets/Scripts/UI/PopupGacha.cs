@@ -132,8 +132,6 @@ public class PopupGacha : PopupBase {
             default:
                 break;
         }
-
-        //Debug.LogError("Result:" + index.ToString());
         ServentManager.Instance.SetServentInfo(star, result, ref servent);
 
         return servent;

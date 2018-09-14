@@ -51,5 +51,10 @@ public class Player : AutoStaticInstance<Player> {
         //LoggerM.LogError(totaltime);
     }
 
+    public bool IsAlreadyHas(int id)
+    {
+        return _playerInfo.Servent.Find(ser => ser.ID == id) == null;
+    }
+
 
 }

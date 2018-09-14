@@ -21,18 +21,10 @@ public class PopupGachaResult : PopupBase {
         for (int i = 0; i < list.Count; i++)
         {
             GachaItem item = Instantiate(itemPrefab, parent).GetComponent<GachaItem>();
-            item.Init(list[i].star,list[i].ID);
+            item.Init(list[i]);
             item.gameObject.SetActive(true);
             Player.Instance.PlayerInfos.Servent.Add(list[i]);//暂时这样做，后续改成只能选择一个加入队伍？
         }  
-    }
-
-    private void PlayItemsAni(ServentInfo servent)
-    {
-        //GachaItem item = Instantiate(itemPrefab, parent).GetComponent<GachaItem>();
-        //item.Init(servent);
-        //item.gameObject.SetActive(true);
-        Player.Instance.PlayerInfos.Servent.Add(servent);//暂时这样做，后续改成只能选择一个加入队伍？
     }
 
 
