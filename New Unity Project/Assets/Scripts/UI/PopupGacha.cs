@@ -56,7 +56,8 @@ public class PopupGacha : PopupBase {
         {
             goOn = false;
             UIManager.Instance.OpenWindow<PopupGachaItem>(window => {
-                window.Init(gachaResult[index], acallback);
+                //window.Init(gachaResult[index], acallback);
+                window.Init(gachaResult[index].ID, gachaResult[index].Name, gachaResult[index].star, acallback);
                 //window.PlayAni();
             });
             while (!goOn)
@@ -64,7 +65,7 @@ public class PopupGacha : PopupBase {
                 yield return null;
             }
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         UIManager.Instance.OpenWindow<PopupGachaResult>(window => window.CreateItems(gachaResult));
     }
 

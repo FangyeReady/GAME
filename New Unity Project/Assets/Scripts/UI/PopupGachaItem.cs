@@ -42,6 +42,30 @@ public class PopupGachaItem : PopupBase {
         } 
     }
 
+    public void Init(int id, string name, int star, Action callBack)
+    {
+        action = callBack;
+        this.name.text = name;
+        cardID = id;
+        ResourcesLoader.Instance.SetSprite("path", "avatar" + id.ToString(), (sp) => avatarPic.overrideSprite = sp);
+        bool isDouble = star % 2 == 0 ? true : false;
+        if (isDouble)
+        {
+            for (int i = 0; i < star; i++)
+            {
+                GameObject st = Instantiate(oushuStarPrefab, parent);
+                st.SetActive(true);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < star; i++)
+            {
+                jishuStarAry[i].SetActive(true);
+            }
+        }
+    }
+
     private void ShowNeFlag()
     {
         newFlag.SetActive(!Player.Instance.IsAlreadyHas(cardID));
