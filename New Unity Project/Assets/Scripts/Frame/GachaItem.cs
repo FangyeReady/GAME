@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GachaItem : MonoBehaviour {
 
     public GameObject star;
-    public  Image img;
+    public Image img;
     public Transform parent;
     public GameObject newFlag;
     private ServentInfo info;
@@ -18,7 +18,9 @@ public class GachaItem : MonoBehaviour {
             GameObject obj = Instantiate(star, parent);
             obj.SetActive(true);
         }
-        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + info.ID.ToString(), (sp) => img.overrideSprite = sp);
+
+        LoggerM.LogError(info.ID.ToString());
+        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + info.ID.ToString(), (sp) => img.sprite = sp);
         newFlag.SetActive(!Player.Instance.IsAlreadyHas(info.ID));
         this.info = info;
     }

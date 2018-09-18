@@ -12,6 +12,7 @@ public class PopupGacha : PopupBase {
     private uint gachaCost = 0;
 
     private List<ServentInfo> gachaResult = new List<ServentInfo>();
+    public List<ServentInfo> GachResult { get { return gachaResult; } }
 
     protected override void Init()
     {
@@ -58,7 +59,6 @@ public class PopupGacha : PopupBase {
             UIManager.Instance.OpenWindow<PopupGachaItem>(window => {
                 //window.Init(gachaResult[index], acallback);
                 window.Init(gachaResult[index].ID, gachaResult[index].Name, gachaResult[index].star, acallback);
-                //window.PlayAni();
             });
             while (!goOn)
             {

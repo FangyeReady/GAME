@@ -69,6 +69,7 @@ public class PopupGachaItem : PopupBase {
     private void ShowNeFlag()
     {
         newFlag.SetActive(!Player.Instance.IsAlreadyHas(cardID));
+        Invoke("OnConfirmClick", 2.5f);
     }
 
 

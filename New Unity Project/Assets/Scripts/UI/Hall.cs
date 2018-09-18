@@ -62,7 +62,7 @@ public class Hall : PopupBase {
             SoundManager.Instance.PlaySound(m_soundType, StaticData.Song[CurrenSongIndex]);
             ResourcesLoader.Instance.SetSprite(StaticData.UI_PIC, "Pause", (sp) =>
             {   
-                playImg.overrideSprite = sp;
+                playImg.sprite = sp;
             });
         }
         else
@@ -70,7 +70,7 @@ public class Hall : PopupBase {
             SoundManager.Instance.PauseMusic(m_soundType);
             ResourcesLoader.Instance.SetSprite(StaticData.UI_PIC, "Play", (sp) =>
             {
-                playImg.overrideSprite = sp;
+                playImg.sprite = sp;
             });
         }
     }
@@ -82,14 +82,14 @@ public class Hall : PopupBase {
         {
             ResourcesLoader.Instance.SetSprite(StaticData.UI_PIC, "SoundOn", (sp) =>
             {
-                muteImg.overrideSprite = sp;
+                muteImg.sprite = sp;
             }); 
         }
         else
         {
             ResourcesLoader.Instance.SetSprite(StaticData.UI_PIC, "SoundOff", (sp) =>
             {
-                muteImg.overrideSprite = sp;
+                muteImg.sprite = sp;
             }); 
         }
     }
@@ -99,18 +99,18 @@ public class Hall : PopupBase {
     private void OnInfoClick()
     {
         UIManager.Instance.OpenWindow<PopupPlayerInfo>();
-        LoggerM.Log("info~!");
+
     }
 
     private void OnGachaClick()
     {
         UIManager.Instance.OpenWindow<PopupGacha>();
-        LoggerM.Log("gacha~!");
+
     }
 
     private void OnManageClick()
     {
-        LoggerM.Log("manage~!");
+        UIManager.Instance.OpenWindow<PopupServentHome>();
     }
 
     private void OnPlayClick()

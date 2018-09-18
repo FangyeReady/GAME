@@ -24,7 +24,7 @@ public class PopupChooseHead : PopupBase {
             {
                 img.gameObject.SetActive(true);
                 img.gameObject.name = list[i].ID.ToString();
-                ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + img.gameObject.name, (sp) => img.overrideSprite = sp);
+                ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + img.gameObject.name, (sp) => img.sprite = sp);
             }
         }
     }

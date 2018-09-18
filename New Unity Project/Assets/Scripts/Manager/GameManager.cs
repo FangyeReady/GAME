@@ -82,5 +82,11 @@ public class GameManager : AutoStaticInstance<GameManager> {
         JsonData data = JsonMapper.ToJson(_gameSettingInfo);
         ReadData.Instance.SaveData(path, data.ToString());
     }
+
+    public int GetServentCount()
+    {
+        return _gameSettingInfo.none.Count + _gameSettingInfo.one.Count + _gameSettingInfo.two.Count +
+            _gameSettingInfo.three.Count + _gameSettingInfo.four.Count + _gameSettingInfo.five.Count;
+    }
     
 }

@@ -67,15 +67,13 @@ public class UIManager : AutoStaticInstance<UIManager> {
         GameObject obj = null;
         if (!m_AllWindowPrefabs.ContainsKey(name))
         {
-            LoggerM.LogError(name);
             obj = Resources.Load<GameObject>(StaticData.POPUP_PATH + name);
             if (obj != null)
             {
                 m_AllWindowPrefabs.Add(name, obj);
             }
         }
-        obj = m_AllWindowPrefabs[name];
-        return obj;
+        return m_AllWindowPrefabs[name];
     }
 
     private PopupBase GetWindow(string name)
@@ -85,7 +83,7 @@ public class UIManager : AutoStaticInstance<UIManager> {
 
     public void RemoveWindow(PopupBase obj)
     {
-        m_AllWindowLists.Remove(obj).ToString();
+        m_AllWindowLists.Remove(obj);
     }
 
     public T GetWindow<T>() where T : PopupBase
