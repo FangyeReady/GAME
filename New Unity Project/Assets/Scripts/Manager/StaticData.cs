@@ -44,6 +44,7 @@ public class GameSettingInfo
     public uint GachaCost;
     public int serventMin;
     public int serventMax;
+    public int cellCount;
     public List<int> none;
     public List<int> one;
     public List<int> two;

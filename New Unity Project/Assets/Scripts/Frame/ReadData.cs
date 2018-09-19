@@ -65,6 +65,7 @@ public class ReadData :AutoStaticInstance<ReadData> {
             info.HeadPic = Player.Instance.PlayerInfos.Servent[0].ID;
         }
         info.GachaCost = (uint)data["GachaCost"];
+        info.cellCount = (int)data["cellCount"];
         info.none = JsonMapper.ToObject<List<int>>(data["none"].ToJson());
         info.one = JsonMapper.ToObject < List<int> > (data["one"].ToJson());
         info.two = JsonMapper.ToObject < List<int> > (data["two"].ToJson());
