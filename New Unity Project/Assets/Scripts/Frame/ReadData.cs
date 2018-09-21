@@ -71,7 +71,8 @@ public class ReadData :AutoStaticInstance<ReadData> {
         info.two = JsonMapper.ToObject < List<int> > (data["two"].ToJson());
         info.three = JsonMapper.ToObject < List<int> > (data["three"].ToJson());
         info.four = JsonMapper.ToObject < List<int> > (data["four"].ToJson());
-        info.five = JsonMapper.ToObject < List<int> > (data["five"].ToJson());  
+        info.five = JsonMapper.ToObject < List<int> > (data["five"].ToJson());
+        info.propID = JsonMapper.ToObject<List<int>>(data["propID"].ToJson());
     }
 
 
@@ -87,6 +88,17 @@ public class ReadData :AutoStaticInstance<ReadData> {
         info.skillDesc = JsonMapper.ToObject<Dictionary<string, string>>(str);
     }
 
+    public void GetPropInfoData(string path, out Dictionary<string, PropInfo> info)
+    {
+        string str = File.ReadAllText(path);
+        info = JsonMapper.ToObject<Dictionary<string, PropInfo>>(str);
+        
+    }
 
-    
+    public void GetPropCfgData(string path, out Dictionary<string, PropCfg> info)
+    {
+        string str = File.ReadAllText(path);
+        info = JsonMapper.ToObject<Dictionary<string, PropCfg>>(str);
+    }
+
 }

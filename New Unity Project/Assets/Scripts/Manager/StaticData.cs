@@ -36,6 +36,8 @@ public class ServentInfo
     public string Desc;
     public int Loyal;
     public int star;
+    public int tire;
+    public int favorability;
 }
 
 public class GameSettingInfo
@@ -44,6 +46,9 @@ public class GameSettingInfo
     public uint GachaCost;
     public int serventMin;
     public int serventMax;
+    /// <summary>
+    /// 可以用于道具栏的扩展。。。消耗金币
+    /// </summary>
     public int cellCount;
     public List<int> none;
     public List<int> one;
@@ -51,12 +56,41 @@ public class GameSettingInfo
     public List<int> three;
     public List<int> four;
     public List<int> five;
+
+    public List<int> propID;
 }
 
 public class ServentSkillInfo
 {
     public Dictionary<string, int[]> skillID;
     public Dictionary<string, string> skillDesc;
+}
+
+/// <summary>
+/// 道具的用处
+/// </summary>
+public class PropCfg
+{
+    public int tire;
+    public int favorability;
+    public int loyal;
+    public int level;
+    public int needServentnum;
+    public int tiredefence;
+    public int jindu;
+    public int all;
+    public int exp;
+}
+
+/// <summary>
+/// 道具的描述
+/// </summary>
+public class PropInfo
+{
+    public string name;
+    public string usedesc;
+    public string id;
+    public int price;
 }
 
 

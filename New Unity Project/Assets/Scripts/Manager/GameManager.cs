@@ -11,6 +11,7 @@ public class GameManager : AutoStaticInstance<GameManager> {
     private GameSettingInfo _gameSettingInfo;
     public GameSettingInfo GameSettingInfos { get { return _gameSettingInfo; } }
 
+
     private string path = StaticData.CONFIG_PATH + "GameSettingInfo.txt";
 
     public override void InitManager()

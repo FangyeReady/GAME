@@ -23,6 +23,8 @@ public class PopupServentHome : PopupBase {
     //从配置表里面读
     public Text serAll;
     public Text serHave;
+    public Text tire;
+    public Text favorability;
 
     public Dropdown dropdown;
 
@@ -99,6 +101,8 @@ public class PopupServentHome : PopupBase {
         Name.text = info.Name;
         Level.text = info.Level.ToString();
         Loyal.text = info.Loyal.ToString();
+        tire.text = info.tire.ToString();
+        favorability.text = info.favorability.ToString();
         SkillDesc.text = info.Desc.ToString();
         serHave.text = Player.Instance.PlayerInfos.Servent.Count.ToString();
         serAll.text = GameManager.Instance.GetServentCount().ToString();

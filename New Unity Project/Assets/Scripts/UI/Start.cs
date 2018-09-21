@@ -42,6 +42,8 @@ public class Start : ObjBase {
         ++count;
         ServentManager.Instance.InitManager();
         ++count;
+        PropManager.Instance.InitManager();
+        ++count;
 
         //可以开始游戏的逻辑
         Begin();
