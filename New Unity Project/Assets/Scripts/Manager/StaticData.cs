@@ -24,6 +24,7 @@ public class PlayerInfo
     public uint BusinessLevel;
     public uint MaxServentNum;
     public string TotalTime;
+    public List<PropData> propID;
     public List<ServentInfo> Servent;
 }
 
@@ -38,6 +39,7 @@ public class ServentInfo
     public int star;
     public int tire;
     public int favorability;
+    public int nowexp;
 }
 
 public class GameSettingInfo
@@ -57,7 +59,7 @@ public class GameSettingInfo
     public List<int> four;
     public List<int> five;
 
-    public List<int> propID;
+    //public List<int> propID;
 }
 
 public class ServentSkillInfo
@@ -65,6 +67,12 @@ public class ServentSkillInfo
     public Dictionary<string, int[]> skillID;
     public Dictionary<string, string> skillDesc;
 }
+
+public class ServentLevel
+{
+    public List<int> Levels;
+}
+
 
 /// <summary>
 /// 道具的用处
@@ -91,6 +99,12 @@ public class PropInfo
     public string usedesc;
     public string id;
     public int price;
+}
+
+public class PropData
+{
+    public string id;
+    public int num;
 }
 
 
@@ -121,6 +135,9 @@ public static class StaticData {
     /// UI按钮路径
     /// </summary>
     public const string UI_PIC = "Pic/ColorfulButtons/";
+
+
+    public const string UI_PROP = "Pic/Prop/";
 
     public const string CONFIG_PATH = "/CFG/";
 

@@ -37,6 +37,6 @@ public class PopupGachaResult : PopupBase {
         {
             Destroy(parent.GetChild(i).gameObject);
         }
-        base.Close();
+        base.OnClose();
     }
 }

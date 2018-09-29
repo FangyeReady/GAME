@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PopupBase : ObjBase {
 
-    public virtual void Close()
+    public virtual void OnClose()
     {
-        DisableGameObject();
+        //DisableGameObject();
+        base.Close();
     }
 }

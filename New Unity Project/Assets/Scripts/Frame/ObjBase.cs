@@ -92,4 +92,10 @@ public class ObjBase : MonoBehaviour {
             this.gameObject.SetActive(false);
         }
     }
+
+    public void Close()
+    {
+        UIManager.Instance.RemoveWindow(this as PopupBase);
+        Destroy(this.gameObject);
+    }
 }

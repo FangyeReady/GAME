@@ -141,7 +141,7 @@ public class PopupGacha : PopupBase {
 
     private void OnCloseClick()
     {
-        base.Close();
+        base.OnClose();
     }
 
 

@@ -83,7 +83,8 @@ public class UIManager : AutoStaticInstance<UIManager> {
 
     public void RemoveWindow(PopupBase obj)
     {
-        m_AllWindowLists.Remove(obj);
+       bool issuccess = m_AllWindowLists.Remove(obj);
+        LoggerM.Log("remove window: " + issuccess.ToString());
     }
 
     public T GetWindow<T>() where T : PopupBase

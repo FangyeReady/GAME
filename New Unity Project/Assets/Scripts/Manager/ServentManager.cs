@@ -5,8 +5,10 @@ using UnityEngine;
 public class ServentManager : AutoStaticInstance<ServentManager> {
 
     private ServentSkillInfo serventSkill;
+    private ServentLevel serventLevel;
     private string pathid = StaticData.CONFIG_PATH + "ServentSkillID.txt";
     private string pathdesc = StaticData.CONFIG_PATH + "ServentSkillDesc.txt";
+    private string pathlevel = StaticData.CONFIG_PATH + "ServentLevel.txt";
 
     /// <summary>
     /// 初始化读取技能id表和技能说明
@@ -16,7 +18,9 @@ public class ServentManager : AutoStaticInstance<ServentManager> {
         base.InitManager();
         pathid = Application.dataPath + pathid;
         pathdesc = Application.dataPath + pathdesc;
+        pathlevel = Application.dataPath + pathlevel;
         ReadData.Instance.GetServentSkillData(pathid, pathdesc, out serventSkill);
+        ReadData.Instance.GetServentLevel(pathlevel, out serventLevel);
     }
 
     private int GetSkillID(Star star)
@@ -49,6 +53,15 @@ public class ServentManager : AutoStaticInstance<ServentManager> {
         servent.skillID = GetSkillID(star);
         servent.Desc = GetSkillDesc(servent.skillID);
         servent.star = (int)star;
+    }
+
+    public int GetServentLevelExp(int level)
+    {
+        if (level >=0 && level < serventLevel.Levels.Count)
+        {
+            return serventLevel.Levels[level];
+        }
+        return 0;
     }
 
 }

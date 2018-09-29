@@ -19,6 +19,7 @@ public class PopupServentHome : PopupBase {
     public Text Loyal;
     public Text expNow;
     public Text expAll;
+    public Slider expSlider;
 
     //从配置表里面读
     public Text serAll;
@@ -31,6 +32,8 @@ public class PopupServentHome : PopupBase {
     private List<GameObject> masks = new List<GameObject>();
     private List<ServentHeadItem> heads = new List<ServentHeadItem>();
     private List<GameObject> gameObjects = new List<GameObject>();
+
+    private ServentInfo curServent;
 
     protected override void Init()
     {
@@ -46,6 +49,8 @@ public class PopupServentHome : PopupBase {
         CreateHeadItems();
         CreateCellItems();
         CreatePropItems();
+
+        StartCoroutine("UpdateServentLevel", 12000);
     }
 
     private void CreateHeadItems()
@@ -67,20 +72,44 @@ public class PopupServentHome : PopupBase {
         RefreshChooseState(0, list[0].ID);
     }
 
+    private List<Transform> cellList = new List<Transform>();
     private void CreateCellItems()
     {
         int count = GameManager.Instance.GameSettingInfos.cellCount;
         for (int i = 0; i < count; i++)
         {
-            var obj = GameObject.Instantiate(cellPrefab, cellParent);
+            var obj = Instantiate(cellPrefab, cellParent);
+            obj.SetActive(true);
+            cellList.Add(obj.transform);
         }
     }
 
     private void CreatePropItems()
     {
         //to do..
+        var list = Player.Instance.PlayerInfos.propID;
+        for (int i = 0; i < list.Count; i++)
+        {
+            var item = Instantiate(propPrefab, GetEmptyCell());
+            item.SetActive(true);
+            item.transform.localScale = Vector3.one;
+            item.transform.localPosition = Vector3.zero;
+            PropItem info = item.GetComponent<PropItem>();
+            info.InitProp(list[i].id, list[i].num);
+        }
     }
 
+    private Transform GetEmptyCell()
+    {
+        for (int i = 0; i < cellList.Count; i++)
+        {
+            if (cellList[i].childCount == 0)
+            {
+                return cellList[i];
+            }
+        }
+        return null;
+    }
 
 
     public void RefreshChooseState(int index, int serID)
@@ -92,6 +121,7 @@ public class PopupServentHome : PopupBase {
         ServentInfo servent = Player.Instance.PlayerInfos.Servent.Find(ser=>ser.ID == serID);
         if (servent != null)
         {
+            curServent = servent;
             InitInfo(servent);
         }
     }
@@ -169,6 +199,49 @@ public class PopupServentHome : PopupBase {
         RefreshChooseState(0, infos[0].ID);
     }
 
+
+    private float fillSpeed = 0.02f;
+    private IEnumerator UpdateServentLevel(int getExp)
+    {
+        float targetVal = 0.0f;
+        int nextLevelNeedExp = ServentManager.Instance.GetServentLevelExp(curServent.Level);
+        for (int i = getExp; i > 0; i -= nextLevelNeedExp)
+        {
+            targetVal = (i - nextLevelNeedExp >= 0) ? 1f : (i + 0.0f) / nextLevelNeedExp;
+            while (targetVal - expSlider.value >= 0.01f)
+            {
+                if (targetVal == 1f)
+                {
+                    expSlider.value += fillSpeed;
+                    curServent.nowexp += (int)(nextLevelNeedExp * fillSpeed);
+                }
+                else
+                {
+                    expSlider.value = Mathf.Lerp(expSlider.value, targetVal, Time.deltaTime);
+                    curServent.nowexp = (int)(expSlider.value * nextLevelNeedExp);
+                }
+                expNow.text = curServent.nowexp.ToString();
+                yield return null;
+            }
+            if (targetVal == 1f)
+            {
+                curServent.Level += 1;
+                expSlider.value = 0.0f;
+                curServent.nowexp = 0;
+                expNow.text = "0";
+                nextLevelNeedExp = ServentManager.Instance.GetServentLevelExp(curServent.Level);
+            }
+            expAll.text = nextLevelNeedExp.ToString();
+            expNow.text = curServent.nowexp.ToString();
+            Level.text = curServent.Level.ToString();
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
+
+    private void OnCloseClick()
+    {
+        base.OnClose();
+    }
 
 
 }

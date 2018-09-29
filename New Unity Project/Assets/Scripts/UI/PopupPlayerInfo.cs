@@ -41,7 +41,7 @@ public class PopupPlayerInfo : PopupBase {
 
     private void OnCloseClick()
     {
-        base.Close();
+        base.OnClose();
     }
 
     private void CreateItems(List<ServentInfo> list)
@@ -69,6 +69,12 @@ public class PopupPlayerInfo : PopupBase {
         GameManager.Instance.GameSettingInfos.HeadPic = id;
     }
 
-    
+    protected override void OnDestoryed()
+    {
+        base.OnDestoryed();
+        StaticUpdater.Instance.UpdateEvent -= UpdateTotalTime;
+    }
+
+
 
 }

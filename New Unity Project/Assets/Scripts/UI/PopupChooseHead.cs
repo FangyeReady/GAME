@@ -31,6 +31,6 @@ public class PopupChooseHead : PopupBase {
 
     private void OnCloseClick()
     {
-        base.Close();
+        base.OnClose();
     }
 }

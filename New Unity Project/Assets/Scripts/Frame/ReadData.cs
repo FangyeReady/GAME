@@ -24,19 +24,19 @@ public class ReadData :AutoStaticInstance<ReadData> {
         info.MaxServentNum = (uint)data["MaxServentNum"];
         info.TotalTime = (string)data["TotalTime"];
         info.Servent = new List<ServentInfo>();
-
+        info.propID = new List<PropData>();
         JsonData servent = JsonMapper.ToObject(data["Servent"].ToJson());
-        
+        JsonData propID = JsonMapper.ToObject(data["propID"].ToJson());
+
+        for (int i = 0; i < propID.Count; i++)
+        {
+            PropData prop = JsonMapper.ToObject<PropData>(propID[i].ToJson());
+            info.propID.Add(prop);
+        }
+
         for (int i = 0; i < servent.Count; i++)
         {
             ServentInfo serventInfo = JsonMapper.ToObject<ServentInfo>(servent[i].ToJson());
-            if (serventInfo.ID.Equals(0))
-            {
-                serventInfo.ID = UnityEngine.Random.Range(GameManager.Instance.GameSettingInfos.serventMin,
-                                                          GameManager.Instance.GameSettingInfos.serventMax);//待优化
-                //还需要对serventinfo进行填充
-                //to do..
-            }
             info.Servent.Add(serventInfo);
         }
         //存储数据
@@ -72,7 +72,8 @@ public class ReadData :AutoStaticInstance<ReadData> {
         info.three = JsonMapper.ToObject < List<int> > (data["three"].ToJson());
         info.four = JsonMapper.ToObject < List<int> > (data["four"].ToJson());
         info.five = JsonMapper.ToObject < List<int> > (data["five"].ToJson());
-        info.propID = JsonMapper.ToObject<List<int>>(data["propID"].ToJson());
+        //info.propID = JsonMapper.ToObject<List<int>>(data["propID"].ToJson());
+
     }
 
 
@@ -88,11 +89,18 @@ public class ReadData :AutoStaticInstance<ReadData> {
         info.skillDesc = JsonMapper.ToObject<Dictionary<string, string>>(str);
     }
 
+    public void GetServentLevel(string pathlevel, out ServentLevel info)
+    {
+        info = new ServentLevel();
+        string str = File.ReadAllText(pathlevel);
+        JsonData data = JsonMapper.ToObject(str);
+        info.Levels = JsonMapper.ToObject<List<int>>(data["Level"].ToJson());
+    }
+
     public void GetPropInfoData(string path, out Dictionary<string, PropInfo> info)
     {
         string str = File.ReadAllText(path);
-        info = JsonMapper.ToObject<Dictionary<string, PropInfo>>(str);
-        
+        info = JsonMapper.ToObject<Dictionary<string, PropInfo>>(str);    
     }
 
     public void GetPropCfgData(string path, out Dictionary<string, PropCfg> info)

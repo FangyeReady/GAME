@@ -7,7 +7,7 @@ using System.Text;
 
 public class Start : ObjBase {
 
-    private int AllCount = 4;
+    private readonly int AllCount = 5;
     private int count = 0;
     public Slider EnterProgress;
     private Text progressText;
@@ -27,7 +27,7 @@ public class Start : ObjBase {
 
 
     private void BeginToGame()
-    {      
+    {
         Utility.SwitchScene(StaticData.Scenes.Game);
     }
 
@@ -35,15 +35,15 @@ public class Start : ObjBase {
     IEnumerator InitData()
     {
         Player.Instance.InitManager();
-        ++count;
+        //++count;
         GameManager.Instance.InitManager();
-        ++count;
+        //++count;
         UIManager.Instance.InitManager();
-        ++count;
+        //++count;
         ServentManager.Instance.InitManager();
-        ++count;
+        //++count;
         PropManager.Instance.InitManager();
-        ++count;
+       // ++count;
 
         //可以开始游戏的逻辑
         Begin();
@@ -57,6 +57,10 @@ public class Start : ObjBase {
 
     private void RefeshProgress()
     {
+        if (AllCount <= 0 || count <= 0)
+        {
+            return;
+        }
         EnterProgress.value = (count + 0.0f) / AllCount;
         progressText.text = (((count + 0.0f) / AllCount) * 100).ToString();
     }

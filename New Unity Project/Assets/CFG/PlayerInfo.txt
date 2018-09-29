@@ -1,1 +1,1 @@
-{"ID":123321,"Name":"FY","Coin":1000,"BusinessLevel":1,"MaxServentNum":2,"TotalTime":"0d0h5m16s","Servent":[{"ID":4001,"Name":"","Level":1,"skillID":0,"Desc":"","Loyal":100,"star":0,"tire":0,"favorability":15}]}
+{"ID":123321,"Name":"FY","Coin":1000,"BusinessLevel":1,"MaxServentNum":2,"TotalTime":"0d0h6m20s","propID":[{"id":"001","num":1},{"id":"002","num":1},{"id":"003","num":1},{"id":"004","num":1},{"id":"005","num":1},{"id":"006","num":1}],"Servent":[{"ID":4001,"Name":"","Level":6,"skillID":0,"Desc":"","Loyal":100,"star":0,"tire":0,"favorability":15,"nowexp":1970}]}
