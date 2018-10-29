@@ -26,7 +26,7 @@ public class UIManager : AutoStaticInstance<UIManager> {
     public override void InitManager()
     {
         base.InitManager();
-        maskPrefab = ResourcesLoader.Instance.GetSimpleRes<GameObject>(StaticData.POPUP_PATH, "mask");
+        maskPrefab = ResourcesLoader.Instance.GetSimpleRes<GameObject>(StaticData.POPUP_PATH,"mask");
     }
 
     public T OpenWindow<T>(Action<T> callBack = null) where T: PopupBase

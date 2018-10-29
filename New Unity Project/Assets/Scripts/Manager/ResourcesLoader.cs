@@ -9,24 +9,29 @@ using Object = UnityEngine.Object;
 public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
 
     private Dictionary<string, Object> resourcesCache = new Dictionary<string, Object>();
-    private IEnumerator LoadResources<T>(string name, Action<T> callback)where T:Object
+    private IEnumerator LoadResFromAB<T>(string name, Action<T> callback)where T:Object
     {
         if (!resourcesCache.ContainsKey(name))
         {
             //加载资源 
-            yield return StartCoroutine( GetAssetBundle(name, (ab) => {
+            yield return StartCoroutine(GetAssetBundle(name, (ab) =>
+            {
                 Object val = ab.LoadAsset(name);
                 if (val != null)
                 {
                     resourcesCache.Add(name, val);
+                    T obj = val as T;
+                    if (obj)
+                    {
+                        callback(obj);
+                    }
                 }
-             })
+            })
             );
-            GetAsset(name, callback);
         }
         else
         {
-            GetAsset(name, callback);
+            GetAssetFromCache<T>(name, callback);
         }
     }
 
@@ -36,19 +41,21 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
     /// <typeparam name="T"></typeparam>
     /// <param name="name"></param>
     /// <param name="callback"></param>
-    private void GetAsset<T>(string name, Action<T> callback) where T : Object
+    private T GetAssetFromCache<T>(string name, Action<T> callback = null) where T : Object
     { 
         if (resourcesCache.ContainsKey(name))
         {
             T obj = resourcesCache[name] as T;
-            if (obj)
+            if (obj != null && callback != null)
             {
                 callback(obj); 
             }
+            return obj;
         }
         else
         {
             LoggerM.LogError("未成功加载资源~:" + name);
+            return null;
         }
     }
 
@@ -58,9 +65,9 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
     /// <typeparam name="T"></typeparam>
     /// <param name="name"></param>
     /// <param name="callback"></param>
-    public void GetRes<T>(string name, Action<T> callback)where T:Object
+    public void GetRes<T>(string name, Action<T> callback = null)where T:Object
     {
-        StartCoroutine(LoadResources<T>(name, callback));
+        StartCoroutine(LoadResFromAB<T>(name, callback));
     }
 
 
@@ -79,11 +86,16 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
 
     public void SetSprite(string path,string name, Action<Sprite> callBack)
     {
+#if UNITY_EDITOR
         var sp = Resources.Load<Sprite>(path + name);
         if (sp != null)
         {
             callBack(sp);
         }
+#else 
+        StartCoroutine(LoadResources<Sprite>(name, callback));
+#endif
+
     }
 
     /// <summary>
@@ -93,14 +105,14 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
     /// <param name="path"></param>
     /// <param name="name"></param>
     /// <returns></returns>
-    public T GetSimpleRes<T>(string path, string name) where T : Object
+    public T GetSimpleRes<T>(string path, string name, Action<T> callback = null) where T : Object
     {
-        T val = Resources.Load(path + name) as T;
-        if (val)
+        Object val = Resources.Load(name);
+        if (callback != null)
         {
-            return val;
+            callback(val as T);
         }
-        return null;
+        return val as T;
     }
 
 }
