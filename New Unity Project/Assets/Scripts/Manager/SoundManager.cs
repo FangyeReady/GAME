@@ -18,60 +18,51 @@ public class SoundPlayer : ObjBase
     public SoundType type;
 
     private AudioClip audioClip;
-    public AudioClip AudioClipSet {
+    public AudioClip SetAudioClip {
         get {
             return audioClip;
         }
         set {
             audioClip = value;
-            m_AudioSource.clip = audioClip;
+            source.clip = audioClip;
         }
     }
     private AudioSource source;
-    private AudioSource m_AudioSource
-    {
-        get
-        {
-            if (source == null)
-            {
-                GameObject obj = new GameObject("SoundPlayer_" + type.ToString());
-                source = obj.AddComponent<AudioSource>();
-                source.playOnAwake = false;
-                source.clip = audioClip;
-            }
-            return source;
-        }
-    }
 
     public SoundPlayer(string id, SoundType type, AudioClip clip)
     {
         ID = id;
         this.type = type;
         this.audioClip = clip;
+
+        GameObject obj = new GameObject("SoundPlayer_" + type.ToString());
+        source = obj.AddComponent<AudioSource>();
+        source.playOnAwake = false;
+        source.clip = audioClip;
     }
 
     public void Play()
     {
         if (IsPlaying())
         {
-            m_AudioSource.Stop();
+            source.Stop();
         }
-        m_AudioSource.Play();
+        source.Play();
     }
 
     public void Pause()
     {
-        m_AudioSource.Pause();
+        source.Pause();
     }
 
     public void Mute()
     {
-        m_AudioSource.mute = !m_AudioSource.mute;
+        source.mute = !source.mute;
     }
 
     private bool IsPlaying()
     {
-        return m_AudioSource.isPlaying;
+        return source.isPlaying;
     }
 
     protected override void OnDestoryed()
@@ -118,7 +109,7 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
             else
             {
                 FetchAudioClip(sound, id, (audio)=>{
-                    AudioPlayers[sound].AudioClipSet = audio;
+                    AudioPlayers[sound].SetAudioClip = audio;
                     AudioPlayers[sound].ID = id;
                     AudioPlayers[sound].Play();
                 });

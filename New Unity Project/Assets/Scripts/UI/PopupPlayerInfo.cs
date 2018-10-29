@@ -20,13 +20,15 @@ public class PopupPlayerInfo : PopupBase {
     {
         base.Init();
         PlayerInfo playerInfo = Player.Instance.PlayerInfos;
+
         playerName.text = playerInfo.Name;
         level.text = playerInfo.BusinessLevel.ToString();
         coin.text = playerInfo.Coin.ToString();
         maxServentNum.text = playerInfo.MaxServentNum.ToString();
         serventNum.text = playerInfo.Servent.Count.ToString();
         totalTime.text = playerInfo.TotalTime.ToString();
-        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + GameManager.Instance.GameSettingInfos.HeadPic.ToString(), (sp) => head.overrideSprite = sp);
+
+        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + GameManager.Instance.GameSettingInfos.HeadPic.ToString(), (sp) => head.sprite = sp);
         CreateItems(playerInfo.Servent);
 
         StaticUpdater.Instance.UpdateEvent += UpdateTotalTime;
@@ -52,7 +54,7 @@ public class PopupPlayerInfo : PopupBase {
             if (img != null)
             {
                 img.gameObject.SetActive(true);
-                ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + list[i].ID.ToString(), (sp) => img.overrideSprite = sp);
+                ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + list[i].ID.ToString(), (sp) => img.sprite = sp);
             }
         }
     }
@@ -65,7 +67,7 @@ public class PopupPlayerInfo : PopupBase {
 
     public void SetHeadPic(int id)
     {
-        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + id.ToString(), (sp) => head.overrideSprite = sp);
+        ResourcesLoader.Instance.SetSprite(StaticData.HEAD_ICON_PATH, "list" + id.ToString(), (sp) => head.sprite = sp);
         GameManager.Instance.GameSettingInfos.HeadPic = id;
     }
 

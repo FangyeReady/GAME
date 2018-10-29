@@ -33,14 +33,17 @@ public class UIManager : AutoStaticInstance<UIManager> {
     {
         Type type = typeof(T);
         string windowName = type.Name;
-        PopupBase window = GetWindow(windowName);
+        PopupBase window = GetWindow<PopupBase>();
         if (window == null)
         {
             GameObject prefab = FetchWindowPrefab(windowName);
+
             GameObject result = Instantiate(prefab, parent);
             result.transform.localPosition = Vector3.zero;
             result.transform.localScale = Vector3.one;
+
             SetMask(result.transform);
+
             window = result.GetComponent(type) as PopupBase;
             window.EnableGameObject();
             window.ObjectName = windowName;
@@ -76,17 +79,26 @@ public class UIManager : AutoStaticInstance<UIManager> {
         return m_AllWindowPrefabs[name];
     }
 
-    private PopupBase GetWindow(string name)
-    {
-        return m_AllWindowLists.Find(window=>window.ObjectName == name);
-    }
+    //private PopupBase GetWindow(string name)
+    //{
+    //    return m_AllWindowLists.Find(window=>window.ObjectName == name);
+    //}
 
+    /// <summary>
+    /// 移除某个指定窗口
+    /// </summary>
+    /// <param name="obj"></param>
     public void RemoveWindow(PopupBase obj)
     {
        bool issuccess = m_AllWindowLists.Remove(obj);
         LoggerM.Log("remove window: " + issuccess.ToString());
     }
 
+    /// <summary>
+    /// 当窗口启用时，得到该窗口
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public T GetWindow<T>() where T : PopupBase
     {
         string name = typeof(T).Name;

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/New_Demo/new_Demo.unity
+- path: Assets/DateTime/DateTime.unity
   isLoaded: 1
   isActive: 1

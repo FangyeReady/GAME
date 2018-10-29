@@ -86,6 +86,13 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
         }
     }
 
+    /// <summary>
+    /// 得到一般的资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="path"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public T GetSimpleRes<T>(string path, string name) where T : Object
     {
         T val = Resources.Load(path + name) as T;
