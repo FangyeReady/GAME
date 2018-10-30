@@ -68,15 +68,6 @@ public class ObjBase : MonoBehaviour {
 
     }
 
-
-    /// <summary>
-    /// 销毁或关闭用
-    /// </summary>
-    public virtual void UnLoad()
-    {
-
-    }
-
     public void EnableGameObject()
     {
         if (this.gameObject != null)
@@ -93,9 +84,27 @@ public class ObjBase : MonoBehaviour {
         }
     }
 
-    public void Close()
+    public void Hide()
     {
-        UIManager.Instance.RemoveWindow(this as PopupBase);
-        Destroy(this.gameObject);
+        if (this.gameObject != null)
+        {
+            this.gameObject.transform.localPosition = new Vector3(10000, 0, 0);
+        }
+    }
+
+    public void Show()
+    {
+        if (this.gameObject != null)
+        {
+            this.gameObject.transform.localPosition = Vector3.zero;
+        }
+    }
+
+    public void UnLoadObj()
+    {
+        if (this.gameObject != null)
+        {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }

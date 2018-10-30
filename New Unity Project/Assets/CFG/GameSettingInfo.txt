@@ -1,5 +1,5 @@
 {
-	"HeadPic": 4008,
+	"HeadPic": 4068,
 	"GachaCost": 100,
 	"serventMin": 0,
 	"serventMax": 0,

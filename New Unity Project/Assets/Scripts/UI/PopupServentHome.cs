@@ -12,6 +12,7 @@ public class PopupServentHome : PopupBase {
     public GameObject cellPrefab;
     public GameObject propPrefab;
 
+    [Header("UI Info")]
     public Image headPic;
     public Text Name;
     public Text SkillDesc;
@@ -22,18 +23,26 @@ public class PopupServentHome : PopupBase {
     public Slider expSlider;
 
     //从配置表里面读
+    [Header("Flag Ser Info")]
     public Text serAll;
     public Text serHave;
     public Text tire;
     public Text favorability;
 
+    [Header("下拉列表")]
     public Dropdown dropdown;
 
     private List<GameObject> masks = new List<GameObject>();
     private List<ServentHeadItem> heads = new List<ServentHeadItem>();
     private List<GameObject> gameObjects = new List<GameObject>();
+    private List<PropItem> propItems = new List<PropItem>();
 
     private ServentInfo curServent;
+    public ServentInfo CurServentInfo {
+        get {
+            return curServent;
+        }
+    }
 
     protected override void Init()
     {
@@ -50,7 +59,7 @@ public class PopupServentHome : PopupBase {
         CreateCellItems();
         CreatePropItems();
 
-        StartCoroutine("UpdateServentLevel", 12000);
+        //StartCoroutine("UpdateServentLevel", 12000);
     }
 
     private void CreateHeadItems()
@@ -90,12 +99,18 @@ public class PopupServentHome : PopupBase {
         var list = Player.Instance.PlayerInfos.propID;
         for (int i = 0; i < list.Count; i++)
         {
+            if (list[i].num <= 0)
+            {
+                continue;
+            }
             var item = Instantiate(propPrefab, GetEmptyCell());
             item.SetActive(true);
             item.transform.localScale = Vector3.one;
             item.transform.localPosition = Vector3.zero;
             PropItem info = item.GetComponent<PropItem>();
             info.InitProp(list[i].id, list[i].num);
+            info.SetTargetServent(curServent);
+            propItems.Add(info);
         }
     }
 
@@ -124,9 +139,15 @@ public class PopupServentHome : PopupBase {
             curServent = servent;
             InitInfo(servent);
         }
+
+        //重置道具的使用对象
+        for (int i = 0; i < propItems.Count; i++)
+        {
+            propItems[i].SetTargetServent(curServent);
+        }
     }
 
-    private void InitInfo(ServentInfo info)
+    public void InitInfo(ServentInfo info)
     {
         Name.text = info.Name;
         Level.text = info.Level.ToString();
@@ -134,6 +155,11 @@ public class PopupServentHome : PopupBase {
         tire.text = info.tire.ToString();
         favorability.text = info.favorability.ToString();
         SkillDesc.text = info.Desc.ToString();
+        expNow.text = info.nowexp.ToString();
+        expAll.text = ServentManager.Instance.GetServentLevelExp(info.Level).ToString();
+
+        expSlider.value = (int.Parse(expNow.text) + 0.0f) / int.Parse(expAll.text);
+
         serHave.text = Player.Instance.PlayerInfos.Servent.Count.ToString();
         serAll.text = GameManager.Instance.GetServentCount().ToString();
 
@@ -199,26 +225,35 @@ public class PopupServentHome : PopupBase {
         RefreshChooseState(0, infos[0].ID);
     }
 
+    public void AddExp(int iexp)
+    {
+        StopAllCoroutines();
+        StartCoroutine("UpdateServentLevel", iexp);
+    }
 
     private float fillSpeed = 0.02f;
     private IEnumerator UpdateServentLevel(int getExp)
     {
         float targetVal = 0.0f;
-        int nextLevelNeedExp = ServentManager.Instance.GetServentLevelExp(curServent.Level);
-        for (int i = getExp; i > 0; i -= nextLevelNeedExp)
+        int nextexp = ServentManager.Instance.GetServentLevelExp(curServent.Level);
+        int offsetExp = 0;
+        for (int i = getExp; i > 0; i -= offsetExp)
         {
-            targetVal = (i - nextLevelNeedExp >= 0) ? 1f : (i + 0.0f) / nextLevelNeedExp;
+            //距离下一级还差多少经验
+            offsetExp = nextexp - curServent.nowexp;
+            //           如果大于这个经验，则升级       小于，则在原有基础上加上现有的
+            targetVal = (i - offsetExp >= 0) ? 1f : (i + 0.0f + curServent.nowexp) / nextexp;
             while (targetVal - expSlider.value >= 0.01f)
             {
                 if (targetVal == 1f)
                 {
                     expSlider.value += fillSpeed;
-                    curServent.nowexp += (int)(nextLevelNeedExp * fillSpeed);
+                    curServent.nowexp += (int)(nextexp * fillSpeed);
                 }
                 else
                 {
                     expSlider.value = Mathf.Lerp(expSlider.value, targetVal, Time.deltaTime);
-                    curServent.nowexp = (int)(expSlider.value * nextLevelNeedExp);
+                    curServent.nowexp = (int)(expSlider.value * nextexp);
                 }
                 expNow.text = curServent.nowexp.ToString();
                 yield return null;
@@ -229,11 +264,11 @@ public class PopupServentHome : PopupBase {
                 expSlider.value = 0.0f;
                 curServent.nowexp = 0;
                 expNow.text = "0";
-                nextLevelNeedExp = ServentManager.Instance.GetServentLevelExp(curServent.Level);
+                nextexp = ServentManager.Instance.GetServentLevelExp(curServent.Level);
+                expAll.text = nextexp.ToString();
             }
-            expAll.text = nextLevelNeedExp.ToString();
-            expNow.text = curServent.nowexp.ToString();
             Level.text = curServent.Level.ToString();
+
             yield return new WaitForSeconds(0.25f);
         }
     }

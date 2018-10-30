@@ -107,7 +107,7 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
     /// <returns></returns>
     public T GetSimpleRes<T>(string path, string name, Action<T> callback = null) where T : Object
     {
-        Object val = Resources.Load(name);
+        Object val = Resources.Load( path + name);
         if (callback != null)
         {
             callback(val as T);

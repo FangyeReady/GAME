@@ -105,7 +105,6 @@ public class Hall : PopupBase {
     private void OnGachaClick()
     {
         UIManager.Instance.OpenWindow<PopupGacha>();
-
     }
 
     private void OnManageClick()

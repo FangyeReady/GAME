@@ -6,7 +6,7 @@ using System;
 public class UIManager : AutoStaticInstance<UIManager> {
 
     private List<PopupBase> m_AllWindowLists = new List<PopupBase>();
-    private Dictionary<string, GameObject> m_AllWindowPrefabs = new Dictionary<string, GameObject>();
+   // private Dictionary<string, GameObject> m_AllWindowPrefabs = new Dictionary<string, GameObject>();
 
     private Transform mtransform;
     private Transform parent {
@@ -33,20 +33,23 @@ public class UIManager : AutoStaticInstance<UIManager> {
     {
         Type type = typeof(T);
         string windowName = type.Name;
-        PopupBase window = GetWindow<PopupBase>();
+        PopupBase window = GetWindow<T>();
         if (window == null)
         {
-            GameObject prefab = FetchWindowPrefab(windowName);
-
+            GameObject prefab = Resources.Load<GameObject>(StaticData.POPUP_PATH + windowName);//FetchWindowPrefab(windowName);
             GameObject result = Instantiate(prefab, parent);
             result.transform.localPosition = Vector3.zero;
             result.transform.localScale = Vector3.one;
 
-            SetMask(result.transform);
-
             window = result.GetComponent(type) as PopupBase;
             window.EnableGameObject();
             window.ObjectName = windowName;
+
+            if (window.HasMask)
+            {
+                SetMask(result.transform);
+            }
+
             m_AllWindowLists.Add(window);
         }
         else
@@ -67,16 +70,17 @@ public class UIManager : AutoStaticInstance<UIManager> {
     /// <returns></returns>
     private GameObject FetchWindowPrefab(string name)
     {
-        GameObject obj = null;
-        if (!m_AllWindowPrefabs.ContainsKey(name))
-        {
-            obj = Resources.Load<GameObject>(StaticData.POPUP_PATH + name);
-            if (obj != null)
-            {
-                m_AllWindowPrefabs.Add(name, obj);
-            }
-        }
-        return m_AllWindowPrefabs[name];
+        GameObject obj = Resources.Load<GameObject>(StaticData.POPUP_PATH + name);
+        return obj;
+       // if (!m_AllWindowPrefabs.ContainsKey(name))
+       // {
+            //obj = Resources.Load<GameObject>(StaticData.POPUP_PATH + name);
+            //if (obj != null)
+            //{
+            //    m_AllWindowPrefabs.Add(name, obj);
+            //}
+        //}
+        //return m_AllWindowPrefabs[name];
     }
 
     //private PopupBase GetWindow(string name)
@@ -91,7 +95,7 @@ public class UIManager : AutoStaticInstance<UIManager> {
     public void RemoveWindow(PopupBase obj)
     {
        bool issuccess = m_AllWindowLists.Remove(obj);
-        LoggerM.Log("remove window: " + issuccess.ToString());
+       LoggerM.Log("remove window: " + issuccess.ToString());
     }
 
     /// <summary>
@@ -103,7 +107,7 @@ public class UIManager : AutoStaticInstance<UIManager> {
     {
         string name = typeof(T).Name;
         PopupBase popup = m_AllWindowLists.Find(w => w.ObjectName == name);
-        if (popup != null && popup.isActiveAndEnabled)
+        if (popup != null && popup.gameObject.activeSelf)
         {
             return popup.gameObject.GetComponent<T>();
         }
@@ -114,5 +118,7 @@ public class UIManager : AutoStaticInstance<UIManager> {
     {
         RectTransform rect =  Instantiate(maskPrefab, par).GetComponent<RectTransform>();
         rect.SetAsFirstSibling();
+        rect.localPosition = Vector3.zero;
+        rect.localScale = Vector3.one;
     }
 }

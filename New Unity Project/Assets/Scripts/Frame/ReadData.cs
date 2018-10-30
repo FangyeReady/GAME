@@ -99,7 +99,13 @@ public class ReadData :AutoStaticInstance<ReadData> {
 
     public void GetPropInfoData(string path, out Dictionary<string, PropInfo> info)
     {
-        string str = File.ReadAllText(path);
+        //Byte[] bytes = File.ReadAllBytes(path);
+        //string str = UTF8Encoding.UTF8.GetString(bytes);
+        FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+        Byte[] bytes = new Byte[stream.Length];
+        int count = stream.Read(bytes, 0, (int)stream.Length);
+        stream.Dispose();
+        string str = UTF8Encoding.UTF8.GetString(bytes);
         info = JsonMapper.ToObject<Dictionary<string, PropInfo>>(str);    
     }
 

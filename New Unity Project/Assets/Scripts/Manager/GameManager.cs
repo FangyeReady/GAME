@@ -8,6 +8,9 @@ public class GameManager : AutoStaticInstance<GameManager> {
     private static float gameTime = 0.0f;
     public static float GameTime { get { return gameTime; } }
 
+    private static float incraseTime = 0f;
+    public static float IncraseTime { get { return incraseTime; } }
+
     private GameSettingInfo _gameSettingInfo;
     public GameSettingInfo GameSettingInfos { get { return _gameSettingInfo; } }
 
@@ -30,7 +33,6 @@ public class GameManager : AutoStaticInstance<GameManager> {
     }
 
     float intervalTime = 1f;
-    float incraseTime = 0f;
     private void AddGameTime()
     {
         gameTime += Time.deltaTime;

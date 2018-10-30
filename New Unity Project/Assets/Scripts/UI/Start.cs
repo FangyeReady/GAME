@@ -20,7 +20,7 @@ public class Start : ObjBase {
         base.PreInit();
         progressText = EnterProgress.transform.Find("Text").GetComponent<Text>();
         resetPos = new Vector3(startButton.transform.localPosition.x, -100, startButton.transform.localPosition.z);
-        StaticUpdater.Instance.UpdateEvent += RefeshProgress;
+        //StaticUpdater.Instance.UpdateEvent += RefeshProgress;
 
         StartCoroutine("InitData");
     }
@@ -43,11 +43,11 @@ public class Start : ObjBase {
         ServentManager.Instance.InitManager();
         //++count;
         PropManager.Instance.InitManager();
-       // ++count;
+        //++count;
 
         //可以开始游戏的逻辑
         Begin();
-        yield return null;
+        yield return new WaitForSeconds(0.1f);
     }
 
     private void Begin()
@@ -68,7 +68,7 @@ public class Start : ObjBase {
     protected override void OnDisabled()
     {
         count = 0;
-        StaticUpdater.Instance.UpdateEvent -= RefeshProgress;
+        //StaticUpdater.Instance.UpdateEvent -= RefeshProgress;
         base.OnDisabled(); 
     }
 }
