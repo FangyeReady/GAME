@@ -60,7 +60,36 @@ public class UIManager : AutoStaticInstance<UIManager> {
         {
             callBack(window as T);
         }
+
+        RebuildSortOrder();
         return window as T;
+    }
+
+    private Dictionary<int, List<Canvas>> windowCanvas = new Dictionary<int, List<Canvas>>();
+    private void RebuildSortOrder()
+    {
+        windowCanvas.Clear();
+        for (int i = 0; i < m_AllWindowLists.Count; i++)
+        {
+            var canvas = m_AllWindowLists[i].gameObject.GetComponent<Canvas>();
+            if (canvas != null)
+            {
+                if (!windowCanvas.ContainsKey(canvas.sortingLayerID))
+                {
+                    windowCanvas.Add(canvas.sortingLayerID, new List<Canvas>());
+                }
+                windowCanvas[canvas.sortingLayerID].Add(canvas);
+            }
+        }
+
+        foreach (var item in windowCanvas.Values)
+        {
+            for (int i = 0; i < item.Count; i++)
+            {
+                item[i].overrideSorting = true;
+                item[i].sortingOrder = i + 1;
+            }
+        }
     }
 
     /// <summary>

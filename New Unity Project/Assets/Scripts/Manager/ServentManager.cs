@@ -55,13 +55,41 @@ public class ServentManager : AutoStaticInstance<ServentManager> {
         servent.star = (int)star;
     }
 
-    public int GetServentLevelExp(int level)
+    public int GetServentNextLevelExp(int level)
     {
         if (level >=0 && level < serventLevel.Levels.Count)
         {
             return serventLevel.Levels[level];
         }
         return 0;
+    }
+
+    
+    public void SetServentLevelByAddExp(ServentInfo servent, int addExp)
+    {
+        int allExp = GetServentNextLevelExp(servent.Level);
+        if (allExp == 0)
+        {
+            return;
+        }
+        int needExp = allExp - servent.nowexp;
+
+        int temp = addExp - needExp;
+        if (temp > 0)
+        {
+            servent.Level += 1;
+            SetServentLevelByAddExp(servent, temp);
+        }
+        else if (temp == 0)
+        {
+            servent.Level += 1;
+            return;
+        }
+        else
+        {
+            servent.nowexp += addExp;
+            return;
+        }
     }
 
 }

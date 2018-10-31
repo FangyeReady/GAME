@@ -56,8 +56,22 @@ public class PropItem : ObjBase, IPointerEnterHandler, IPointerExitHandler{
     private void RefreshPropUI()
     {
         text.text = num.ToString();
+
+        if (iteminfo != null)
+        {
+            iteminfo.Hide();
+        }
         if (this.num <= 0)
         {
+            var list = Player.Instance.PlayerInfos.propID;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].id == this.id)
+                {
+                    list.RemoveAt(i);
+                    break;
+                }
+            }
             base.UnLoadObj();
         }
     }

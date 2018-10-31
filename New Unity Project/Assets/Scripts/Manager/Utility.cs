@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ public static class Utility  {
     public static void SwitchScene(StaticData.Scenes scene)
     {
         SceneManager.LoadScene((int)scene);
-        Debug.Log("Load Scene " + scene.ToString());
+        LoggerM.Log("Load Scene " + scene.ToString());
     }
 
     public static DateTime ToUtcTime(long secondsFromUtcStart)
@@ -58,5 +59,21 @@ public static class Utility  {
         int result = random.Next(min, max);//包含下限，不包含上限
 
         return result;
+    }
+
+    /// <summary>
+    /// 得到某个程序是否在运行，若存在则在运行
+    /// </summary>
+    /// <param name="methodName"></param>
+    /// <returns></returns>
+    public static int GetProcessID(string methodName)
+    {
+        Process[] processes = Process.GetProcessesByName(methodName);
+
+        foreach (var item in processes)
+        {
+            LoggerM.LogError(item.Id.ToString() + "---");
+        }
+        return 0;
     }
 }

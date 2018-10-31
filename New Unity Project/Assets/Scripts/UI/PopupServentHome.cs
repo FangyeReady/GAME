@@ -143,7 +143,14 @@ public class PopupServentHome : PopupBase {
         //重置道具的使用对象
         for (int i = 0; i < propItems.Count; i++)
         {
-            propItems[i].SetTargetServent(curServent);
+            if (propItems[i] != null)
+            {
+                propItems[i].SetTargetServent(curServent);
+            }
+            else
+            {
+                propItems.RemoveAt(i);
+            }
         }
     }
 
@@ -156,7 +163,7 @@ public class PopupServentHome : PopupBase {
         favorability.text = info.favorability.ToString();
         SkillDesc.text = info.Desc.ToString();
         expNow.text = info.nowexp.ToString();
-        expAll.text = ServentManager.Instance.GetServentLevelExp(info.Level).ToString();
+        expAll.text = ServentManager.Instance.GetServentNextLevelExp(info.Level).ToString();
 
         expSlider.value = (int.Parse(expNow.text) + 0.0f) / int.Parse(expAll.text);
 
@@ -227,50 +234,67 @@ public class PopupServentHome : PopupBase {
 
     public void AddExp(int iexp)
     {
-        StopAllCoroutines();
-        StartCoroutine("UpdateServentLevel", iexp);
+        if (!isRunning)
+        {
+            StartCoroutine("UpdateServentLevel", iexp);
+        }
+        else
+        {
+            StopAllCoroutines();
+            isRunning = false;
+            ServentManager.Instance.SetServentLevelByAddExp(curServent, iexp);
+        }
     }
 
     private float fillSpeed = 0.02f;
+    private bool isRunning = false;//标志协程是否正在运行
     private IEnumerator UpdateServentLevel(int getExp)
     {
+        isRunning = true;
         float targetVal = 0.0f;
-        int nextexp = ServentManager.Instance.GetServentLevelExp(curServent.Level);
-        int offsetExp = 0;
-        for (int i = getExp; i > 0; i -= offsetExp)
+        int nextexp = ServentManager.Instance.GetServentNextLevelExp(curServent.Level);
+        if (nextexp != 0)//经验已经打到上限
         {
-            //距离下一级还差多少经验
-            offsetExp = nextexp - curServent.nowexp;
-            //           如果大于这个经验，则升级       小于，则在原有基础上加上现有的
-            targetVal = (i - offsetExp >= 0) ? 1f : (i + 0.0f + curServent.nowexp) / nextexp;
-            while (targetVal - expSlider.value >= 0.01f)
+            int offsetExp = 0;
+            for (int i = getExp; i > 0; i -= offsetExp)
             {
+                //距离下一级还差多少经验
+                offsetExp = nextexp - curServent.nowexp;
+                //           如果大于这个经验，则升级       小于，则在原有基础上加上现有的
+                targetVal = (i - offsetExp >= 0) ? 1f : (i + 0.0f + curServent.nowexp) / nextexp;
+                while (targetVal - expSlider.value >= 0.01f)
+                {
+                    if (targetVal == 1f)
+                    {
+                        expSlider.value += fillSpeed;
+                        curServent.nowexp += (int)(nextexp * fillSpeed);
+                    }
+                    else
+                    {
+                        expSlider.value = Mathf.Lerp(expSlider.value, targetVal, Time.deltaTime);
+                        curServent.nowexp = (int)(expSlider.value * nextexp);
+                    }
+                    expNow.text = curServent.nowexp.ToString();
+                    yield return null;
+                }
                 if (targetVal == 1f)
                 {
-                    expSlider.value += fillSpeed;
-                    curServent.nowexp += (int)(nextexp * fillSpeed);
+                    curServent.Level += 1;
+                    expSlider.value = 0.0f;
+                    curServent.nowexp = 0;
+                    expNow.text = "0";
+                    nextexp = ServentManager.Instance.GetServentNextLevelExp(curServent.Level);
+                    if (nextexp != 0)
+                    {
+                        expAll.text = nextexp.ToString();
+                    }
                 }
-                else
-                {
-                    expSlider.value = Mathf.Lerp(expSlider.value, targetVal, Time.deltaTime);
-                    curServent.nowexp = (int)(expSlider.value * nextexp);
-                }
-                expNow.text = curServent.nowexp.ToString();
-                yield return null;
-            }
-            if (targetVal == 1f)
-            {
-                curServent.Level += 1;
-                expSlider.value = 0.0f;
-                curServent.nowexp = 0;
-                expNow.text = "0";
-                nextexp = ServentManager.Instance.GetServentLevelExp(curServent.Level);
-                expAll.text = nextexp.ToString();
-            }
-            Level.text = curServent.Level.ToString();
+                Level.text = curServent.Level.ToString();
 
-            yield return new WaitForSeconds(0.25f);
-        }
+                yield return new WaitForSeconds(0.25f);
+            }
+        }     
+        isRunning = false;
     }
 
     private void OnCloseClick()
