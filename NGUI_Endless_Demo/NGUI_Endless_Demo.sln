@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGUI_Endless_Demo", "Assembly-CSharp.csproj", "{2ACA4ABF-9071-C2D2-221C-950D8C1F7CBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{2ACA4ABF-9071-C2D2-221C-950D8C1F7CBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGUI_Endless_Demo", "Assembly-CSharp-Editor.csproj", "{11E39596-F2DD-1687-2ECF-6467CE6F9914}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{11E39596-F2DD-1687-2ECF-6467CE6F9914}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
