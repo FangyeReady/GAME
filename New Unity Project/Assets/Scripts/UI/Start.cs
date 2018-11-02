@@ -7,8 +7,6 @@ using System.Text;
 
 public class Start : ObjBase {
 
-    private readonly int AllCount = 5;
-    private int count = 0;
     public Slider EnterProgress;
     private Text progressText;
 
@@ -31,20 +29,27 @@ public class Start : ObjBase {
         Utility.SwitchScene(StaticData.Scenes.Game);
     }
 
-
+    private readonly int AllCount = 5;
+    private float process = 0.0f;
     IEnumerator InitData()
     {
         Player.Instance.InitManager();
-        //++count;
         GameManager.Instance.InitManager();
-        //++count;
         UIManager.Instance.InitManager();
-        //++count;
         ServentManager.Instance.InitManager();
-        //++count;
         PropManager.Instance.InitManager();
-        //++count;
 
+
+        while (AllCount - process > 0.01f)
+        {
+            process = Mathf.Lerp(process, AllCount, Time.deltaTime);
+            yield return null;
+
+            EnterProgress.value = (process + 0.0f) / AllCount;
+            progressText.text = (((process + 0.0f) / AllCount) * 100).ToString("f2");
+            yield return null;
+        }
+        progressText.text = "100";
         //可以开始游戏的逻辑
         Begin();
         yield return new WaitForSeconds(0.1f);
@@ -55,20 +60,8 @@ public class Start : ObjBase {
         startButton.transform.localPosition = resetPos;
     }
 
-    private void RefeshProgress()
-    {
-        if (AllCount <= 0 || count <= 0)
-        {
-            return;
-        }
-        EnterProgress.value = (count + 0.0f) / AllCount;
-        progressText.text = (((count + 0.0f) / AllCount) * 100).ToString();
-    }
-
     protected override void OnDisabled()
     {
-        count = 0;
-        //StaticUpdater.Instance.UpdateEvent -= RefeshProgress;
         base.OnDisabled(); 
     }
 }

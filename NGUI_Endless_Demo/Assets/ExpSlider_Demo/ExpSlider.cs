@@ -17,7 +17,7 @@ public class ExpSlider : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-       // slider.onValueChanged.AddListener(CheckFillArea);
+    // slider.onValueChanged.AddListener(CheckFillArea);
 
         curExpText.text = "0";
         levelUpText.text = nextLevelNeedExp.ToString();
