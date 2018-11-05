@@ -56,5 +56,8 @@ public class Player : AutoStaticInstance<Player> {
         return _playerInfo.Servent.Find(ser => ser.ID == id) == null;
     }
 
-
+    public override void Save()
+    {
+        throw new NotImplementedException();
+    }
 }

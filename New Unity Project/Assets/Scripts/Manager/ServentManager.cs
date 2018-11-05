@@ -92,4 +92,8 @@ public class ServentManager : AutoStaticInstance<ServentManager> {
         }
     }
 
+    public override void Save()
+    {
+        throw new System.NotImplementedException();
+    }
 }

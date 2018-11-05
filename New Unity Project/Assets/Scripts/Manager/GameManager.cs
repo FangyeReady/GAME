@@ -51,7 +51,7 @@ public class GameManager : AutoStaticInstance<GameManager> {
         {
             Player.Instance.SetGameTime(gameTime);
             Player.Instance.RefreshData();
-            this.RefreshData();
+            this.SaveData();
             Application.Quit();
             Debug.LogError("OnDestory~!  " + Time.time);
         }
@@ -79,8 +79,14 @@ public class GameManager : AutoStaticInstance<GameManager> {
 
     }
 
+    private void SaveData()
+    {
+        Save();
 
-    private void RefreshData()
+        PropManager.Instance.Save();
+    }
+
+    public override void Save()
     {
         JsonData data = JsonMapper.ToJson(_gameSettingInfo);
         ReadData.Instance.SaveData(path, data.ToString());

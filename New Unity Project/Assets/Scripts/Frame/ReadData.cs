@@ -46,10 +46,16 @@ public class ReadData :AutoStaticInstance<ReadData> {
 
     public void SaveData(string path, string data)
     {
-        FileStream fileStream = new FileStream(path, FileMode.Create);
+        FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate);
         byte[] bytes = Encoding.UTF8.GetBytes(data);
         fileStream.Write(bytes,0,bytes.Length);
         fileStream.Close();
+    }
+
+
+    public override void Save()
+    {
+        
     }
 
 

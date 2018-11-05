@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using LitJson;
 public class PropManager : AutoStaticInstance<PropManager> {
 
     private Dictionary<string, PropInfo> _propinfo;
@@ -60,4 +60,12 @@ public class PropManager : AutoStaticInstance<PropManager> {
 
     }
 
+    public override void Save()
+    {
+        JsonData data1 = JsonMapper.ToJson(_propinfo);
+        JsonData data2 = JsonMapper.ToJson(_propcfgs);
+
+        ReadData.Instance.SaveData(pathinfo, data1.ToString());
+        ReadData.Instance.SaveData(pathcfg, data2.ToString());
+    }
 }

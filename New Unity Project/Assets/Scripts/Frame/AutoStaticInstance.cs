@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoStaticInstance<T> : MonoBehaviour where T: MonoBehaviour
+public abstract class AutoStaticInstance<T> : MonoBehaviour where T: MonoBehaviour
 {
     private static MonoBehaviour _instance;
 
@@ -24,4 +24,6 @@ public class AutoStaticInstance<T> : MonoBehaviour where T: MonoBehaviour
     {
 
     }
+
+    public abstract void Save();
 }

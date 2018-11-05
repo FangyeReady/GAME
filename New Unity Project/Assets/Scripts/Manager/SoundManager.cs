@@ -165,4 +165,9 @@ public class SoundManager : AutoStaticInstance<SoundManager> {
                 });    
         }
     }
+
+    public override void Save()
+    {
+        throw new NotImplementedException();
+    }
 }

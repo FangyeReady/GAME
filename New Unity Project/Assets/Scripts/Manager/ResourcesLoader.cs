@@ -115,4 +115,8 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
         return val as T;
     }
 
+    public override void Save()
+    {
+        throw new NotImplementedException();
+    }
 }

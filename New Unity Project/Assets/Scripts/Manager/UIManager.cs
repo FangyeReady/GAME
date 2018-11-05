@@ -150,4 +150,9 @@ public class UIManager : AutoStaticInstance<UIManager> {
         rect.localPosition = Vector3.zero;
         rect.localScale = Vector3.one;
     }
+
+    public override void Save()
+    {
+        throw new NotImplementedException();
+    }
 }

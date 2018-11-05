@@ -28,4 +28,9 @@ public class StaticUpdater : AutoStaticInstance<StaticUpdater> {
         UpdateEvent = null;
         FixUpdateEvent = null;
     }
+
+    public override void Save()
+    {
+        throw new System.NotImplementedException();
+    }
 }
