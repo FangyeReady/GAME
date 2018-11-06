@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Servent Manager.
+/// </summary>
 public class ServentManager : AutoStaticInstance<ServentManager> {
 
+    /// <summary>
+    /// skill info.
+    /// </summary>
     private ServentSkillInfo serventSkill;
+    /// <summary>
+    /// skill level info.
+    /// </summary>
     private ServentLevel serventLevel;
     private string pathid = StaticData.CONFIG_PATH + "ServentSkillID.txt";
     private string pathdesc = StaticData.CONFIG_PATH + "ServentSkillDesc.txt";
@@ -23,6 +32,11 @@ public class ServentManager : AutoStaticInstance<ServentManager> {
         ReadData.Instance.GetServentLevel(pathlevel, out serventLevel);
     }
 
+    /// <summary>
+    /// get skill id.
+    /// </summary>
+    /// <param name="star"></param>
+    /// <returns></returns>
     private int GetSkillID(Star star)
     {
         if (serventSkill.skillID.ContainsKey(star.ToString()))
@@ -35,6 +49,11 @@ public class ServentManager : AutoStaticInstance<ServentManager> {
         return 0;
     }
 
+    /// <summary>
+    /// get skill id.
+    /// </summary>
+    /// <param name="skillID"></param>
+    /// <returns></returns>
     private string GetSkillDesc(int skillID)
     {
         if (serventSkill.skillDesc.ContainsKey(skillID.ToString()))

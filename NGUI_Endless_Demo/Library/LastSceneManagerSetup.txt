@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/DateTime/DateTime.unity
+- path: Assets/UGUI_Atlas_Demo/UGUI_Atlas_Demo.unity
   isLoaded: 1
   isActive: 1

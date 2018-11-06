@@ -67,17 +67,18 @@
     <Compile Include="Assets\DateTime\DateTimeTest.cs" />
     <Compile Include="Assets\ExpSlider_Demo\ExpSlider.cs" />
     <Compile Include="Assets\New_Demo\NewDemo.cs" />
+    <Compile Include="Assets\UGUI_Atlas_Demo\Images\SetSprite.cs" />
     <Compile Include="Assets\Utilty.cs" />
     <None Include="Assets\CanvasMode_Demo\ReadMe.txt" />
     <None Include="Assets\MultiCameraRender_Demo\ReadMe.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
