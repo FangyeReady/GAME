@@ -40,16 +40,16 @@ public class ReadData :AutoStaticInstance<ReadData> {
             info.Servent.Add(serventInfo);
         }
         //存储数据
-        Player.Instance.RefreshData();
+        //Player.Instance.RefreshData();
     }
 
 
     public void SaveData(string path, string data)
     {
-        FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate);
-        byte[] bytes = Encoding.UTF8.GetBytes(data);
-        fileStream.Write(bytes,0,bytes.Length);
-        fileStream.Close();
+        //FileStream fileStream = new FileStream(path, FileMode.OpenOrCreate);
+        //byte[] bytes = Encoding.UTF8.GetBytes(data);
+        //fileStream.Write(bytes,0,bytes.Length);
+        //fileStream.Close();
     }
 
 
@@ -105,13 +105,13 @@ public class ReadData :AutoStaticInstance<ReadData> {
 
     public void GetPropInfoData(string path, out Dictionary<string, PropInfo> info)
     {
-        //Byte[] bytes = File.ReadAllBytes(path);
-        //string str = UTF8Encoding.UTF8.GetString(bytes);
-        FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-        Byte[] bytes = new Byte[stream.Length];
-        int count = stream.Read(bytes, 0, (int)stream.Length);
-        stream.Dispose();
+        Byte[] bytes = File.ReadAllBytes(path);
         string str = UTF8Encoding.UTF8.GetString(bytes);
+        //FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+        //Byte[] bytes = new Byte[stream.Length];
+        //int count = stream.Read(bytes, 0, (int)stream.Length);
+        //stream.Dispose();
+        //string str = UTF8Encoding.UTF8.GetString(bytes);
         info = JsonMapper.ToObject<Dictionary<string, PropInfo>>(str);    
     }
 
