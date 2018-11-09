@@ -86,15 +86,15 @@ public class ResourcesLoader : AutoStaticInstance<ResourcesLoader> {
 
     public void SetSprite(string path,string name, Action<Sprite> callBack)
     {
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
         var sp = Resources.Load<Sprite>(path + name);
         if (sp != null)
         {
             callBack(sp);
         }
-#else 
-        StartCoroutine(LoadResources<Sprite>(name, callback));
-#endif
+//#else 
+        //StartCoroutine(LoadResources<Sprite>(name, callBack));
+//#endif
 
     }
 
