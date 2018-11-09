@@ -1,0 +1,32 @@
+ManifestFileVersion: 0
+CRC: 40979639
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6bffcc2422193302528c639957534924
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4034.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4033.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4027.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4032.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4030.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4005.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4036.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4006.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4031.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4029.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4002.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4003.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4004.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4035.jpg
+- Assets/UGUI_Atlas_Demo/Images/Sprites/list4028.jpg
+Dependencies: []

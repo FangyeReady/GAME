@@ -17,7 +17,6 @@ public class SetSprite : MonoBehaviour {
 	
 	void Update () {
 
-
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (iSprite != null)
