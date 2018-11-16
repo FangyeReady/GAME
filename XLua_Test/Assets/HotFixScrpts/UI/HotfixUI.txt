@@ -1,0 +1,34 @@
+
+
+print("ui test")
+
+xlua.hotfix(CS.UITest, "SetNotice",
+function(self)
+   self.NoticeText.text = "this is a LUA str."
+   
+   local num = CS.HelloWorld.Instance:Add(5, 9)
+   
+   print(">>><<<"..num)
+   
+   num = self:Add(1,2)
+   print(">>><<<"..num)
+   
+end
+)
+
+xlua.hotfix(CS.UITest, "get_SX", 
+
+function(self)
+   print("this is lua --get-- sx")
+   return self._sx * 10
+end
+)
+
+
+xlua.hotfix(CS.UITest, "set_SX", 
+
+function(self, val)
+   print("this is lua --set-- sx")
+   self._sx = val
+end
+)

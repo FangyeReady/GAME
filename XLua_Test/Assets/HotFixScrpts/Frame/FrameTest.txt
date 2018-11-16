@@ -1,0 +1,17 @@
+print("fram test")
+
+xlua.hotfix(CS.HelloWorld, "Add",
+function(self, a, b)
+   print("fixed func")
+   return (a + b) * 10
+end
+)
+
+xlua.hotfix(CS.GZTest, ".ctor",
+
+function(self, a)
+   self.a = a
+   print("this LUA GZ"..self.a)
+end
+
+)
