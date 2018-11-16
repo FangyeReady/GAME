@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 1974308645
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c754662acab0337f752850644584639c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fe397485c3cec1106b49e9ff95e8f8a2
+HashAppended: 1
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleBro/Res/Materials/1.mat
+Dependencies: []

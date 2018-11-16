@@ -1,7 +1,7 @@
 ManifestFileVersion: 0
-CRC: 1843995140
+CRC: 2632364211
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: sprites..assetbundle
+      Name: sprites.assetbundle
       Dependencies: {}

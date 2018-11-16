@@ -1,0 +1,25 @@
+ManifestFileVersion: 0
+CRC: 748588910
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c26a229b39c94fc7e36d3bef956b0a11
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f19fbf085e00d23fbc8d6cf7b345590b
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleBro/Res/5.png
+- Assets/AssetBundleBro/Res/6.PNG
+- Assets/AssetBundleBro/Res/10.PNG
+- Assets/AssetBundleBro/Res/9.PNG
+- Assets/AssetBundleBro/Res/2.png
+- Assets/AssetBundleBro/Res/3.PNG
+- Assets/AssetBundleBro/Res/1.png
+- Assets/AssetBundleBro/Res/7.png
+- Assets/AssetBundleBro/Res/8.PNG
+- Assets/AssetBundleBro/Res/4.png
+Dependencies: []

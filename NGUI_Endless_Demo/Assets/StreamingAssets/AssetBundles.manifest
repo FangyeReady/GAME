@@ -1,0 +1,11 @@
+ManifestFileVersion: 0
+CRC: 923289681
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: 3dprefab_76bebfb1e79c54efffc54bbda8261ac1
+      Dependencies:
+        Dependency_0: mat_c754662acab0337f752850644584639c
+    Info_1:
+      Name: mat_c754662acab0337f752850644584639c
+      Dependencies: {}

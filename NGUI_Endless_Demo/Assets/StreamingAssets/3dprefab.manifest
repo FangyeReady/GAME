@@ -1,0 +1,32 @@
+ManifestFileVersion: 0
+CRC: 3032510466
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 76bebfb1e79c54efffc54bbda8261ac1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: cfc09d1c5ab7436ef379a7d79ea0371f
+HashAppended: 1
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleBro/Res/Cube.prefab
+- Assets/AssetBundleBro/Res/Sphere.prefab
+Dependencies:
+- C:/Users/fy/Desktop/GAME/My/NGUI_Endless_Demo/Assets/AssetBundles/mat_c754662acab0337f752850644584639c
