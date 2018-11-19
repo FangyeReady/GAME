@@ -573,7 +573,8 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: HOTFIX_ENABLE
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   incrementalIl2cppBuild: {}
   allowUnsafeCode: 0

@@ -7,6 +7,7 @@ using System.IO;
 public class HelloWorld : MonoBehaviour {
 
     private static LuaEnv m_luaEnv;
+
     public static LuaEnv LuaInstance
     {
         get {
