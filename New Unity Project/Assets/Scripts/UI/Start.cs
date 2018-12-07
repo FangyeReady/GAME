@@ -39,10 +39,12 @@ public class Start : ObjBase {
         ServentManager.Instance.InitManager();
         PropManager.Instance.InitManager();
 
-
+        float loadingTime = 2f;
+        float deltaTime = 0f;
         while (AllCount - process > 0.01f)
         {
-            process = Mathf.Lerp(process, AllCount, Time.deltaTime);
+            deltaTime += Time.deltaTime;
+            process = Mathf.Lerp(process, AllCount, deltaTime / loadingTime);
             yield return null;
 
             EnterProgress.value = (process + 0.0f) / AllCount;

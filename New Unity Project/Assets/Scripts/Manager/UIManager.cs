@@ -9,7 +9,7 @@ public class UIManager : AutoStaticInstance<UIManager> {
    // private Dictionary<string, GameObject> m_AllWindowPrefabs = new Dictionary<string, GameObject>();
 
     private Transform mtransform;
-    private Transform parent {
+    public Transform Parent_Main {
         get {
             if (mtransform == null)
             {
@@ -37,7 +37,7 @@ public class UIManager : AutoStaticInstance<UIManager> {
         if (window == null)
         {
             GameObject prefab = Resources.Load<GameObject>(StaticData.POPUP_PATH + windowName);//FetchWindowPrefab(windowName);
-            GameObject result = Instantiate(prefab, parent);
+            GameObject result = Instantiate(prefab, Parent_Main);
             result.transform.localPosition = Vector3.zero;
             result.transform.localScale = Vector3.one;
 

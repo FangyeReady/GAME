@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class PropItem : ObjBase, IPointerEnterHandler, IPointerExitHandler{
+public class PropItem : ObjBase, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler,IDragHandler,IEndDragHandler{
 
     public Image img;
     public Text text;
@@ -14,6 +14,17 @@ public class PropItem : ObjBase, IPointerEnterHandler, IPointerExitHandler{
     private PropCfg propCfg;
     private PopupPropItemInfo iteminfo = null;
     private ServentInfo servent;
+
+
+    private Transform parent;
+    private bool isDraging = false;
+
+
+    protected override void Init()
+    {
+        base.Init();
+        this.parent = this.transform.parent;
+    }
 
     public void InitProp(string id, int num)
     {
@@ -48,9 +59,12 @@ public class PropItem : ObjBase, IPointerEnterHandler, IPointerExitHandler{
 
     private void UseItem()
     {
-        this.num -= 1; 
-        RefreshPropUI();
-        PropManager.Instance.UsePropItem(propCfg, servent);
+        if (!isDraging)
+        {
+            this.num -= 1;
+            RefreshPropUI();
+            PropManager.Instance.UsePropItem(propCfg, servent);
+        }
     }
 
     private void RefreshPropUI()
@@ -73,6 +87,60 @@ public class PropItem : ObjBase, IPointerEnterHandler, IPointerExitHandler{
                 }
             }
             base.UnLoadObj();
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        isDraging = true;
+        this.transform.parent = UIManager.Instance.GetWindow<PopupServentHome>().transform;
+        this.transform.localPosition = Vector3.zero;
+        this.transform.localScale = Vector3.one;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        float x = Input.mousePosition.x - Screen.width / 2;
+        float y = Input.mousePosition.y - Screen.height / 2;
+        Vector2 vector2 = new Vector2(x, y);
+        this.transform.localPosition = vector2;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        isDraging = false;
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ChangeCell(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        ChangeCell(other);
+    }
+
+    private void ChangeCell(Collider other)
+    {
+        if (isDraging == false && other.CompareTag("cell"))
+        {
+            if (this.parent != null && !this.parent.Equals(other.transform))
+            {
+                LoggerM.Log("in~~");
+                if (other.transform.childCount == 1)
+                {
+                    var item = other.transform.GetChild(0);
+                    item.transform.SetParent(this.parent);
+                    item.transform.localPosition = Vector3.zero;
+                    item.transform.localScale = Vector3.one;
+                }
+                this.parent = other.transform;
+                this.gameObject.transform.SetParent(this.parent);
+                this.transform.localPosition = Vector3.zero;
+                this.transform.localScale = Vector3.one;
+            }
         }
     }
 }

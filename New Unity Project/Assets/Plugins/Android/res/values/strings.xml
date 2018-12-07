@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BSGameSdk_Demo_1.8.4</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">BSGameSdk_Demo_1.8.4</string>
+    <string name="buttonText">Test</string>
+    <string name="pay_button_text">支付</string>
+    <string name="button_bsgamesdk_reg">注册</string>
+    <string name="button_bsgamesdk_login">登录</string>
+    <string name="button_bsgamesdk_logout">登出</string>
+    <string name="button_check_login">是否登录</string>
+    <string name="button_get_user_info">获取用户信息</string>
+    <string name="button_modify_account">修改默认账号</string>
+    <string name="button_notify_zone">通知区服角色信息</string>
+    <string name="button_create_role">创建角色</string>
+    <string name="button_check_realname_auth">是否实名认证</string>
+    <string name="bsgamesdk_demo_button_exit">退出游戏</string>
+    
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bsgamesdk_white"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="支付测试"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:drawableLeft="@drawable/newicon"
+        android:drawablePadding="5dp"
+        />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="输入金额（单位：分）"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/edit_fee"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/edit_dialog_input_username"
+        android:inputType="number"
+        android:maxLength="6" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp">
+        <Button
+            style="@style/bsgamesdk_btn_confirm"
+            android:id="@+id/bsgamesdk_pay_confirm"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/bsgamesdk_determine"
+            android:layout_marginRight="5dp"/>
+        <Button
+            style="@style/bsgamesdk_btn_reg"
+            android:id="@+id/bsgamesdk_pay_cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/bsgamesdk_cancel"/>
+    </LinearLayout>
+
+</LinearLayout>

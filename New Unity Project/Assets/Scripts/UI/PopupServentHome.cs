@@ -103,14 +103,18 @@ public class PopupServentHome : PopupBase {
             {
                 continue;
             }
-            var item = Instantiate(propPrefab, GetEmptyCell());
-            item.SetActive(true);
-            item.transform.localScale = Vector3.one;
-            item.transform.localPosition = Vector3.zero;
-            PropItem info = item.GetComponent<PropItem>();
-            info.InitProp(list[i].id, list[i].num);
-            info.SetTargetServent(curServent);
-            propItems.Add(info);
+            Transform parent = GetEmptyCell();
+            if (parent != null)
+            {
+                var item = Instantiate(propPrefab, parent);
+                item.SetActive(true);
+                item.transform.localScale = Vector3.one;
+                item.transform.localPosition = Vector3.zero;
+                PropItem info = item.GetComponent<PropItem>();
+                info.InitProp(list[i].id, list[i].num);
+                info.SetTargetServent(curServent);
+                propItems.Add(info);
+            } 
         }
     }
 
