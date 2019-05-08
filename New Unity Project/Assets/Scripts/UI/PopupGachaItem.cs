@@ -11,7 +11,7 @@ public class PopupGachaItem : PopupBase {
     public GameObject oushuStarPrefab;
 
     public Image avatarPic;
-    public Text name;
+    public Text name_text;
     public GameObject newFlag;
 
     private Action action;
@@ -21,7 +21,7 @@ public class PopupGachaItem : PopupBase {
     public void Init(ServentInfo info, Action callBack)
     {
         action = callBack;
-        name.text = info.Name;
+        name_text.text = info.Name;
         cardID = info.ID;
         ResourcesLoader.Instance.SetSprite("path", "avatar" + info.ID.ToString(), (sp) => avatarPic.overrideSprite = sp);
         bool isDouble = info.star % 2 == 0 ? true : false;
@@ -45,7 +45,7 @@ public class PopupGachaItem : PopupBase {
     public void Init(int id, string name, int star, Action callBack)
     {
         action = callBack;
-        this.name.text = name;
+        this.name_text.text = name;
         cardID = id;
         ResourcesLoader.Instance.SetSprite("path", "avatar" + id.ToString(), (sp) => avatarPic.overrideSprite = sp);
         bool isDouble = star % 2 == 0 ? true : false;

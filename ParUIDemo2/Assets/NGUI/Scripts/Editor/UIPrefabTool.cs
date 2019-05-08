@@ -422,7 +422,7 @@ public class UIPrefabTool : EditorWindow
 		{
 			rt = new RenderTexture(dim, dim, 1);
 			rt.hideFlags = HideFlags.HideAndDontSave;
-			rt.generateMips = false;
+			rt.autoGenerateMips = false;
 			rt.format = RenderTextureFormat.ARGB32;
 			rt.filterMode = FilterMode.Trilinear;
 			rt.anisoLevel = 4;

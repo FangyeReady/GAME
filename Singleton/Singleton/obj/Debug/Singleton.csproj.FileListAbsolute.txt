@@ -1,0 +1,7 @@
+C:\Users\fy\Desktop\Singleton\Singleton\bin\Debug\Singleton.exe.config
+C:\Users\fy\Desktop\Singleton\Singleton\bin\Debug\Singleton.exe
+C:\Users\fy\Desktop\Singleton\Singleton\bin\Debug\Singleton.pdb
+C:\Users\fy\Desktop\Singleton\Singleton\obj\Debug\Singleton.csprojAssemblyReference.cache
+C:\Users\fy\Desktop\Singleton\Singleton\obj\Debug\Singleton.csproj.CoreCompileInputs.cache
+C:\Users\fy\Desktop\Singleton\Singleton\obj\Debug\Singleton.exe
+C:\Users\fy\Desktop\Singleton\Singleton\obj\Debug\Singleton.pdb

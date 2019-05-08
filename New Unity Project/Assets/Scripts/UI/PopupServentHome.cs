@@ -163,8 +163,8 @@ public class PopupServentHome : PopupBase {
         Name.text = info.Name;
         Level.text = info.Level.ToString();
         Loyal.text = info.Loyal.ToString();
-        Tire.text = info.Tire.ToString();
-        Favorability.text = info.Favorability.ToString();
+        Tire.text = info.tire.ToString();
+        Favorability.text = info.favorability.ToString();
         SkillDesc.text = info.Desc.ToString();
         ExpNow.text = info.nowexp.ToString();
         ExpAll.text = ServentManager.Instance.GetServentNextLevelExp(info.Level).ToString();

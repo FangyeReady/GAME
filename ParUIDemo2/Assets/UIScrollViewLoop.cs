@@ -266,9 +266,9 @@ public class UIScrollViewLoop : MonoBehaviour
         }
 
 
-        Transform centerTransform = itemParent.FindChild((guankaIndex + 2).ToString());
-        Transform preTransform = itemParent.FindChild((guankaIndex - 1).ToString());
-        Transform guankaTransform = itemParent.FindChild(guankaIndex.ToString());
+        Transform centerTransform = itemParent.Find((guankaIndex + 2).ToString());
+        Transform preTransform = itemParent.Find((guankaIndex - 1).ToString());
+        Transform guankaTransform = itemParent.Find(guankaIndex.ToString());
  
         if (guankaTransform != null)
         {
