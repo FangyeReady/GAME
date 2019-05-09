@@ -642,6 +642,52 @@ namespace Singleton
 
     #endregion
 
+    #region 合作模式
+
+    /// <summary>
+    /// 此处的抽象其实毫无意义。。。。。。
+    /// </summary>
+    public abstract class FOperate
+    {
+        protected int depth;
+        protected string name;
+        public string GetName() { return name; }
+        public int GetDepth() { return depth; }
+        public int GetCount() { return structList.Count; }
+        protected List<FOperate> structList;
+        public abstract void Add(FOperate operate);
+        public abstract void PrintConstact();
+    }
+
+    public class SWorker : FOperate
+    {
+        public SWorker(string name, int depth)
+        {
+            this.name = name;
+            this.depth = depth;
+            structList = new List<FOperate>();
+        }
+
+        public override void Add(FOperate operate)
+        {
+            structList.Add(operate);
+        }
+
+        public override void PrintConstact()
+        {
+            for (int i = 0; i < structList.Count; i++)
+            {
+                Console.WriteLine("Name:{0}-----Depth:{1}", structList[i].GetName(), structList[i].GetDepth());
+                if (structList[i].GetCount() > 0)
+                {
+                    structList[i].PrintConstact();
+                }
+            }
+        }
+    }
+
+    #endregion
+
 
     class Program
     {
@@ -744,42 +790,76 @@ namespace Singleton
 
             //--------------------------------------------------------过滤器模式 + 原型模式：....----------------------------------------------
             //创建一个存在过滤方法的类，然后。。。使用它
-            List<PerSon> perSons = new List<PerSon>();
-            perSons.Add(new PerSon("1", "male", "10"));
-            perSons.Add(new PerSon("2", "male", "20"));
-            perSons.Add(new PerSon("3", "male", "30"));
-            perSons.Add(new PerSon("4", "male", "40"));
-            perSons.Add(new PerSon("5", "male", "50"));
-            perSons.Add(new PerSon("6", "female", "60"));
-            perSons.Add(new PerSon("7", "female", "10"));
-            perSons.Add(new PerSon("8", "female", "20"));
-            perSons.Add(new PerSon("9", "female", "30"));
-            perSons.Add(new PerSon("10", "male", "40"));
+            //List<PerSon> perSons = new List<PerSon>();
+            //perSons.Add(new PerSon("1", "male", "10"));
+            //perSons.Add(new PerSon("2", "male", "20"));
+            //perSons.Add(new PerSon("3", "male", "30"));
+            //perSons.Add(new PerSon("4", "male", "40"));
+            //perSons.Add(new PerSon("5", "male", "50"));
+            //perSons.Add(new PerSon("6", "female", "60"));
+            //perSons.Add(new PerSon("7", "female", "10"));
+            //perSons.Add(new PerSon("8", "female", "20"));
+            //perSons.Add(new PerSon("9", "female", "30"));
+            //perSons.Add(new PerSon("10", "male", "40"));
 
 
-            ProtoptypeofGuoLv guoLv1 = new SelectPersonBy_Gender("male");
-            var male_list = guoLv1.GuoLvMethod(perSons);
+            //ProtoptypeofGuoLv guoLv1 = new SelectPersonBy_Gender("male");
+            //var male_list = guoLv1.GuoLvMethod(perSons);
 
-            PrintPersonList(male_list);
+            //PrintPersonList(male_list);
 
-            ProtoptypeofGuoLv guolv2 = guoLv1.Clone();
+            //ProtoptypeofGuoLv guolv2 = guoLv1.Clone();
 
-            Console.WriteLine(guoLv1.GetHashCode() + "-----------" + guolv2.GetHashCode());
+            //Console.WriteLine(guoLv1.GetHashCode() + "-----------" + guolv2.GetHashCode());
 
-            guolv2.SetTiaoJian("female");
+            //guolv2.SetTiaoJian("female");
 
-            var female_list = guolv2.GuoLvMethod(perSons);
+            //var female_list = guolv2.GuoLvMethod(perSons);
 
-            PrintPersonList(female_list);
+            //PrintPersonList(female_list);
 
-            Console.WriteLine("<---------------------------------------------------------------->");
+            //Console.WriteLine("<---------------------------------------------------------------->");
 
-            ProtoptypeofGuoLv guoLv3 = new SelectPersonBy_Age("50");
-            var age_list =  guoLv3.GuoLvMethod(perSons);
-            PrintPersonList(age_list);
+            //ProtoptypeofGuoLv guoLv3 = new SelectPersonBy_Age("50");
+            //var age_list =  guoLv3.GuoLvMethod(perSons);
+            //PrintPersonList(age_list);
+
+            //--------------------------------------------------------组合器模式：为了表达出同一类对象的层次结构----------------------------------------------
+            SWorker sWorker = new SWorker("老板", 1);
+
+            SWorker sWorker1 = new SWorker("市场主管", 2);
+            SWorker sWorker2 = new SWorker("人事主任", 2);
+
+            SWorker sWorker3 = new SWorker("市场经理1", 3);
+            SWorker sWorker4 = new SWorker("市场经理2", 3);
+
+            SWorker sWorker5 = new SWorker("人事专员1", 3);
+            SWorker sWorker6 = new SWorker("人事专员2", 3);
+
+            SWorker sWorker7 = new SWorker("码农1", 4);
+            SWorker sWorker8 = new SWorker("码农2", 4);
+            SWorker sWorker9 = new SWorker("码农3", 4);
+            SWorker sWorker10 = new SWorker("码农4", 4);
+
+            sWorker.Add(sWorker1);
+            sWorker.Add(sWorker2);
+
+            sWorker1.Add(sWorker3);
+            sWorker1.Add(sWorker4);
+
+            sWorker2.Add(sWorker5);
+            sWorker2.Add(sWorker6);
+
+            sWorker3.Add(sWorker7);
+            sWorker4.Add(sWorker8);
+            sWorker4.Add(sWorker9);
+            sWorker4.Add(sWorker10);
 
 
-           
+            sWorker.PrintConstact();
+
+
+
 
             Console.ReadKey();
         }
