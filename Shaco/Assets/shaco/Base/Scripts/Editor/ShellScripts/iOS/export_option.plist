@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plist version="1.0">
+  <dict>
+    <key>method</key>
+    <string>app-store</string>
+    <key>provisioningProfiles</key>
+    <dict>
+      <key>com.bilibili.ichu</key>
+      <string>ichu_dis</string>
+    </dict>
+    <key>uploadBitcode</key>
+    <false />
+  </dict>
+</plist>
