@@ -519,6 +519,129 @@ namespace Singleton
 
     #endregion
 
+    #region 过滤器模式
+
+    /// <summary>
+    /// 用于过滤（筛选）Person的API
+    /// </summary>
+    public interface PersonGuoLvApi
+    {
+        List<PerSon> GuoLv(List<PerSon> list);
+    }
+
+    public abstract class ProtoptypeofGuoLv
+    {
+        protected string _tiaoJian;
+        public ProtoptypeofGuoLv(string tiaojian)
+        {
+            this._tiaoJian = tiaojian;
+        }
+
+        public void SetTiaoJian(string t)
+        {
+            this._tiaoJian = t;
+        }
+
+        public abstract List<PerSon> GuoLvMethod(List<PerSon> list);
+
+        public abstract ProtoptypeofGuoLv Clone();
+    }
+
+    public class PerSon
+    {
+        private string _name;
+        private string _gender;
+        private string _age;
+
+        public PerSon(string name, string gender, string age)
+        {
+            this._name = name;
+            this._gender = gender;
+            this._age = age;
+        }
+
+        public string Name
+        {
+            get { return _name; }
+        }
+
+        public string Gender
+        {
+            get { return _gender; }
+        }
+
+        public string Age
+        {
+            get { return _age; }
+        }
+
+        public void PrintInfo()
+        {
+            Console.WriteLine("Name:{0}, Gender:{1}, Age:{2}", this._name, this._gender, this._age);
+        }
+    }
+
+    public class SelectPersonBy_Gender : ProtoptypeofGuoLv  //, PersonGuoLvApi   //基类必须在所有接口之前
+    { 
+
+        public SelectPersonBy_Gender(string t) : base(t) { }
+
+        public override List<PerSon> GuoLvMethod(List<PerSon> perSons)
+        {
+            List<PerSon> newList = perSons.FindAll(t => t.Gender == this._tiaoJian);
+            return newList;
+        }
+
+
+        public override ProtoptypeofGuoLv Clone()
+        {
+            //SelectPersonBy_Gender temp = new SelectPersonBy_Gender(this._tiaoJian);
+
+            //return temp as ProtoptypeofGuoLv;
+
+            return this.MemberwiseClone() as ProtoptypeofGuoLv;
+        }
+    }
+
+    public class SelectPersonBy_Age : ProtoptypeofGuoLv  //, PersonGuoLvApi   //基类必须在所有接口之前
+    {
+
+        private int age_tiaojian = 0;
+        public SelectPersonBy_Age(string t) : base(t) {
+            age_tiaojian = int.Parse(t);
+        }
+
+        public override List<PerSon> GuoLvMethod(List<PerSon> perSons)
+        {
+            List<PerSon> temp = new List<PerSon>();
+            for (int i = 0; i < perSons.Count; i++)
+            {
+                int age1 = int.Parse(perSons[i].Age);
+                if (age1 <= age_tiaojian)
+                {
+                    temp.Add(perSons[i]);
+                }
+            }
+
+            return temp;
+        }
+
+
+        public override ProtoptypeofGuoLv Clone()
+        {
+            //SelectPersonBy_Gender temp = new SelectPersonBy_Gender(this._tiaoJian);
+
+            //return temp as ProtoptypeofGuoLv;
+
+            return this.MemberwiseClone() as ProtoptypeofGuoLv;
+        }
+    }
+
+
+
+
+    #endregion
+
 
     class Program
     {
@@ -592,6 +715,8 @@ namespace Singleton
             //--------------------------------------------------------原型模式：复制一个类----------------------------------------------
             //当你需要创建一个一模一样的对象而又不能影响已有的对象时，可以使用原型模式
             //原型模式的最重要缺点就是每一个类必须配备一个Clone方法，而且这个Clone方法需要对类的功能进行通盘考虑。这对全新的类来说不是很难，但对已有的类进行改造时，不一定是容易的事。
+            //浅复制：在C#中调用 MemberwiseClone() 方法即为浅复制。如果字段是值类型的，则对字段执行逐位复制，如果字段是引用类型的，则复制对象的引用，而不复制对象，因此：原始对象和其副本引用同一个对象！
+            //深复制：如果字段是值类型的，则对字段执行逐位复制，如果字段是引用类型的，则把引用类型的对象指向一个全新的对象！
             //ColorManager colorManager = new ColorManager();
             //colorManager["red"] = new Colors(255, 0, 0);
             //colorManager["green"] = new Colors(0, 255, 0);
@@ -611,13 +736,60 @@ namespace Singleton
 
 
 
-            Shape shape = new Shape(new DrawCircle());
-            shape.Darw(10, 10, 10);
+            //Shape shape = new Shape(new DrawCircle());
+            //shape.Darw(10, 10, 10);
 
-            shape = new Shape(new DrawRetengle());
-            shape.Darw(1,1,1);
+            //shape = new Shape(new DrawRetengle());
+            //shape.Darw(1,1,1);
+
+            //--------------------------------------------------------过滤器模式 + 原型模式：....----------------------------------------------
+            //创建一个存在过滤方法的类，然后。。。使用它
+            List<PerSon> perSons = new List<PerSon>();
+            perSons.Add(new PerSon("1", "male", "10"));
+            perSons.Add(new PerSon("2", "male", "20"));
+            perSons.Add(new PerSon("3", "male", "30"));
+            perSons.Add(new PerSon("4", "male", "40"));
+            perSons.Add(new PerSon("5", "male", "50"));
+            perSons.Add(new PerSon("6", "female", "60"));
+            perSons.Add(new PerSon("7", "female", "10"));
+            perSons.Add(new PerSon("8", "female", "20"));
+            perSons.Add(new PerSon("9", "female", "30"));
+            perSons.Add(new PerSon("10", "male", "40"));
+
+
+            ProtoptypeofGuoLv guoLv1 = new SelectPersonBy_Gender("male");
+            var male_list = guoLv1.GuoLvMethod(perSons);
+
+            PrintPersonList(male_list);
+
+            ProtoptypeofGuoLv guolv2 = guoLv1.Clone();
+
+            Console.WriteLine(guoLv1.GetHashCode() + "-----------" + guolv2.GetHashCode());
+
+            guolv2.SetTiaoJian("female");
+
+            var female_list = guolv2.GuoLvMethod(perSons);
+
+            PrintPersonList(female_list);
+
+            Console.WriteLine("<---------------------------------------------------------------->");
+
+            ProtoptypeofGuoLv guoLv3 = new SelectPersonBy_Age("50");
+            var age_list =  guoLv3.GuoLvMethod(perSons);
+            PrintPersonList(age_list);
+
+
+           
 
             Console.ReadKey();
+        }
+
+        public static void PrintPersonList(List<PerSon> perSons)
+        {
+            for (int i = 0; i < perSons.Count; i++)
+            {
+                perSons[i].PrintInfo();
+            }
         }
     }
 }
