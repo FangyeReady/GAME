@@ -825,38 +825,41 @@ namespace Singleton
             //PrintPersonList(age_list);
 
             //--------------------------------------------------------组合器模式：为了表达出同一类对象的层次结构----------------------------------------------
-            SWorker sWorker = new SWorker("老板", 1);
+            //SWorker sWorker = new SWorker("老板", 1);
 
-            SWorker sWorker1 = new SWorker("市场主管", 2);
-            SWorker sWorker2 = new SWorker("人事主任", 2);
+            //SWorker sWorker1 = new SWorker("市场主管", 2);
+            //SWorker sWorker2 = new SWorker("人事主任", 2);
 
-            SWorker sWorker3 = new SWorker("市场经理1", 3);
-            SWorker sWorker4 = new SWorker("市场经理2", 3);
+            //SWorker sWorker3 = new SWorker("市场经理1", 3);
+            //SWorker sWorker4 = new SWorker("市场经理2", 3);
 
-            SWorker sWorker5 = new SWorker("人事专员1", 3);
-            SWorker sWorker6 = new SWorker("人事专员2", 3);
+            //SWorker sWorker5 = new SWorker("人事专员1", 3);
+            //SWorker sWorker6 = new SWorker("人事专员2", 3);
 
-            SWorker sWorker7 = new SWorker("码农1", 4);
-            SWorker sWorker8 = new SWorker("码农2", 4);
-            SWorker sWorker9 = new SWorker("码农3", 4);
-            SWorker sWorker10 = new SWorker("码农4", 4);
+            //SWorker sWorker7 = new SWorker("码农1", 4);
+            //SWorker sWorker8 = new SWorker("码农2", 4);
+            //SWorker sWorker9 = new SWorker("码农3", 4);
+            //SWorker sWorker10 = new SWorker("码农4", 4);
 
-            sWorker.Add(sWorker1);
-            sWorker.Add(sWorker2);
+            //sWorker.Add(sWorker1);
+            //sWorker.Add(sWorker2);
 
-            sWorker1.Add(sWorker3);
-            sWorker1.Add(sWorker4);
+            //sWorker1.Add(sWorker3);
+            //sWorker1.Add(sWorker4);
 
-            sWorker2.Add(sWorker5);
-            sWorker2.Add(sWorker6);
+            //sWorker2.Add(sWorker5);
+            //sWorker2.Add(sWorker6);
 
-            sWorker3.Add(sWorker7);
-            sWorker4.Add(sWorker8);
-            sWorker4.Add(sWorker9);
-            sWorker4.Add(sWorker10);
+            //sWorker3.Add(sWorker7);
+            //sWorker4.Add(sWorker8);
+            //sWorker4.Add(sWorker9);
+            //sWorker4.Add(sWorker10);
 
 
-            sWorker.PrintConstact();
+            //sWorker.PrintConstact();
+
+
+            //--------------------------------------------------------装饰器模式：允许向一个现有的对象添加新的功能，同时又不改变其结构----------------------------------------------
 
 
 
