@@ -252,7 +252,7 @@ namespace Singleton
     }
 
     /// <summary>
-    /// 产品，提供一个外部接口用于得到需要的产品的嘻嘻（根据实际情况扩展初始化等接口  甚至不需要提供外部接口 ）
+    /// 产品，提供一个外部接口用于得到需要的产品（根据实际情况扩展初始化等接口  甚至不需要提供外部接口 ）
     /// </summary>
     public abstract class IProduct
     {
@@ -481,11 +481,17 @@ namespace Singleton
 
     #region 桥接模式
 
+    /// <summary>
+    /// 抽象类
+    /// </summary>
     public abstract class DarwApi
     {
         public abstract void Darw(int x, int y, int redius = 0);
     }
 
+    /// <summary>
+    /// 实现类：其中包含了抽象对象，用于调用其方法
+    /// </summary>
     public class Shape
     {
         private DarwApi darwApi;
@@ -688,6 +694,60 @@ namespace Singleton
 
     #endregion
 
+    #region 装饰器模式
+    public abstract class Computer
+    {
+        protected string _madeFrom;
+        protected string _company;
+        protected string _cpu;
+        protected string _gpu;
+
+        public abstract void ShowInfo();
+    }
+
+
+    public class LenovoComputer : Computer
+    {
+        public LenovoComputer(string madefrom, string company, string cpu, string gpu)  {
+
+            this._madeFrom = madefrom;
+            this._company = company;
+            this._cpu = cpu;
+            this._gpu = gpu;
+
+        }
+        public override void ShowInfo()
+        {
+            Console.WriteLine("MADE:{0}, Company:{1}, CPU:{2}, GPU:{2}", this._madeFrom, this._company, this._cpu, this._gpu);
+        }
+    }
+
+    /// <summary>
+    /// 装饰器，与需要扩展功能的类继承自同一个父类，然后持有该类，扩展方法来调用
+    /// </summary>
+    public class ComputerDecorator : Computer
+    {
+        private Computer decorator;
+        public ComputerDecorator(Computer computer)
+        {
+            this.decorator = computer;
+        }
+
+        public override void ShowInfo()
+        {
+            this.decorator.ShowInfo();
+            this.NewFunctionBlock();
+        }
+
+        private void NewFunctionBlock()
+        {
+            Console.WriteLine("this is 装饰器新增的新方法~！");
+        }
+    }
+
+
+    #endregion
+
 
     class Program
     {
@@ -781,7 +841,7 @@ namespace Singleton
             //audioPlayer.PlayMusic(AudioType.FLAC, "My Immortal");
 
 
-
+            //--------------------------------------------------------桥接模式：抽象类与实现类分离----------------------------------------------
             //Shape shape = new Shape(new DrawCircle());
             //shape.Darw(10, 10, 10);
 
@@ -860,8 +920,14 @@ namespace Singleton
 
 
             //--------------------------------------------------------装饰器模式：允许向一个现有的对象添加新的功能，同时又不改变其结构----------------------------------------------
+            //一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。
+            //装饰器的方式，虽然避免了多次继承导致子类膨胀，但是却新增了其子类的数量（创建了装饰器）
+            Computer computer = new LenovoComputer("China", "lenovo", "i9", "2080ti");
+            computer.ShowInfo();
 
 
+            Computer computer2 = new ComputerDecorator(computer);
+            computer2.ShowInfo();
 
 
             Console.ReadKey();
