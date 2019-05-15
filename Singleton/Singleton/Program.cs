@@ -12,7 +12,7 @@ namespace Singleton
     #region 单例模式
     //=============================================单例===================================================
     public class CLS {
-        public virtual void Print( CLS instance )
+        public virtual void Print(CLS instance)
         {
             Console.WriteLine("CODE:" + instance.GetHashCode());
         }
@@ -20,7 +20,7 @@ namespace Singleton
     /// <summary>
     /// 单例1
     /// </summary>
-    public class CLS1 :CLS 
+    public class CLS1 : CLS
     {
         private static CLS1 instance = new CLS1();
         private CLS1()
@@ -38,7 +38,7 @@ namespace Singleton
     /// <summary>
     /// 单例2
     /// </summary>
-    public class CLS2 :CLS
+    public class CLS2 : CLS
     {
         private static CLS2 _instance;
         public static CLS2 Instance {
@@ -65,7 +65,7 @@ namespace Singleton
     /// <summary>
     /// Monster对象
     /// </summary>
-    public abstract class Monster   
+    public abstract class Monster
     {
         protected string _name;
         protected string _flag;
@@ -78,7 +78,7 @@ namespace Singleton
 
         public abstract void SetData(string name, string flag);
 
-        
+
     }
 
 
@@ -149,7 +149,7 @@ namespace Singleton
 
         public Monster CatchMoster(MonsterBuilder monsterBuilder)
         {
-           return  monsterBuilder.CreateMonster();
+            return monsterBuilder.CreateMonster();
         }
 
     }
@@ -210,9 +210,9 @@ namespace Singleton
     /// <summary>
     ///实现具体的实例构造过程
     /// </summary>
-    public class AnimalFactory:Factory
+    public class AnimalFactory : Factory
     {
-        public override Product CreateProduct( ProductType type )
+        public override Product CreateProduct(ProductType type)
         {
             Product product = null;
 
@@ -226,7 +226,7 @@ namespace Singleton
                     break;
             }
 
-            return product;      
+            return product;
         }
     }
 
@@ -248,7 +248,7 @@ namespace Singleton
     public abstract class IFactory
     {
         public abstract IProduct CreateProduct(Items type);  //product type
-        
+
     }
 
     /// <summary>
@@ -322,9 +322,9 @@ namespace Singleton
             {
                 case Items.shopItems: product = new ShopItems();
                     break;
-                case Items.equipItems:product = new EquipItems();
+                case Items.equipItems: product = new EquipItems();
                     break;
-                case Items.playerItems:product = new PlayerItems(); 
+                case Items.playerItems: product = new PlayerItems();
                     break;
                 default:
                     break;
@@ -464,11 +464,11 @@ namespace Singleton
         {
             switch (type)
             {
-                case AudioType.MP3:PlayMp3(audio);
+                case AudioType.MP3: PlayMp3(audio);
                     break;
-                case AudioType.MP4:mediaAdapter.PlayMusic(type, audio);
+                case AudioType.MP4: mediaAdapter.PlayMusic(type, audio);
                     break;
-                case AudioType.FLAC:mediaAdapter.PlayMusic(type, audio);
+                case AudioType.FLAC: mediaAdapter.PlayMusic(type, audio);
                     break;
                 default:
                     break;
@@ -502,7 +502,7 @@ namespace Singleton
 
         public void Darw(int x, int y, int redius)
         {
-            this.darwApi.Darw(x,y,redius);
+            this.darwApi.Darw(x, y, redius);
         }
     }
 
@@ -588,7 +588,7 @@ namespace Singleton
     }
 
     public class SelectPersonBy_Gender : ProtoptypeofGuoLv  //, PersonGuoLvApi   //基类必须在所有接口之前
-    { 
+    {
 
         public SelectPersonBy_Gender(string t) : base(t) { }
 
@@ -708,7 +708,7 @@ namespace Singleton
 
     public class LenovoComputer : Computer
     {
-        public LenovoComputer(string madefrom, string company, string cpu, string gpu)  {
+        public LenovoComputer(string madefrom, string company, string cpu, string gpu) {
 
             this._madeFrom = madefrom;
             this._company = company;
@@ -742,6 +742,120 @@ namespace Singleton
         private void NewFunctionBlock()
         {
             Console.WriteLine("this is 装饰器新增的新方法~！");
+        }
+    }
+
+
+    #endregion
+
+    #region 外观模式
+    public abstract class WG_Color
+    {
+        public abstract void Paint();
+    }
+
+    public class RedColor : WG_Color
+    {
+        public override void Paint()
+        {
+            Console.WriteLine("wg red~!");
+        }
+    }
+
+    public class YellowColor : WG_Color
+    {
+        public override void Paint()
+        {
+            Console.WriteLine("wg yellow~!");
+        }
+    }
+
+    public class BlueColor : WG_Color
+    {
+        public override void Paint()
+        {
+            Console.WriteLine("wg blue~!");
+        }
+    }
+
+    /// <summary>
+    /// 外观（其实就算是管理器？？？？）
+    /// </summary>
+    public class ColorMaker
+    {
+        private WG_Color red;
+        private WG_Color yellow;
+        private WG_Color blue;
+
+        public ColorMaker()
+        {
+            red = new RedColor();
+            yellow = new YellowColor();
+            blue = new BlueColor();
+        }
+
+        public void PaintById(int id)
+        {
+            switch (id)
+            {
+                case 1: red.Paint(); break;
+                case 2: yellow.Paint(); break;
+                case 3: blue.Paint(); break;
+                default:
+                    break;
+            }
+        }
+
+    }
+    #endregion
+
+    #region 享元模式
+
+    public abstract class Solider
+    {
+        protected string type;
+        protected string atk;
+        public abstract void ShowInfo();
+    }
+
+
+    public class SwardSolider : Solider
+    {
+        public SwardSolider(string type, string atk)
+        {
+            this.type = type;
+            this.atk = atk;
+        }
+
+        public override void ShowInfo()
+        {
+            Console.WriteLine("兵种：{0}, 攻击力：{1}", type, atk);
+        }
+    }
+
+
+    public class SoliderFactory
+    {
+        private Dictionary<string, Solider> soliderCache = new Dictionary<string, Solider>();
+
+        public Solider GetSolider(string type)
+        {
+            Solider temp;
+            if (soliderCache.ContainsKey(type))
+            {
+                temp = soliderCache[type];
+            }
+            else
+            {
+                temp = new SwardSolider(type, "1");//先随便写吧。。。
+
+                soliderCache.Add(type, temp);
+
+                Console.WriteLine("add~~~~");
+            }
+          
+            return temp;
+            
         }
     }
 
@@ -922,12 +1036,32 @@ namespace Singleton
             //--------------------------------------------------------装饰器模式：允许向一个现有的对象添加新的功能，同时又不改变其结构----------------------------------------------
             //一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。
             //装饰器的方式，虽然避免了多次继承导致子类膨胀，但是却新增了其子类的数量（创建了装饰器）
-            Computer computer = new LenovoComputer("China", "lenovo", "i9", "2080ti");
-            computer.ShowInfo();
+            //Computer computer = new LenovoComputer("China", "lenovo", "i9", "2080ti");
+            //computer.ShowInfo();
 
+            ////利用  装饰器 + 原已创建的类重新构造一个类，给这个类赋予了新的功能，而没有改变原来类的构造
+            //Computer computer2 = new ComputerDecorator(computer);
+            //computer2.ShowInfo();
 
-            Computer computer2 = new ComputerDecorator(computer);
-            computer2.ShowInfo();
+            ////--------------------------------------------------------外观模式：......Manager??----------------------------------------------
+            //ColorMaker colorMaker = new ColorMaker();
+            //colorMaker.PaintById(1);
+            //colorMaker.PaintById(2);
+            //colorMaker.PaintById(3);
+
+            //--------------------------------------------------------享元模式：避免重复创建大量的重复对象----------------------------------------------
+            //在有大量对象时，有可能会造成内存溢出，我们把其中共同的部分抽象出来，如果有相同的业务请求，直接返回在内存中已有的对象，避免重新创建
+
+            SoliderFactory soliderFac = new SoliderFactory();
+
+            string[] soName = { "长剑士", "重甲剑士", "飞剑士" };
+            Random random = new Random(DateTime.Now.Second);
+            for (int i = 0; i < 20; i++)
+            {
+                int index = random.Next(0, soName.Length );
+                var solider = soliderFac.GetSolider(soName[index]);
+                solider.ShowInfo();
+            }
 
 
             Console.ReadKey();
