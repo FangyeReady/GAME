@@ -810,7 +810,8 @@ namespace Singleton
     #endregion
 
     #region 享元模式
-
+    //享元模式有个情况，就是所有单元其实是共享的，改变一个其它都会改变
+    //所以享元应该用于  当所需要的对象是没有什么特性的对象时才能用，或者结合原型模式使用
     public abstract class Solider
     {
         protected string type;
@@ -862,6 +863,173 @@ namespace Singleton
 
     #endregion
 
+    #region 代理模式
+
+    public interface MImage
+    {
+        void Display();
+    }
+
+    public class HeadImage : MImage
+    {
+        private string path = string.Empty;
+
+        public HeadImage(string path)
+        {
+            this.path = path;
+        }
+
+        public void Display()
+        {
+            Console.WriteLine("show file image:" + this.path);
+            Console.WriteLine("Hash Code:" + this.GetHashCode());
+        }
+
+        public void LoadImage()
+        {
+            Console.WriteLine("load from file~!" + this.path);
+        }
+    }
+
+    /// <summary>
+    /// 代理器~~~~~~
+    /// </summary>
+    public class DLImage : MImage
+    {
+        private string path = string.Empty;
+        private HeadImage headImage;
+        public DLImage(string path)
+        {
+            this.path = path;
+            headImage = new HeadImage(this.path);
+        }
+
+        public void Display()
+        {
+            Console.WriteLine("Hash Code:" + this.GetHashCode());
+            headImage.Display();
+        }
+    }
+
+    #endregion
+
+    #region 责任链模式
+
+    public enum Duty
+    {
+        one,
+        two,
+        three,
+        four
+    }
+    /// <summary>
+    /// 创建一个类，它除了需要实现我们需要的功能外，还必须实现：1.可以设置责任者；2.传递任务
+    /// </summary>
+    public abstract class Worker
+    {
+        protected Worker nextWorker;
+
+        public Duty m_type;
+
+        public void SerWorker(Worker wk)
+        {
+            if( wk != this)
+                this.nextWorker = wk;
+        }
+
+        public void HandleWork(Duty workType, string work)
+        {
+            if (this.m_type == workType)
+            {
+                KillTheWork(work);
+                return;
+            }
+
+            Console.WriteLine("There is not my work, my duty is :" + m_type.ToString());
+
+            if (null != nextWorker  && nextWorker != this)
+            {
+                nextWorker.HandleWork(workType, work);
+            }
+            else
+            {
+                Console.WriteLine("There is no Woker can deal this work~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            }
+
+        }
+
+        protected abstract void KillTheWork(string work);
+    }
+
+    /// <summary>
+    /// 创建一个类，可以得到一个责任链
+    /// </summary>
+    public class DutyChainManager
+    {
+        //....算了，这个之后延伸
+    }
+    
+
+    public class Worker1 : Worker
+    {
+        public Worker1() : base()
+        {
+            m_type = Duty.one;
+        }
+
+        protected override void KillTheWork(string work)
+        {
+            Console.WriteLine("i have finish the work:{0}, and my hashcode is:{1}, my duty Type is:{2}", work,this.GetHashCode(), m_type.ToString());
+        }
+    }
+
+    public class Worker2 : Worker
+    {
+        public Worker2() : base()
+        {
+            m_type = Duty.two;
+        }
+
+        protected override void KillTheWork(string work)
+        {
+            Console.WriteLine("i have finish the work:{0}, and my hashcode is:{1}, my duty Type is:{2}", work, this.GetHashCode(), m_type.ToString());
+        }
+    }
+
+    public class Worker3 : Worker
+    {
+        public Worker3() : base()
+        {
+            m_type = Duty.three;
+        }
+
+        protected override void KillTheWork(string work)
+        {
+            Console.WriteLine("i have finish the work:{0}, and my hashcode is:{1}, my duty Type is:{2}", work, this.GetHashCode(), m_type.ToString());
+        }
+    }
+
+
+    public class Worker4 : Worker
+    {
+        public Worker4() : base()
+        {
+            m_type = Duty.four;
+        }
+
+        protected override void KillTheWork(string work)
+        {
+            Console.WriteLine("i have finish the work:{0}, and my hashcode is:{1}, my duty Type is:{2}", work, this.GetHashCode(), m_type.ToString());
+        }
+    }
+
+
+
+
+
+
+    #endregion
+
 
     class Program
     {
@@ -906,8 +1074,6 @@ namespace Singleton
             //DamageMonsterBuilder damageMonsterBuilder = new DamageMonsterBuilder("红玉", "金系输出~！");
             //Monster monster = Master.Instance.CatchMoster(damageMonsterBuilder);
             //monster.Print();
-
-
 
             //--------------------------------------------------------工厂：创建复杂的类----------------------------------------------
             //test:
@@ -1043,7 +1209,7 @@ namespace Singleton
             //Computer computer2 = new ComputerDecorator(computer);
             //computer2.ShowInfo();
 
-            ////--------------------------------------------------------外观模式：......Manager??----------------------------------------------
+            //--------------------------------------------------------外观模式：......Manager??----------------------------------------------
             //ColorMaker colorMaker = new ColorMaker();
             //colorMaker.PaintById(1);
             //colorMaker.PaintById(2);
@@ -1052,17 +1218,36 @@ namespace Singleton
             //--------------------------------------------------------享元模式：避免重复创建大量的重复对象----------------------------------------------
             //在有大量对象时，有可能会造成内存溢出，我们把其中共同的部分抽象出来，如果有相同的业务请求，直接返回在内存中已有的对象，避免重新创建
 
-            SoliderFactory soliderFac = new SoliderFactory();
+            //SoliderFactory soliderFac = new SoliderFactory();
 
-            string[] soName = { "长剑士", "重甲剑士", "飞剑士" };
-            Random random = new Random(DateTime.Now.Second);
-            for (int i = 0; i < 20; i++)
-            {
-                int index = random.Next(0, soName.Length );
-                var solider = soliderFac.GetSolider(soName[index]);
-                solider.ShowInfo();
-            }
+            //string[] soName = { "长剑士", "重甲剑士", "飞剑士" };
+            //Random random = new Random(DateTime.Now.Second);
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    int index = random.Next(0, soName.Length );
+            //    var solider = soliderFac.GetSolider(soName[index]);
+            //    solider.ShowInfo();
+            //}
 
+            //--------------------------------------------------------代理模式：相当于一种封装，利用代理器间接访问想访问的类----------------------------------------------
+            //例：火车票可以通过代理点购买，而不需要直接去火车北站买
+            //DLImage dLImage = new DLImage("text.png");
+            //dLImage.Display();
+
+            //--------------------------------------------------------责任链模式：把任务发给任务链，直到有一个类可以处理这个类为止----------------------------------------------
+
+            Worker1 w1 = new Worker1();
+            Worker2 w2 = new Worker2();
+            Worker3 w3 = new Worker3();
+            Worker4 w4 = new Worker4();
+
+            w1.SerWorker(w2);
+            w2.SerWorker(w3);
+            w3.SerWorker(w4);
+
+            //w1.HandleWork(Duty.three, "这是给任务者3的任务");
+
+            w3.HandleWork(Duty.four, "这是给任务者4的任务");
 
             Console.ReadKey();
         }
