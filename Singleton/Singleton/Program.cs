@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 using System.Threading;
+using System.Collections;
 
 namespace Singleton
 {
@@ -924,6 +925,7 @@ namespace Singleton
     }
     /// <summary>
     /// 创建一个类，它除了需要实现我们需要的功能外，还必须实现：1.可以设置责任者；2.传递任务
+    /// 必须实现的这两点其实可以写成一个接口，由不同的类继承即可，所以实现任务链模式不一定全部需要同一个继承体系的类
     /// </summary>
     public abstract class Worker
     {
@@ -1030,12 +1032,185 @@ namespace Singleton
 
     #endregion
 
+    #region 命令模式
+    /// <summary>
+    /// 命令的接口
+    /// </summary>
+    public interface Order
+    {
+        void excute();
+    }
+
+    /// <summary>
+    /// 请求行为。。。。这里看起来有点像具体实现命令的类？？？
+    /// 应该也可以用继承的方式，实现多个请求行为，不同的行为不同的处理命令的方式
+    /// </summary>
+    public class Stock
+    {
+        public void Buy()
+        {
+            Console.WriteLine("Buy goods~~~~!");
+        }
+
+        public void Sell()
+        {
+            Console.WriteLine("Sell goods~~~~!");
+        }
+    }
+
+    /// <summary>
+    /// 接收和执行命令的类
+    /// </summary>
+    public class Border
+    {
+        List<Order> orderList = new List<Order>();
+
+        public void TakeOrder(Order order)
+        {
+            orderList.Add(order);
+        }
+
+        public void DealOrder()
+        {
+            for (int i = 0; i < orderList.Count; i++)
+            {
+                orderList[i].excute();
+            }
+        }
+    }
+
+    public class BuyOrder : Order
+    {
+        private Stock stock;
+        public BuyOrder(Stock stock)
+        {
+            this.stock = stock;
+        }
+
+        public void excute()
+        {
+            this.stock.Buy();
+        }
+    }
+
+    public class SellOrder : Order
+    {
+        private Stock stock;
+        public SellOrder(Stock stock)
+        {
+            this.stock = stock;
+        }
+
+        public void excute()
+        {
+            this.stock.Sell();
+        }
+    }
+
+
+    #endregion
+
+    #region 迭代器模式
+
+    public interface Iterator {
+        bool HasNext();
+        Object Next();
+    }
+
+    public interface Container {
+        Iterator GetIterator();
+    }
+
+
+    public class MyContainer : Container
+    {
+        private Dictionary<string, string> m_Dic = new Dictionary<string, string>();
+        private MyDicIterator dicIterator;
+
+        private class MyDicIterator : Iterator
+        {
+            private int index = 0;
+            private Dictionary<string, string> dic;
+            public MyDicIterator(Dictionary<string, string> container)
+            {
+                dic = container;
+            }
+
+            public bool HasNext()
+            {
+                return index < dic.Count;
+            }
+
+            public Object Next()
+            {
+                if (HasNext())
+                {
+                    string key = dic.Keys.ElementAt(index++);//emmmm....这种方式遍历字典么。。。
+             
+                    return dic[key];
+                }
+
+                return null;                 
+            }
+        }
+
+
+        public MyContainer()
+        {
+            dicIterator = new MyDicIterator(m_Dic);
+        }
+
+        public Iterator GetIterator()
+        {
+            return dicIterator;
+        }
+
+        public void Add(string key, string val)
+        {
+            m_Dic.Add(key, val);
+        }
+    }
+
+    #endregion
+
+
+    #region 中介者模式
+
+    /// <summary>
+    /// 这个就是中介者，当然很简陋就是了
+    /// </summary>
+    public class ChatRoom
+    {
+        public static void SendMessage(User who,  string message)
+        {
+            Console.WriteLine( "{0} said: {1}", who.Name, message  );
+        }
+    }
+
+    public class User
+    {
+        private string _name;
+        public string Name { get { return _name; } }
+
+        public User(string name)
+        {
+            this._name = name;
+        }
+
+        public void Speak(string word)
+        {
+            ChatRoom.SendMessage(this, word);
+        }
+    }
+
+
+    #endregion
 
     class Program
     {
         static void Main(string[] args)
         {
-
+            #region 单例
             //--------------------------------------------------------单例--------------------------------------------------------------------------------
             //目的：全局有且只有一个该类
 
@@ -1050,7 +1225,9 @@ namespace Singleton
             //CLS cLS4 = CLS2.Instance;
             //cLS3.Print(cLS3);
             //cLS4.Print(cLS4);
+            #endregion
 
+            #region 构造者模式
             //--------------------------------------------------------Build : 适用于以前写的createItems之类的----------------------------------------------
 
             //目的:1. 将一个复杂对象的构造与它的表示分离，使得同样的构造过程可以创建不同的表示。
@@ -1074,7 +1251,9 @@ namespace Singleton
             //DamageMonsterBuilder damageMonsterBuilder = new DamageMonsterBuilder("红玉", "金系输出~！");
             //Monster monster = Master.Instance.CatchMoster(damageMonsterBuilder);
             //monster.Print();
+            #endregion
 
+            #region 工厂
             //--------------------------------------------------------工厂：创建复杂的类----------------------------------------------
             //test:
             //AnimalFactory animalFactory = new AnimalFactory();
@@ -1085,8 +1264,9 @@ namespace Singleton
             //Product dog = animalFactory.CreateProduct(ProductType.BogDog);
             //dog.Show();
             //dog.Print();
+            #endregion
 
-
+            #region 抽象工厂
             //--------------------------------------------------------抽象工厂：创建复杂的一族类----------------------------------------------
             //如果需要扩展其它的工厂，则MainFactor需要新增代码，enum需要新增type(这样可能导致某个枚举变得特别大~~~~)
             //工厂和抽象工厂的区别就是：抽象工厂多了一个工厂生成器~~~~
@@ -1096,8 +1276,9 @@ namespace Singleton
             //IFactory factory = MainFactory.CreateFactory(FacType.items);
             //IProduct product = factory.CreateProduct(Items.equipItems);
             //product.ShowInfo();
+            #endregion
 
-
+            #region 原型
             //--------------------------------------------------------原型模式：复制一个类----------------------------------------------
             //当你需要创建一个一模一样的对象而又不能影响已有的对象时，可以使用原型模式
             //原型模式的最重要缺点就是每一个类必须配备一个Clone方法，而且这个Clone方法需要对类的功能进行通盘考虑。这对全新的类来说不是很难，但对已有的类进行改造时，不一定是容易的事。
@@ -1113,21 +1294,26 @@ namespace Singleton
             //Console.WriteLine(colorManager["red"].GetHashCode());
             //Console.WriteLine(color.GetHashCode());
 
+            #endregion
 
+            #region 适配器
             //--------------------------------------------------------适配器模式：具体操作的什么类，由适配器决定----------------------------------------------
             //AudioPlayer audioPlayer = new AudioPlayer();
             //audioPlayer.PlayMusic(AudioType.MP3, "等你下课");
             //audioPlayer.PlayMusic(AudioType.MP4, "PRAY");
             //audioPlayer.PlayMusic(AudioType.FLAC, "My Immortal");
+            #endregion
 
-
+            #region 桥接
             //--------------------------------------------------------桥接模式：抽象类与实现类分离----------------------------------------------
             //Shape shape = new Shape(new DrawCircle());
             //shape.Darw(10, 10, 10);
 
             //shape = new Shape(new DrawRetengle());
             //shape.Darw(1,1,1);
+            #endregion
 
+            #region 过滤器
             //--------------------------------------------------------过滤器模式 + 原型模式：....----------------------------------------------
             //创建一个存在过滤方法的类，然后。。。使用它
             //List<PerSon> perSons = new List<PerSon>();
@@ -1164,6 +1350,10 @@ namespace Singleton
             //var age_list =  guoLv3.GuoLvMethod(perSons);
             //PrintPersonList(age_list);
 
+            #endregion
+
+
+            #region 组合器
             //--------------------------------------------------------组合器模式：为了表达出同一类对象的层次结构----------------------------------------------
             //SWorker sWorker = new SWorker("老板", 1);
 
@@ -1197,8 +1387,9 @@ namespace Singleton
 
 
             //sWorker.PrintConstact();
+            #endregion
 
-
+            #region 装饰器
             //--------------------------------------------------------装饰器模式：允许向一个现有的对象添加新的功能，同时又不改变其结构----------------------------------------------
             //一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。
             //装饰器的方式，虽然避免了多次继承导致子类膨胀，但是却新增了其子类的数量（创建了装饰器）
@@ -1208,13 +1399,17 @@ namespace Singleton
             ////利用  装饰器 + 原已创建的类重新构造一个类，给这个类赋予了新的功能，而没有改变原来类的构造
             //Computer computer2 = new ComputerDecorator(computer);
             //computer2.ShowInfo();
+            #endregion
 
+            #region 外观
             //--------------------------------------------------------外观模式：......Manager??----------------------------------------------
             //ColorMaker colorMaker = new ColorMaker();
             //colorMaker.PaintById(1);
             //colorMaker.PaintById(2);
             //colorMaker.PaintById(3);
+            #endregion
 
+            #region 享元
             //--------------------------------------------------------享元模式：避免重复创建大量的重复对象----------------------------------------------
             //在有大量对象时，有可能会造成内存溢出，我们把其中共同的部分抽象出来，如果有相同的业务请求，直接返回在内存中已有的对象，避免重新创建
 
@@ -1228,26 +1423,86 @@ namespace Singleton
             //    var solider = soliderFac.GetSolider(soName[index]);
             //    solider.ShowInfo();
             //}
+            #endregion
 
+            #region 代理
             //--------------------------------------------------------代理模式：相当于一种封装，利用代理器间接访问想访问的类----------------------------------------------
             //例：火车票可以通过代理点购买，而不需要直接去火车北站买
             //DLImage dLImage = new DLImage("text.png");
             //dLImage.Display();
+            #endregion
 
+            #region 责任链
             //--------------------------------------------------------责任链模式：把任务发给任务链，直到有一个类可以处理这个类为止----------------------------------------------
+            //Worker1 w1 = new Worker1();
+            //Worker2 w2 = new Worker2();
+            //Worker3 w3 = new Worker3();
+            //Worker4 w4 = new Worker4();
 
-            Worker1 w1 = new Worker1();
-            Worker2 w2 = new Worker2();
-            Worker3 w3 = new Worker3();
-            Worker4 w4 = new Worker4();
-
-            w1.SerWorker(w2);
-            w2.SerWorker(w3);
-            w3.SerWorker(w4);
+            //w1.SerWorker(w2);
+            //w2.SerWorker(w3);
+            //w3.SerWorker(w4);
 
             //w1.HandleWork(Duty.three, "这是给任务者3的任务");
 
-            w3.HandleWork(Duty.four, "这是给任务者4的任务");
+            //w3.HandleWork(Duty.four, "这是给任务者4的任务");
+            #endregion
+
+            #region 命令
+            //--------------------------------------------------------命令模式：将一个请求封装成一个对象，从而使您可以用不同的请求对客户进行参数化----------------------------------------------
+            //行为请求者与行为实现者通常是一种紧耦合的关系，但某些场合，比如需要对行为进行记录、撤销或重做、事务等处理时，这种无法抵御变化的紧耦合的设计就不太合适
+            //Stock stock = new Stock();
+
+            //BuyOrder buyOrder = new BuyOrder(stock);
+            //SellOrder sellOrder = new SellOrder(stock);
+
+            //Border border = new Border();
+            //border.TakeOrder(buyOrder);
+            //border.TakeOrder(sellOrder);
+
+            //border.DealOrder();
+
+
+            #endregion
+
+            #region 迭代器模式
+            //-------------------------------------------------------迭代器模式：访问想遍历类中的数据时，用迭代器模式----------------------------------------------
+            //这样就不用返回整个容器出来，不需要暴露类中存储数据的方式
+            //同一个容器可以根据迭代器的不同而有不同的遍历方式
+            //缺点是当需要增加聚合类（新的容器对象）而需要遍历时，可能就需要新增一个迭代器类，这会增加系统的复杂度和维护难度
+
+            //MyContainer myContainer = new MyContainer();
+            //myContainer.Add("k1", "v1");
+            //myContainer.Add("k2", "v2");
+            //myContainer.Add("k3", "v3");
+            //myContainer.Add("k4", "v4");
+            //myContainer.Add("k5", "v5");
+            //myContainer.Add("k6", "v6");
+            //myContainer.Add("k7", "v7");
+            //myContainer.Add("k8", "v8");
+
+            //for (Iterator it = myContainer.GetIterator(); it.HasNext(); )
+            //{
+            //    Console.WriteLine("VALUE:" + it.Next());
+            //}
+
+            #endregion
+
+            #region 中介者模式
+            //-------------------------------------------------------中介者模式：对象与对象之间不直接交互，而是通过中介者----------------------------------------------
+            //用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互
+            //假设，A要对B施加一个BUFF
+            //此时有个 “BUFF添加机”， A调用这个类，传入对象B，和Buff数据，即可向B添加BUFF
+            User AMan = new User("风少");
+            User BMan = new User("胡老板");
+            User CMan = new User("幽君");
+
+
+            AMan.Speak("胡老板又去约了~！");
+            BMan.Speak("你这个渣男~！");
+            CMan.Speak("参一个~~~！");
+            #endregion
+
 
             Console.ReadKey();
         }
