@@ -1,31 +1,56 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using RPG.Core;
+
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, IAction
     {
         private NavMeshAgent m_Agent;
         private Animator m_Animator;
-
+        private ActionScheduler m_ActionScheduler;
         private Ray posRay;
         void Start()
         {
             m_Agent = GetComponent<NavMeshAgent>();
             m_Animator = GetComponent<Animator>();
+            m_ActionScheduler = GetComponent<ActionScheduler>();
         }
 
         void Update()
         {
-
             // Debug.DrawRay(posRay.origin, posRay.direction * 100, Color.red);
             UpdateAnimator();
         }
 
+        /// <summary>
+        /// 设置 iaction, 并开始移动
+        /// </summary>
+        /// <param name="destation"></param>
+        public void StartMoveAction(Vector3 destation)
+        {
+            m_ActionScheduler.StartAction(this);
+            MoveTo(destation);
+        }
 
-        public void MoveToTarget(Vector3 destitation)
+        /// <summary>
+        /// 开启agent的移动，然后设定目标位置
+        /// </summary>
+        /// <param name="destitation"></param>
+        public void MoveTo(Vector3 destitation)
         {
             m_Agent.SetDestination(destitation);
+            m_Agent.isStopped = false;
         }
+
+        /// <summary>
+        /// 取消移动， stop为true则停止
+        /// </summary>
+        public void Cancel()
+        {
+            m_Agent.isStopped = true;
+        }
+
 
         /// <summary>
         /// 更新角色Z轴方向的动画，在三维坐标系下，Z轴一般表示前进
