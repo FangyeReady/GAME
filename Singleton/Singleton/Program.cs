@@ -855,9 +855,9 @@ namespace Singleton
 
                 Console.WriteLine("add~~~~");
             }
-          
+
             return temp;
-            
+
         }
     }
 
@@ -935,7 +935,7 @@ namespace Singleton
 
         public void SerWorker(Worker wk)
         {
-            if( wk != this)
+            if (wk != this)
                 this.nextWorker = wk;
         }
 
@@ -949,7 +949,7 @@ namespace Singleton
 
             Console.WriteLine("There is not my work, my duty is :" + m_type.ToString());
 
-            if (null != nextWorker  && nextWorker != this)
+            if (null != nextWorker && nextWorker != this)
             {
                 nextWorker.HandleWork(workType, work);
             }
@@ -970,7 +970,7 @@ namespace Singleton
     {
         //....算了，这个之后延伸
     }
-    
+
 
     public class Worker1 : Worker
     {
@@ -981,7 +981,7 @@ namespace Singleton
 
         protected override void KillTheWork(string work)
         {
-            Console.WriteLine("i have finish the work:{0}, and my hashcode is:{1}, my duty Type is:{2}", work,this.GetHashCode(), m_type.ToString());
+            Console.WriteLine("i have finish the work:{0}, and my hashcode is:{1}, my duty Type is:{2}", work, this.GetHashCode(), m_type.ToString());
         }
     }
 
@@ -1146,11 +1146,11 @@ namespace Singleton
                 if (HasNext())
                 {
                     string key = dic.Keys.ElementAt(index++);//emmmm....这种方式遍历字典么。。。
-             
+
                     return dic[key];
                 }
 
-                return null;                 
+                return null;
             }
         }
 
@@ -1173,7 +1173,6 @@ namespace Singleton
 
     #endregion
 
-
     #region 中介者模式
 
     /// <summary>
@@ -1181,9 +1180,9 @@ namespace Singleton
     /// </summary>
     public class ChatRoom
     {
-        public static void SendMessage(User who,  string message)
+        public static void SendMessage(User who, string message)
         {
-            Console.WriteLine( "{0} said: {1}", who.Name, message  );
+            Console.WriteLine("{0} said: {1}", who.Name, message);
         }
     }
 
@@ -1202,6 +1201,171 @@ namespace Singleton
             ChatRoom.SendMessage(this, word);
         }
     }
+
+
+    #endregion
+
+    #region 备忘录模式
+
+    public interface ISave
+    {
+        void SetState(string st);
+        string GetState();
+    }
+
+    public class SaveData : ISave, ICloneable
+    {
+        private string state;
+
+        public SaveData(string st = "")
+        {
+            this.state = st;
+        }
+
+        public void SetState(string st)
+        {
+            this.state = st;
+        }
+
+        public string GetState()
+        {
+            return this.state;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+    }
+
+    public class SaveManager
+    {
+        private SaveManager()
+        {
+            saveDataList = new List<SaveData>();
+        }
+
+        private static SaveManager _instance;
+        public static SaveManager Instance
+        {
+            get {
+                if (null == _instance)
+                    _instance = new SaveManager();
+
+                return _instance;
+            }
+        }
+
+        private List<SaveData> saveDataList;
+
+        public void Add(SaveData data)
+        {
+            saveDataList.Add(data);
+        }
+
+        public SaveData GetSaveData(int conditions)
+        {
+            return saveDataList[conditions].Clone() as SaveData;
+        }
+
+    }
+
+
+    public class MainThread 
+    {
+        private SaveData state;
+
+        public void SetState(string st)
+        {
+            if (null == this.state)
+                this.state = new SaveData(st);
+            else
+                this.state.SetState(st);
+
+            Console.WriteLine("当前关卡：~~~~" + this.state.GetState());
+        }
+
+        public SaveData GetState()
+        {
+            return this.state.Clone() as SaveData;
+        }
+
+        public void SaveState()
+        {
+            SaveManager.Instance.Add( state );
+        }
+    }
+
+    #endregion
+
+    #region 观察者模式
+
+    /// <summary>
+    /// 观察者
+    /// </summary>
+    public abstract class Observer
+    {
+        public abstract void Update();
+    }
+
+    public class ObserverOne : Observer
+    {
+
+        public ObserverOne(Subject sb)
+        {
+            sb.UpdateEvent += Update;
+        }
+
+        public override void Update()
+        {
+            Console.WriteLine(" 1 update");
+        }
+    }
+
+    public class ObserverTwo : Observer
+    {
+        public ObserverTwo(Subject sb)
+        {
+            sb.UpdateEvent += Update;
+        }
+
+        public override void Update()
+        {
+            Console.WriteLine(" 2 update");
+        }
+    }
+
+
+    public class ObserverThree : Observer
+    {
+        public ObserverThree(Subject sb)
+        {
+            sb.UpdateEvent += Update;
+        }
+
+        public override void Update()
+        {
+            Console.WriteLine(" 3 update");
+        }
+    }
+
+    /// <summary>
+    /// 被观察者
+    /// </summary>
+    public class Subject
+    {
+        public delegate void Update();
+        public event Update UpdateEvent;
+
+        private int curState = 0;
+        public void ChangeState( int state)
+        {
+            if( state != curState)
+                UpdateEvent();
+        }
+       
+    }
+
 
 
     #endregion
@@ -1462,7 +1626,6 @@ namespace Singleton
 
             //border.DealOrder();
 
-
             #endregion
 
             #region 迭代器模式
@@ -1493,14 +1656,42 @@ namespace Singleton
             //用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互
             //假设，A要对B施加一个BUFF
             //此时有个 “BUFF添加机”， A调用这个类，传入对象B，和Buff数据，即可向B添加BUFF
-            User AMan = new User("风少");
-            User BMan = new User("胡老板");
-            User CMan = new User("幽君");
+            //User AMan = new User("风少");
+            //User BMan = new User("胡老板");
+            //User CMan = new User("幽君");
 
 
-            AMan.Speak("胡老板又去约了~！");
-            BMan.Speak("你这个渣男~！");
-            CMan.Speak("参一个~~~！");
+            //AMan.Speak("胡老板又去约了~！");
+            //BMan.Speak("你这个渣男~！");
+            //CMan.Speak("参一个~~~！");
+            #endregion
+
+            #region 备忘录模式
+            //-------------------------------------------------------备忘录模式：在不破坏封装的前提下保存对象，以便于之后恢复----------------------------------------------
+            // 1、需要保存/恢复数据的相关状态场景。 2、提供一个可回滚的操作。 例如：游戏存档
+
+            //MainThread mainThread = new MainThread();
+            //mainThread.SetState("第一关~~~~");
+            //SaveManager.Instance.Add(mainThread.GetState());
+
+            //mainThread.SetState("第五关~~~！");
+            //SaveManager.Instance.Add(mainThread.GetState());
+
+
+            //mainThread.SetState(SaveManager.Instance.GetSaveData(1).GetState());
+
+
+            #endregion
+
+            #region 观察者模式
+            Subject sbj = new Subject();
+            ObserverOne sb1 = new ObserverOne(sbj);
+            ObserverTwo sb2 = new ObserverTwo(sbj);
+            ObserverThree sb3 = new ObserverThree(sbj);
+
+
+            sbj.ChangeState(2);
+
             #endregion
 
 
