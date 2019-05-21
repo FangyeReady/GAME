@@ -5,6 +5,7 @@ using RPG.Movement;
 using UnityEngine;
 namespace RPG.Control {
     public class PlayerController : MonoBehaviour {
+
         private Mover m_Mover;
         private Fighter m_Fighter;
 
@@ -14,10 +15,15 @@ namespace RPG.Control {
         }
 
         void Update () {
-            if (InteractWithCombat ()) return;
+
+            if (InteractWithCombat ()) return; //战斗要在移动前面，不然就会一直移动到指定位置，而不会去战斗
             if (InteractWithMovement ()) return;
         }
 
+        /// <summary>
+        /// 移动
+        /// </summary>
+        /// <returns></returns>
         private bool InteractWithMovement () {
             if (Input.GetMouseButton (0)) {
                 MoveToCorsur ();
@@ -26,14 +32,17 @@ namespace RPG.Control {
             return false;
         }
 
+        /// <summary>
+        /// 战斗
+        /// </summary>
+        /// <returns></returns>
         private bool InteractWithCombat () {
             RaycastHit[] hits = Physics.RaycastAll (GetMouseRay ());
             foreach (RaycastHit hit in hits) {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget> ();
-                if (null == target) continue;
+                if (null == target) continue; //身上有CombatTarget的对象才能开启战斗
 
                 if (Input.GetMouseButtonDown (0)) {
-                    Debug.Log ("attack behaviour~!");
                     m_Fighter.Attack (target.gameObject);
                 }
                 return true;
@@ -49,7 +58,6 @@ namespace RPG.Control {
             bool hasHit = Physics.Raycast (GetMouseRay (), out hitInfo);
 
             if (hasHit) {
-                print ("move~!");
                 m_Mover.StartMoveAction (hitInfo.point);
             }
         }
