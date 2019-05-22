@@ -43,6 +43,7 @@ namespace RPG.Control {
                 if (null == target) continue; //身上有CombatTarget的对象才能开启战斗
 
                 if (Input.GetMouseButtonDown (0)) {
+                    this.transform.LookAt(target.transform);
                     m_Fighter.Attack (target.gameObject);
                 }
                 return true;
