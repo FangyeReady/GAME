@@ -30,7 +30,7 @@ namespace RPG.Combat {
 
             if (null == target) return;
             if (target.IsDead ()) {
-                m_ActionScheduler.CancelCurrentAction ();
+                //m_ActionScheduler.CancelCurrentAction ();
                 return;
             }
 

@@ -597,6 +597,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8142201201586912328, guid: a2d8f69a1d45a584282a7f3133c65f68,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8142201201586912332, guid: a2d8f69a1d45a584282a7f3133c65f68,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -652,17 +657,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8142201201586912328, guid: a2d8f69a1d45a584282a7f3133c65f68,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: weaponDamage
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1528315419, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
       propertyPath: m_Speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
-      propertyPath: weaponDamage
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
