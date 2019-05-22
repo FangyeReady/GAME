@@ -28,7 +28,11 @@ namespace RPG.Combat {
         private void Update () {
             timeSinceLastAttack += Time.deltaTime;
 
-            if ( !CanAttack() ) return;
+            if (null == target) return;
+            if (target.IsDead ()) {
+                m_ActionScheduler.CancelCurrentAction ();
+                return;
+            }
 
             //若不在武器范围内则先移动过去
             if (!GetIsInRange ()) {
@@ -53,8 +57,9 @@ namespace RPG.Combat {
         /// 是否能够攻击  TODO:在哪里调用？
         /// </summary>
         /// <returns></returns>
-        public bool CanAttack () {
-            return target != null && !target.IsDead ();
+        public bool CanAttack (GameObject tg) {
+            Health tgHealth = tg.GetComponent<Health> ();
+            return tgHealth != null && !tgHealth.IsDead ();
         }
 
         public void Attack (GameObject target) {
