@@ -8,11 +8,12 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Collections;
 
-namespace Singleton
+namespace DesignPattern
 {
     #region 单例模式
     //=============================================单例===================================================
-    public class CLS {
+    public class CLS
+    {
         public virtual void Print(CLS instance)
         {
             Console.WriteLine("CODE:" + instance.GetHashCode());
@@ -42,8 +43,10 @@ namespace Singleton
     public class CLS2 : CLS
     {
         private static CLS2 _instance;
-        public static CLS2 Instance {
-            get {
+        public static CLS2 Instance
+        {
+            get
+            {
                 if (null == _instance)
                 {
                     _instance = new CLS2();
@@ -88,7 +91,8 @@ namespace Singleton
     /// </summary>
     public abstract class MonsterBuilder
     {
-        public MonsterBuilder(string name, string flag) {
+        public MonsterBuilder(string name, string flag)
+        {
 
             data.name = name;
             data.flag = flag;
@@ -138,8 +142,10 @@ namespace Singleton
         }
 
         private static Master _instance;
-        public static Master Instance {
-            get {
+        public static Master Instance
+        {
+            get
+            {
                 if (null == _instance)
                 {
                     _instance = new Master();
@@ -171,7 +177,8 @@ namespace Singleton
     /// <summary>
     /// 产品
     /// </summary>
-    public abstract class Product {
+    public abstract class Product
+    {
 
         public abstract void Show();
 
@@ -219,9 +226,11 @@ namespace Singleton
 
             switch (type)
             {
-                case ProductType.LittleCat: product = new Cat();  //这里可以设计为传一个参数（数据）进去
+                case ProductType.LittleCat:
+                    product = new Cat();  //这里可以设计为传一个参数（数据）进去
                     break;
-                case ProductType.BogDog: product = new Dog();
+                case ProductType.BogDog:
+                    product = new Dog();
                     break;
                 default:
                     break;
@@ -237,7 +246,8 @@ namespace Singleton
 
     #region 抽象工厂
 
-    public enum FacType {
+    public enum FacType
+    {
         items,
         animal,
         childs
@@ -270,7 +280,8 @@ namespace Singleton
             IFactory factory = null;
             switch (type)
             {
-                case FacType.items: factory = new ListItemsFactory();
+                case FacType.items:
+                    factory = new ListItemsFactory();
                     break;
                 case FacType.animal:
                     break;
@@ -284,7 +295,8 @@ namespace Singleton
     }
 
     //test:
-    public enum Items {
+    public enum Items
+    {
         shopItems,
         equipItems,
         playerItems,
@@ -321,11 +333,14 @@ namespace Singleton
             IProduct product = null;
             switch (type)
             {
-                case Items.shopItems: product = new ShopItems();
+                case Items.shopItems:
+                    product = new ShopItems();
                     break;
-                case Items.equipItems: product = new EquipItems();
+                case Items.equipItems:
+                    product = new EquipItems();
                     break;
-                case Items.playerItems: product = new PlayerItems();
+                case Items.playerItems:
+                    product = new PlayerItems();
                     break;
                 default:
                     break;
@@ -340,7 +355,8 @@ namespace Singleton
 
     #region 原型模式
 
-    public abstract class ColorPrototype {
+    public abstract class ColorPrototype
+    {
 
         public abstract ColorPrototype Clone();
     }
@@ -417,9 +433,11 @@ namespace Singleton
         {
             switch (type)
             {
-                case AudioType.MP4: PlayMP4(audio);
+                case AudioType.MP4:
+                    PlayMP4(audio);
                     break;
-                case AudioType.FLAC: PlayFlac(audio);
+                case AudioType.FLAC:
+                    PlayFlac(audio);
                     break;
                 default:
                     break;
@@ -465,11 +483,14 @@ namespace Singleton
         {
             switch (type)
             {
-                case AudioType.MP3: PlayMp3(audio);
+                case AudioType.MP3:
+                    PlayMp3(audio);
                     break;
-                case AudioType.MP4: mediaAdapter.PlayMusic(type, audio);
+                case AudioType.MP4:
+                    mediaAdapter.PlayMusic(type, audio);
                     break;
-                case AudioType.FLAC: mediaAdapter.PlayMusic(type, audio);
+                case AudioType.FLAC:
+                    mediaAdapter.PlayMusic(type, audio);
                     break;
                 default:
                     break;
@@ -614,7 +635,8 @@ namespace Singleton
     {
 
         private int age_tiaojian = 0;
-        public SelectPersonBy_Age(string t) : base(t) {
+        public SelectPersonBy_Age(string t) : base(t)
+        {
             age_tiaojian = int.Parse(t);
         }
 
@@ -709,7 +731,8 @@ namespace Singleton
 
     public class LenovoComputer : Computer
     {
-        public LenovoComputer(string madefrom, string company, string cpu, string gpu) {
+        public LenovoComputer(string madefrom, string company, string cpu, string gpu)
+        {
 
             this._madeFrom = madefrom;
             this._company = company;
@@ -1112,12 +1135,14 @@ namespace Singleton
 
     #region 迭代器模式
 
-    public interface Iterator {
+    public interface Iterator
+    {
         bool HasNext();
         Object Next();
     }
 
-    public interface Container {
+    public interface Container
+    {
         Iterator GetIterator();
     }
 
@@ -1248,7 +1273,8 @@ namespace Singleton
         private static SaveManager _instance;
         public static SaveManager Instance
         {
-            get {
+            get
+            {
                 if (null == _instance)
                     _instance = new SaveManager();
 
@@ -1271,7 +1297,7 @@ namespace Singleton
     }
 
 
-    public class MainThread 
+    public class MainThread
     {
         private SaveData state;
 
@@ -1292,7 +1318,7 @@ namespace Singleton
 
         public void SaveState()
         {
-            SaveManager.Instance.Add( state );
+            SaveManager.Instance.Add(state);
         }
     }
 
@@ -1358,15 +1384,105 @@ namespace Singleton
         public event Update UpdateEvent;
 
         private int curState = 0;
-        public void ChangeState( int state)
+        public void ChangeState(int state)
         {
-            if( state != curState)
+            if (state != curState)
                 UpdateEvent();
         }
-       
+
     }
 
 
+
+    #endregion
+
+
+    #region 状态模式
+
+    public enum State
+    {
+        Walk,
+        Run,
+        Jump,
+        fastMove,
+        slowMove
+    }
+
+    public abstract class StateAction
+    {
+        public abstract void DoAction();
+        public abstract void SetTarget(Player pl);
+    }
+
+    public class Player
+    {
+        private StateAction m_State;
+
+
+        public Player(StateAction state)
+        {
+            SetState(state);
+        }
+
+        public void SetState(StateAction state)
+        {
+            this.m_State = state;
+            this.m_State.SetTarget(this);
+            PlayerMove();
+        }
+
+        private void PlayerMove()
+        {
+            m_State.DoAction();
+        }
+
+        public override string ToString()
+        {
+            return "i,m a fighter~!";
+        }
+    }
+
+    public class WalkAction : StateAction
+    {
+        private Player player;
+        public override void SetTarget(Player pl)
+        {
+            player = pl;
+        }
+        public override void DoAction()
+        {
+            if (null == player) return;
+            Console.WriteLine("player walk~~~!" + player.ToString());
+        }
+    }
+
+    public class RunAction : StateAction
+    {
+        private Player player;
+        public override void SetTarget(Player pl)
+        {
+            player = pl;
+        }
+        public override void DoAction()
+        {
+            if (null == player) return;
+            Console.WriteLine("player run~~~!" + player.ToString());
+        }
+    }
+
+    public class JumpAction : StateAction
+    {
+        private Player player;
+        public override void SetTarget(Player pl)
+        {
+            player = pl;
+        }
+        public override void DoAction()
+        {
+            if (null == player) return;
+            Console.WriteLine("player jump~~~!" + player.ToString());
+        }
+    }
 
     #endregion
 
@@ -1684,18 +1800,34 @@ namespace Singleton
             #endregion
 
             #region 观察者模式
-            Subject sbj = new Subject();
-            ObserverOne sb1 = new ObserverOne(sbj);
-            ObserverTwo sb2 = new ObserverTwo(sbj);
-            ObserverThree sb3 = new ObserverThree(sbj);
+            //Subject sbj = new Subject();
+            //ObserverOne sb1 = new ObserverOne(sbj);
+            //ObserverTwo sb2 = new ObserverTwo(sbj);
+            //ObserverThree sb3 = new ObserverThree(sbj);
 
 
-            sbj.ChangeState(2);
+            //sbj.ChangeState(2);
 
             #endregion
 
 
-            Console.ReadKey();
+            #region 状态模式
+            //-------------------------------------------------------状态模式：在状态模式（State Pattern）中，类的行为是基于它的状态改变的----------------------------------------------
+            //听名字有点像状态机？？
+            //允许对象在内部状态发生改变时改变它的行为
+            //这种实现方式有个特点，增加状态，维护都很容易
+           WalkAction walkState = new WalkAction();
+           RunAction runAction = new RunAction();
+           JumpAction jumpAction = new JumpAction();
+
+           Player player = new Player(walkState);
+           player.SetState(runAction);
+           player.SetState(jumpAction);
+
+        #endregion
+
+
+        Console.ReadKey();
         }
 
         public static void PrintPersonList(List<PerSon> perSons)

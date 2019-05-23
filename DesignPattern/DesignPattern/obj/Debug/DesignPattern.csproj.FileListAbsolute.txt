@@ -1,0 +1,7 @@
+C:\Users\fy\Desktop\MY\GAME\DesignPattern\DesignPattern\bin\Debug\DesignPattern.exe.config
+C:\Users\fy\Desktop\MY\GAME\DesignPattern\DesignPattern\bin\Debug\DesignPattern.exe
+C:\Users\fy\Desktop\MY\GAME\DesignPattern\DesignPattern\bin\Debug\DesignPattern.pdb
+C:\Users\fy\Desktop\MY\GAME\DesignPattern\DesignPattern\obj\Debug\DesignPattern.csprojAssemblyReference.cache
+C:\Users\fy\Desktop\MY\GAME\DesignPattern\DesignPattern\obj\Debug\DesignPattern.csproj.CoreCompileInputs.cache
+C:\Users\fy\Desktop\MY\GAME\DesignPattern\DesignPattern\obj\Debug\DesignPattern.exe
+C:\Users\fy\Desktop\MY\GAME\DesignPattern\DesignPattern\obj\Debug\DesignPattern.pdb
