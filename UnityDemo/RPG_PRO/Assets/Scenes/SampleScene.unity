@@ -128,10 +128,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 165942539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d9f3e0890c58614da002b709732acef, type: 3}
+  m_Script: {fileID: 11500000, guid: 4638da336dd499841805b6ab6f2e0d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toPlayerDistance: 10
+  toPlayerDistance: 8
+  lastSawPlayerTime: 0
+  timeToGoBack: 5
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,6 +720,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1777871267417781807, guid: 993c9b9c01628c84c94eabbf800c6fcd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1777871267417781803, guid: 993c9b9c01628c84c94eabbf800c6fcd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -790,10 +797,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1119556677}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d9f3e0890c58614da002b709732acef, type: 3}
+  m_Script: {fileID: 11500000, guid: 4638da336dd499841805b6ab6f2e0d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toPlayerDistance: 10
+  toPlayerDistance: 8
+  lastSawPlayerTime: 0
+  timeToGoBack: 5
 --- !u!1 &1215061409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,6 +1127,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1777871267417781807, guid: 993c9b9c01628c84c94eabbf800c6fcd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1777871267417781803, guid: 993c9b9c01628c84c94eabbf800c6fcd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1190,10 +1204,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1444639096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d9f3e0890c58614da002b709732acef, type: 3}
+  m_Script: {fileID: 11500000, guid: 4638da336dd499841805b6ab6f2e0d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toPlayerDistance: 10
+  toPlayerDistance: 8
+  lastSawPlayerTime: 0
+  timeToGoBack: 5
 --- !u!1 &1594240733 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1777871267417781807, guid: 993c9b9c01628c84c94eabbf800c6fcd,
@@ -1209,10 +1225,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1594240733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d9f3e0890c58614da002b709732acef, type: 3}
+  m_Script: {fileID: 11500000, guid: 4638da336dd499841805b6ab6f2e0d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toPlayerDistance: 10
+  toPlayerDistance: 8
+  lastSawPlayerTime: 0
+  timeToGoBack: 5
 --- !u!1001 &1661741669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1509,6 +1527,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ea279f68da9892439c4f0c6679f5c20, type: 3}
+--- !u!1001 &2215277050304980739
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 215684369969589755, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_Name
+      value: PartrolPath
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532881713752161276, guid: 105bd88f743000641b8f84b5e96f81d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 105bd88f743000641b8f84b5e96f81d6, type: 3}
 --- !u!1001 &7525712482202506060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1609,12 +1696,12 @@ PrefabInstance:
     - target: {fileID: 7525712482224650525, guid: 2e694540d0b82fd41adb14fec24ec8f1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.05
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: 7525712482224650525, guid: 2e694540d0b82fd41adb14fec24ec8f1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.4
+      value: -6.63
       objectReference: {fileID: 0}
     - target: {fileID: 7525712482224650525, guid: 2e694540d0b82fd41adb14fec24ec8f1,
         type: 3}

@@ -41,20 +41,18 @@ namespace RPG.Combat {
                 //因为Attack中已经调用了 ActionScheduler.StartAction (this)，
                 //如果此时又调用ActionScheduler.StartAction (this)就会调用Figher的Cancel方法， target = null
                 //那么战斗逻辑就会被终止
-                //m_Mover.MoveTo(target.position);
+                //m_Mover.MoveTo(target.transform.position);
 
                 //:待验证, 在此处开启移动Action
                 m_Mover.StartMoveAction (target.transform.position);
             } else {
-                //m_Mover.Cancel (); //因为Attack中已经调用了 ActionScheduler.StartAction (this) ，此时如果再调用就会直接return, 无意义
-                //:待验证，真正开启战斗
                 m_ActionScheduler.StartAction (this);
                 AttackBehaviour ();
             }
         }
 
         /// <summary>
-        /// 是否能够攻击  TODO:在哪里调用？
+        /// 是否能够攻击  
         /// </summary>
         /// <returns></returns>
         public bool CanAttack (GameObject tg) {
@@ -63,9 +61,6 @@ namespace RPG.Combat {
         }
 
         public void Attack (GameObject target) {
-            //m_ActionScheduler.StartAction (this); //当需要攻击时，移动的Cancel被调用
-
-            //待验证，试试此处不调用m_ActionScheduler.StartAction (this)，因为此处即使设置了target，由于武器范围原因，仍然不一定停止移动
             this.target = target.GetComponent<Health> (); // target在update中被使用，一旦被赋值就直接开启战斗逻辑
         }
 
@@ -89,6 +84,7 @@ namespace RPG.Combat {
 
         public void Cancel () {
             target = null;
+            m_AniController.ResetTrigger ("attack");
             m_AniController.SetTrigger ("stopAttack");
         }
 

@@ -5,19 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace RPG.Core
-{
-    public class ActionScheduler : MonoBehaviour
-    {
+namespace RPG.Core {
+    public class ActionScheduler : MonoBehaviour {
         IAction action;
 
-        public void StartAction(IAction behaviour)
-        {
+        public void StartAction (IAction behaviour) {
             if (action == behaviour) return;
 
-            if ( null != action)
-            {
-                action.Cancel();
+            if (null != action) {
+
+                Debug.Log ("cancel~!");
+                action.Cancel ();
             }
             this.action = behaviour;
         }
@@ -25,9 +23,8 @@ namespace RPG.Core
         /// <summary>
         /// 取消当前行为
         /// </summary>
-        public void CancelCurrentAction()
-        {
-            StartAction(null);
+        public void CancelCurrentAction () {
+            StartAction (null);
         }
     }
 }
