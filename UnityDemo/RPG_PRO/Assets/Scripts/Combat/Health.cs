@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using UnityEngine.AI;
+using RPG.Core;
 
 namespace  RPG.Combat
 {
@@ -8,7 +9,13 @@ namespace  RPG.Combat
         [SerializeField] float health = 20;
 
         private bool isDead = false;
+        private ActionScheduler m_ActionScheduler;
+        private NavMeshAgent navAgent;
 
+        private void Start() {
+            m_ActionScheduler = GetComponent<ActionScheduler>();
+            navAgent = GetComponent<NavMeshAgent>();
+        }
 
 
         public void TakeDamage( float damage )
@@ -25,6 +32,8 @@ namespace  RPG.Combat
             
             isDead = true;
             GetComponent<Animator>().SetTrigger("die");
+            m_ActionScheduler.CancelCurrentAction();
+            navAgent.enabled = false;
         }
 
         public bool IsDead()

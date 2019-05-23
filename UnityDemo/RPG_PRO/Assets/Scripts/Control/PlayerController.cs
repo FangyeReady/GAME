@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
+using UnityEngine.AI;
 namespace RPG.Control {
     public class PlayerController : MonoBehaviour {
 
         private Mover m_Mover;
         private Fighter m_Fighter;
+        private Health m_Health;
 
         void Start () {
             m_Mover = this.GetComponent<Mover> ();
             m_Fighter = this.GetComponent<Fighter> ();
+            m_Health = this.GetComponent<Health>();
         }
 
         void Update () {
+
+            if(m_Health.IsDead()) return;
 
             if (InteractWithCombat ()) return; //战斗要在移动前面，不然就会一直移动到指定位置，而不会去战斗
             if (InteractWithMovement ()) return;
@@ -39,11 +44,15 @@ namespace RPG.Control {
         private bool InteractWithCombat () {
             RaycastHit[] hits = Physics.RaycastAll (GetMouseRay ());
             foreach (RaycastHit hit in hits) {
-                CombatTarget target = hit.transform.GetComponent<CombatTarget> ();
+                Health target = hit.transform.GetComponent<Health> ();
                 if (null == target) continue; //身上有CombatTarget的对象才能开启战斗
+                if (!m_Fighter.CanAttack (target.gameObject))
+                {
+                    continue;
+                }
 
                 if (Input.GetMouseButtonDown (0)) {
-                    this.transform.LookAt(target.transform);
+                    this.transform.LookAt (target.transform);
                     m_Fighter.Attack (target.gameObject);
                 }
                 return true;

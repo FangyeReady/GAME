@@ -21,5 +21,13 @@ namespace RPG.Core
             }
             this.action = behaviour;
         }
+
+        /// <summary>
+        /// 取消当前行为
+        /// </summary>
+        public void CancelCurrentAction()
+        {
+            StartAction(null);
+        }
     }
 }
