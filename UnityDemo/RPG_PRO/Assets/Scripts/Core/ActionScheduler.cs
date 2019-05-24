@@ -14,7 +14,7 @@ namespace RPG.Core {
 
             if (null != action) {
 
-                Debug.Log ("cancel~!");
+                Debug.Log ("cancel~!  " + action.ToString());
                 action.Cancel ();
             }
             this.action = behaviour;

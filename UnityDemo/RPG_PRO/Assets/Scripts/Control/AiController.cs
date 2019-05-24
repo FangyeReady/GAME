@@ -1,3 +1,4 @@
+using System;
 using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
@@ -6,10 +7,26 @@ namespace RPG.Core {
 
     public class AiController : MonoBehaviour {
 
-        [SerializeField] float toPlayerDistance = 10f;
-        [SerializeField] float lastSawPlayerTime = 0f;
-        [SerializeField] float timeToGoBack = 5f;
+        [SerializeField] float toPlayerDistance = 5f;
+        [SerializeField] float timeToGoBack = 3f;
+        [SerializeField] float timeToWait = 1.5f;
+        [SerializeField] PartrolPath partrolPath;
+
+        /// <summary>
+        /// 失去目标后的停滞时间变量
+        /// </summary>
+        float lastSawPlayerTime = Mathf.Infinity;
+
+        /// <summary>
+        /// 寻点的暂停时间变量
+        /// </summary>
+        float lastInPathPoint = Mathf.Infinity;
+
+        private int currentGardIndex = 0;
+        private float disToPathPoint = 3f;
+
         private Vector3 gardPosition;
+        private Vector3 nextPosition;
 
         private GameObject player;
         private Fighter m_Fighter;
@@ -25,43 +42,73 @@ namespace RPG.Core {
             m_ActionScheduler = GetComponent<ActionScheduler> ();
 
             gardPosition = this.transform.position;
+            nextPosition = gardPosition;
         }
 
-        private void Update () {
+        private void Update ()
+        {
 
-            if (m_Health.IsDead ()) return;
+            if (m_Health.IsDead()) return;
 
-            if (IsPlayerInRange () && m_Fighter.CanAttack (tg: player.gameObject))
+            if (IsPlayerInRange() && m_Fighter.CanAttack(tg: player.gameObject))
             {
                 AttackBehaviour();
             }
             else if (lastSawPlayerTime < timeToGoBack)
             {
-                StayOrGardBehaviour();
+                SuspicionBehaviour();
             }
             else
             {
-                MoveBackBehaviour();
+                GardMoveBehaviour();
             }
 
+            UpdateTimers();
+
+        }
+
+        private void UpdateTimers()
+        {
             lastSawPlayerTime += Time.deltaTime;
+            lastInPathPoint += Time.deltaTime;
+        }
+
+        private void GardMoveBehaviour () {
+            if (partrolPath != null) {
+
+                if (AtPartrolPoint ()) {
+                    currentGardIndex = CyclePointIndex ();
+                    nextPosition = GetCurrentWayPoint ();
+                    lastInPathPoint = 0;
+                }
+                if (lastInPathPoint > timeToWait)
+                    m_Mover.StartMoveAction (nextPosition);
+                return;
+            }
+            m_Mover.StartMoveAction (gardPosition);
 
         }
 
-        private void MoveBackBehaviour()
-        {
-            m_Mover.StartMoveAction(gardPosition);
+        private Vector3 GetCurrentWayPoint () {
+            return partrolPath.GetPoint (currentGardIndex);
         }
 
-        private void StayOrGardBehaviour()
-        {
-            m_ActionScheduler.CancelCurrentAction();
+        private int CyclePointIndex () {
+            return partrolPath.GetNextIndex (currentGardIndex);
         }
 
-        private void AttackBehaviour()
-        {
-            m_Fighter.Attack(player);
+        private bool AtPartrolPoint () {
+            float dis = Vector3.Distance (this.transform.position, GetCurrentWayPoint ());
+            return dis < disToPathPoint;
+        }
+
+        private void SuspicionBehaviour () {
+            m_ActionScheduler.CancelCurrentAction ();
+        }
+
+        private void AttackBehaviour () {
             lastSawPlayerTime = 0f;
+            m_Fighter.Attack (player);
         }
 
         private bool IsPlayerInRange () {

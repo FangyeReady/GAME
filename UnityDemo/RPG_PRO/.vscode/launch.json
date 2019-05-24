@@ -4,8 +4,9 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
-            "name": "Unity Editor",
+            "name": "Unity Editor RPG",
             "type": "unity",
             "path": "/c:/Users/fy/Desktop/GAME/My/UnityDemo/RPG_PRO/Library/EditorInstance.json",
             "request": "launch"
