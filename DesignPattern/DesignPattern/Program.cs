@@ -1396,7 +1396,6 @@ namespace DesignPattern
 
     #endregion
 
-
     #region 状态模式
 
     public enum State
@@ -1483,6 +1482,53 @@ namespace DesignPattern
             Console.WriteLine("player jump~~~!" + player.ToString());
         }
     }
+
+    #endregion
+
+    #region 空对象模式
+
+    public abstract class Child
+    {
+        protected string name;
+        public abstract string GetName();
+    }
+
+    public class Student : Child
+    {
+        public Student(string name)
+        {
+            this.name = name;
+        }
+        public override string GetName()
+        {
+            return this.name;
+        }
+    }
+
+    public class NullStudent : Child
+    {
+        public override string GetName()
+        {
+            return "there is no this student~~~!";
+        }
+    }
+
+
+    public class StudentInfoFactory
+    {
+        static List<string> studentInfo = new List<string> { "mike", "jerry", "bob", "mikky" };
+
+        public static Child GetChild(string info)
+        {
+            if (studentInfo.Contains(info))
+            {
+                return new Student(info);
+            }
+
+            return new NullStudent();
+        }
+    }
+
 
     #endregion
 
@@ -1810,24 +1856,42 @@ namespace DesignPattern
 
             #endregion
 
-
             #region 状态模式
             //-------------------------------------------------------状态模式：在状态模式（State Pattern）中，类的行为是基于它的状态改变的----------------------------------------------
             //听名字有点像状态机？？
             //允许对象在内部状态发生改变时改变它的行为
             //这种实现方式有个特点，增加状态，维护都很容易
-           WalkAction walkState = new WalkAction();
-           RunAction runAction = new RunAction();
-           JumpAction jumpAction = new JumpAction();
+            WalkAction walkState = new WalkAction();
+            RunAction runAction = new RunAction();
+            JumpAction jumpAction = new JumpAction();
 
-           Player player = new Player(walkState);
-           player.SetState(runAction);
-           player.SetState(jumpAction);
+            Player player = new Player(walkState);
+            player.SetState(runAction);
+            player.SetState(jumpAction);
 
-        #endregion
+            #endregion
+
+            #region 空对象模式
+            //-------------------------------------------------------空对象模式：创建一个不做任何行为的类，这样就可以不用检测null情况了----------------------------------------------
+            //Null 对象不是检查空值，而是反应一个不做任何动作的关系。这样的 Null 对象也可以在数据不可用的时候提供默认的行为。
+            //感觉还是稍微有点用处吧。。。。
+            List<Child> children = new List<Child>();
+            children.Add(StudentInfoFactory.GetChild("bob") );
+            children.Add(StudentInfoFactory.GetChild("mike"));
+            children.Add(StudentInfoFactory.GetChild("asda"));
+            children.Add(StudentInfoFactory.GetChild("jerry"));
+            children.Add(StudentInfoFactory.GetChild("asd33a"));
+            children.Add(StudentInfoFactory.GetChild("mikky"));
+
+            for (int i = 0; i < children.Count; i++)
+            {
+                Console.WriteLine( children[i].GetName() );
+            }
 
 
-        Console.ReadKey();
+            #endregion
+
+            Console.ReadKey();
         }
 
         public static void PrintPersonList(List<PerSon> perSons)
