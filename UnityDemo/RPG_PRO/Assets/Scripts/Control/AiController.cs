@@ -22,10 +22,24 @@ namespace RPG.Core {
         /// </summary>
         float lastInPathPoint = Mathf.Infinity;
 
+        /// <summary>
+        /// 当前寻路的点
+        /// </summary>
         private int currentGardIndex = 0;
+
+        /// <summary>
+        /// 距离目标路径点的距离
+        /// </summary>
         private float disToPathPoint = 3f;
 
+        /// <summary>
+        /// 初始位置
+        /// </summary>
         private Vector3 gardPosition;
+
+        /// <summary>
+        /// 下一个路径点的位置
+        /// </summary>
         private Vector3 nextPosition;
 
         private GameObject player;
@@ -75,7 +89,6 @@ namespace RPG.Core {
 
         private void GardMoveBehaviour () {
             if (partrolPath != null) {
-
                 if (AtPartrolPoint ()) {
                     currentGardIndex = CyclePointIndex ();
                     nextPosition = GetCurrentWayPoint ();

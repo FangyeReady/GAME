@@ -27,7 +27,5 @@ namespace RPG.Core {
             }
             return 0;
         }
-
-
     }
 }
