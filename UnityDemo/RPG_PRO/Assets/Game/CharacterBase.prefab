@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1528315422}
   - component: {fileID: 1528315424}
   - component: {fileID: 1528315425}
+  - component: {fileID: 2616839689541859861}
   m_Layer: 0
   m_Name: CharacterBase
   m_TagString: Untagged
@@ -104,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd881178d160e8a4cb225b67db843b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 6
 --- !u!114 &1528315424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6fca56f42d8314ab2ca6f6ee656d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedChange: 1
 --- !u!114 &1528315425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,3 +131,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fba033cb08075145a03252a1c07f78e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &2616839689541859861
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142201201586912328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.32
+  m_Height: 1.9218054
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8884258, z: 0}
