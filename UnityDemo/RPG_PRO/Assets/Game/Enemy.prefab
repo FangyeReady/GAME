@@ -30,6 +30,7 @@ MonoBehaviour:
   timeToGoBack: 3
   timeToWait: 1.5
   partrolPath: {fileID: 0}
+  speedChange: 0.5
 --- !u!114 &6896078619581403821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cc86a9153267f4d9651b959737c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 40
 --- !u!1001 &6382681556372244023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -613,6 +614,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8142201201586912328, guid: a2d8f69a1d45a584282a7f3133c65f68,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8142201201586912332, guid: a2d8f69a1d45a584282a7f3133c65f68,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -668,14 +674,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8142201201586912328, guid: a2d8f69a1d45a584282a7f3133c65f68,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
       propertyPath: weaponDamage
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1528315419, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
       propertyPath: m_Speed

@@ -10,6 +10,7 @@ namespace RPG.Control {
         private Mover m_Mover;
         private Fighter m_Fighter;
         private Health m_Health;
+        [Range(0, 1)] public float speedChange = 1f;
 
         void Start () {
             m_Mover = this.GetComponent<Mover> ();
@@ -51,7 +52,7 @@ namespace RPG.Control {
                     continue;
                 }
 
-                if (Input.GetMouseButtonDown (0)) {
+                if (Input.GetMouseButton (0)) {
                     this.transform.LookAt (target.transform);
                     m_Fighter.Attack (target.gameObject);
                 }
@@ -68,7 +69,7 @@ namespace RPG.Control {
             bool hasHit = Physics.Raycast (GetMouseRay (), out hitInfo);
 
             if (hasHit) {
-                m_Mover.StartMoveAction (hitInfo.point);
+                m_Mover.StartMoveAction (hitInfo.point, speedChange);
             }
         }
 

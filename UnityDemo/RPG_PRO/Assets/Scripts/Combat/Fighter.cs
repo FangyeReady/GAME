@@ -41,7 +41,7 @@ namespace RPG.Combat {
                 //因为Attack中已经调用了 ActionScheduler.StartAction (this)，
                 //如果此时又调用ActionScheduler.StartAction (this)就会调用Figher的Cancel方法， target = null
                 //那么战斗逻辑就会被终止
-                m_Mover.MoveTo (target.transform.position);
+                m_Mover.MoveTo (target.transform.position, 1f);
 
                 //:待验证, 在此处开启移动Action
                 //m_Mover.StartMoveAction (target.transform.position);

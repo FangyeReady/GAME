@@ -6,6 +6,8 @@ namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction
     {
+        [SerializeField] float maxSpeed = 6f;
+
         private NavMeshAgent m_Agent;
         private Animator m_Animator;
         private ActionScheduler m_ActionScheduler;
@@ -27,19 +29,20 @@ namespace RPG.Movement
         /// 设置 iaction, 并开始移动
         /// </summary>
         /// <param name="destation"></param>
-        public void StartMoveAction(Vector3 destation)
+        public void StartMoveAction(Vector3 destation, float speedAdjust)
         {
             m_ActionScheduler.StartAction(this);
-            MoveTo(destation);
+            MoveTo(destation, speedAdjust);
         }
 
         /// <summary>
         /// 开启agent的移动，然后设定目标位置
         /// </summary>
         /// <param name="destitation"></param>
-        public void MoveTo(Vector3 destitation)
+        public void MoveTo(Vector3 destitation, float speedAdjust)
         {
             m_Agent.SetDestination(destitation);
+            m_Agent.speed = maxSpeed * Mathf.Clamp01(speedAdjust);//限制value在0,1之间并返回value。如果value小于0，返回0。如果value大于1,返回1，否则返回value 。
             m_Agent.isStopped = false;
         }
 

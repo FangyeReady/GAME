@@ -11,6 +11,7 @@ namespace RPG.Core {
         [SerializeField] float timeToGoBack = 3f;
         [SerializeField] float timeToWait = 1.5f;
         [SerializeField] PartrolPath partrolPath;
+        [Range(0, 1)] public float speedChange = 0.5f;
 
         /// <summary>
         /// 失去目标后的停滞时间变量
@@ -95,10 +96,10 @@ namespace RPG.Core {
                     lastInPathPoint = 0;
                 }
                 if (lastInPathPoint > timeToWait)
-                    m_Mover.StartMoveAction (nextPosition);
+                    m_Mover.StartMoveAction (nextPosition,speedChange);
                 return;
             }
-            m_Mover.StartMoveAction (gardPosition);
+            m_Mover.StartMoveAction (gardPosition,speedChange);
 
         }
 
