@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using RPG.Combat;
+using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,6 +25,11 @@ namespace RPG.Control {
 
             if (InteractWithCombat ()) return; //战斗要在移动前面，不然就会一直移动到指定位置，而不会去战斗
             if (InteractWithMovement ()) return;
+        }
+
+
+        private void OnDisable() {
+            this.GetComponent<ActionScheduler>().CancelCurrentAction();
         }
 
         /// <summary>
