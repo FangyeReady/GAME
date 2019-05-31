@@ -11,7 +11,7 @@ namespace RPG.Control {
         private Mover m_Mover;
         private Fighter m_Fighter;
         private Health m_Health;
-        [Range(0, 1)] public float speedChange = 1f;
+        [Range(0, 1)] public float speedControll = 1f;
 
         void Start () {
             m_Mover = this.GetComponent<Mover> ();
@@ -25,11 +25,6 @@ namespace RPG.Control {
 
             if (InteractWithCombat ()) return; //战斗要在移动前面，不然就会一直移动到指定位置，而不会去战斗
             if (InteractWithMovement ()) return;
-        }
-
-
-        private void OnDisable() {
-            this.GetComponent<ActionScheduler>().CancelCurrentAction();
         }
 
         /// <summary>
@@ -51,16 +46,12 @@ namespace RPG.Control {
         private bool InteractWithCombat () {
             RaycastHit[] hits = Physics.RaycastAll (GetMouseRay ());
             foreach (RaycastHit hit in hits) {
-                Health target = hit.transform.GetComponent<Health> ();
-                if (null == target) continue; //身上有CombatTarget的对象才能开启战斗
-                if (!m_Fighter.CanAttack (target.gameObject))
-                {
-                    continue;
-                }
-
+                GameObject target = hit.transform.gameObject;
+                if (!m_Fighter.CanAttack (target)) continue;
+              
                 if (Input.GetMouseButton (0)) {
                     this.transform.LookAt (target.transform);
-                    m_Fighter.Attack (target.gameObject);
+                    m_Fighter.StartAttackAction (target);
                 }
                 return true;
             }
@@ -75,7 +66,7 @@ namespace RPG.Control {
             bool hasHit = Physics.Raycast (GetMouseRay (), out hitInfo);
 
             if (hasHit) {
-                m_Mover.StartMoveAction (hitInfo.point, speedChange);
+                m_Mover.StartMoveAction (hitInfo.point, speedControll);
             }
         }
 

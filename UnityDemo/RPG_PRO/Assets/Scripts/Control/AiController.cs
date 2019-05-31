@@ -8,20 +8,20 @@ namespace RPG.Core {
     public class AiController : MonoBehaviour {
 
         [SerializeField] float toPlayerDistance = 5f;
-        [SerializeField] float timeToGoBack = 3f;
-        [SerializeField] float timeToWait = 1.5f;
+        [SerializeField] float waitTimeToGoBack = 3f;
+        [SerializeField] float waitTimeAtPoint = 1.5f;
         [SerializeField] PartrolPath partrolPath;
         [Range(0, 1)] public float speedChange = 0.5f;
 
         /// <summary>
         /// 失去目标后的停滞时间变量
         /// </summary>
-        float lastSawPlayerTime = Mathf.Infinity;
+        float lastSawPlayerTime = Mathf.Infinity;//无穷大
 
         /// <summary>
         /// 寻点的暂停时间变量
         /// </summary>
-        float lastInPathPoint = Mathf.Infinity;
+        float lastInPathPoint = Mathf.Infinity;//无穷大
 
         /// <summary>
         /// 当前寻路的点
@@ -69,7 +69,7 @@ namespace RPG.Core {
             {
                 AttackBehaviour();
             }
-            else if (lastSawPlayerTime < timeToGoBack)
+            else if (lastSawPlayerTime < waitTimeToGoBack)  //如果lastSawPlayerTime增加到等于waitTimeToGoBack，那么就取消当前操作（战斗），然后回到初始position
             {
                 SuspicionBehaviour();
             }
@@ -90,13 +90,15 @@ namespace RPG.Core {
 
         private void GardMoveBehaviour () {
             if (partrolPath != null) {
-                if (AtPartrolPoint ()) {
+                if (AtPartrolPoint ()) { //这里在初次进来后并不会频繁进入，因为此时已经更新了index
                     currentGardIndex = CyclePointIndex ();
                     nextPosition = GetCurrentWayPoint ();
                     lastInPathPoint = 0;
                 }
-                if (lastInPathPoint > timeToWait)
-                    m_Mover.StartMoveAction (nextPosition,speedChange);
+                if (lastInPathPoint > waitTimeAtPoint)
+                {
+                    m_Mover.StartMoveAction(nextPosition, speedChange);
+                }
                 return;
             }
             m_Mover.StartMoveAction (gardPosition,speedChange);
@@ -122,7 +124,7 @@ namespace RPG.Core {
 
         private void AttackBehaviour () {
             lastSawPlayerTime = 0f;
-            m_Fighter.Attack (player);
+            m_Fighter.StartAttackAction (player);
         }
 
         private bool IsPlayerInRange () {

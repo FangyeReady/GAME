@@ -1,6 +1,8 @@
 using UnityEngine;
 using RPG.Control;
 using UnityEngine.Playables;
+using RPG.Core;
+
 namespace RPG.Cinematics
 {
     public class CinematicsControllRemover : MonoBehaviour
@@ -17,6 +19,7 @@ namespace RPG.Cinematics
 
         private void DisableControll(PlayableDirector dir)
         {
+            player.GetComponent<ActionScheduler>().CancelCurrentAction();
             player.enabled = false;
         }
 

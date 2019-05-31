@@ -1626,9 +1626,241 @@ namespace DesignPattern
     }
     #endregion
 
+    #region 访问者模式
+    public interface IFriends
+    {
+        string Name { set; get; }
+        void Accept(IVisitor visitor);
+    }
+
+    public interface IVisitor
+    {
+        void VisitFriend(IFriends friend);
+    }
+
+    /// <summary>
+    /// 这个是访问者，或者说处理数据的逻辑类
+    /// </summary>
+    public class FriendVisitor1 : IVisitor
+    {
+        public void VisitFriend(IFriends friend)
+        {
+            Console.WriteLine("Visit Friend~~~~"+friend.Name);
+        }
+    }
+
+
+    public class FriendVisitor2 : IVisitor
+    {
+        public void VisitFriend(IFriends friend)
+        {
+            Console.WriteLine("gogogoogogogogogoo~~~~~~~~~~~~~Visit Friend~~~~" + friend.Name);
+        }
+    }
+
+    public class FriendContainer
+    {
+        private Dictionary<string, IFriends> friendData = new Dictionary<string, IFriends>();
+        public FriendContainer()
+        {
+            FriendOne friendOne = new FriendOne("friend1");
+            FriendTweo friendTweo = new FriendTweo("friend2");
+            FriendThree friendThree = new FriendThree("friend3");
+
+            friendData.Add(friendOne.Name, friendOne);
+            friendData.Add(friendTweo.Name, friendTweo);
+            friendData.Add(friendThree.Name, friendThree);
+        }
+
+        public void Accept(IVisitor visitor, string key)
+        {
+            //找到对应道具信息
+            IFriends friend = friendData[key];
+
+
+            //发送购买请求
+            //。。。。。
+
+
+            //接收到购买结果后，调用user的接口
+            visitor.VisitFriend(friend);
+        }
+    }
+
+    /// <summary>
+    /// 假设这些“Friend”都是数据结构
+    /// </summary>
+    public class FriendOne : IFriends
+    {
+        private string name;
+        public string Name { get { return name; } set { name = value; } }
+
+        public FriendOne(string val)
+        {
+            this.Name = val;
+        }
+
+        /// <summary>
+        /// 接待客人，让其访问自己
+        /// </summary>
+        /// <param name="visitor"></param>
+        public void Accept(IVisitor visitor)
+        {
+            visitor.VisitFriend(this);
+        }
+    }
+
+    public class FriendTweo : IFriends
+    {
+        private string name;
+        public string Name { get { return name; } set { name = value; } }
+
+        public FriendTweo(string val)
+        {
+            this.Name = val;
+        }
+
+        /// <summary>
+        /// 接待客人，让其访问自己
+        /// </summary>
+        /// <param name="visitor"></param>
+        public void Accept(IVisitor visitor)
+        {
+            visitor.VisitFriend(this);
+        }
+    }
+
+    public class FriendThree : IFriends
+    {
+        private string name;
+        public string Name { get { return name; } set { name = value; } }
+
+        public FriendThree(string val)
+        {
+            this.Name = val;
+        }
+
+        /// <summary>
+        /// 接待客人，让其访问自己
+        /// </summary>
+        /// <param name="visitor"></param>
+        public void Accept(IVisitor visitor)
+        {
+            visitor.VisitFriend(this);
+        }
+    }
+    #endregion
+
+    #region MVC模式
+
+    public struct StudenData
+    {
+        public string name;
+        public int age;
+        public string level;
+    }
+
+    /// <summary>
+    /// model:提供一些接口，用于对数据的管理
+    /// </summary>
+    public class StudentInfo
+    {
+        private StudenData data;
+
+        public void SetName(string name)
+        {
+            data.name = name;
+        }
+
+        public string GetName()
+        {
+           return data.name;
+        }
+
+
+        public void SetAge(int age)
+        {
+            data.age = age;
+        }
+
+        public int GetAge()
+        {
+            return data.age;
+        }
+
+
+        public void SetLevel(string level)
+        {
+            data.level = level;
+        }
+
+        public string GetLevel()
+        {
+            return data.level;
+        }
+    }
+
+    /// <summary>
+    /// view:仅用于展示
+    /// </summary>
+    public class StudentView
+    {
+        public void ShowStudentView(StudenData data)
+        {
+            Console.WriteLine("Name:" + data.name + "\tAge:" + data.age + "\tLevel:" + data.level);
+        }
+    }
+
+    /// <summary>
+    /// Controller:操作model, 刷新view
+    /// 此处的操作model写得过于简单，实际上并不是单纯的调用model的刷新数据的方法
+    /// 有时候controller在从服务器获得数据时，可能会进行筛选，解析等等其它操作，得到的成品再传给model
+    /// 例：下述方法的RecvData（StudenData data）
+    /// </summary>
+    public class StudentController
+    {
+        private StudentInfo info = new StudentInfo();
+        private StudentView view = new StudentView();
+
+        public void RecvData(StudenData data)
+        {
+            data.name = data.name + ".super";
+            SetStudentName(data.name);
+            SetStudentAge(data.age);
+            data.level = "成都四十九中" + data.level;
+            SetStudentLevel(data.level);
+            //.....
+        }
+
+        public void SetStudentName(string name)
+        {
+            info.SetName(name);
+        }
+
+        public void SetStudentAge(int age)
+        {
+            info.SetAge(age);
+        }
+
+        public void SetStudentLevel(string name)
+        {
+            info.SetLevel(name);
+        }
+
+        public void UpdateView()
+        {
+            StudenData data;
+            data.name = info.GetName();
+            data.age = info.GetAge();
+            data.level = info.GetLevel();
+            view.ShowStudentView(data);
+        }
+    }
+    #endregion
+
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             #region 单例
             //--------------------------------------------------------单例--------------------------------------------------------------------------------
@@ -2003,9 +2235,63 @@ namespace DesignPattern
             //-------------------------------------------------------模板模式：一个抽象类公开定义了执行它的方法的方式/模板----------------------------------------------
             //抽象类的子类根据需求重写这些方法，但是调用必须以抽象类定义的方式（顺序等）来执行
             //主要用于一些通用的方法
-            WOW small_wow = new WOW();
-            small_wow.Play();
+            //WOW small_wow = new WOW();
+            //small_wow.Play();
             #endregion
+
+            #region 访问者模式
+            //-------------------------------------------------------访问者模式：该种模式运用于数据不常变，但visitor经常会变（定义新的操作）的情况----------------------------------------------
+            //FriendContainer中包含了各种各样的数据结构
+            //friendVisitor有一套稳定的逻辑用于处理各种不同的数据结构
+            //各个数据结构继承自同一个接口，用于被访问
+            //。。。既然这样，为毛不直接把数据结构传给friendVisitor???????
+            //关键点：friendContainer不会变，但是visitor可能会变
+            //该种模式运用于visitor经常会变（定义新的操作）的情况
+
+            //数据结构有一个稳定的接口用于被不同的visitor访问
+            //visitor也有一个稳定的接口去访问数据结构
+
+            //要达成上述两点，就需要visitor是继承自一个接口，  数据结构也继承自一个借口
+
+
+            //思考一下在游戏者的使用： 
+            //游戏里有很多商人，也有很多玩家，玩家访问商人进行购买和售出物品（ 每个商人都有 buy,sale接口）
+            //每个玩家有（getItem，updateInfo接口）
+            //玩家点击购买道具（商人调用buy接口接受user的信息和查找到道具data, shop.buy(user, key)）
+            //商人向服务器发送购买请求
+            //购买成功后，玩家调用 user.getItem(购买结果), user.updateInfo(itemInfo)
+            //*******************
+            //具体参照FriendContainer中Accept的注释
+            //*******************
+
+            //FriendContainer friendContainer = new FriendContainer();
+
+
+            //FriendVisitor1 friendVisitor1 = new FriendVisitor1();
+            //friendContainer.Accept(friendVisitor1, "friend2");
+            //friendContainer.Accept(friendVisitor1, "friend3");
+            //friendContainer.Accept(friendVisitor1, "friend1");
+
+            //FriendVisitor2 friendVisitor2 = new FriendVisitor2();
+            //friendContainer.Accept(friendVisitor2, "friend1");
+            //friendContainer.Accept(friendVisitor2, "friend2");
+            //friendContainer.Accept(friendVisitor2, "friend3");
+
+            #endregion
+
+            #region MVC模式
+            StudentController controller = new StudentController();
+            StudenData data;
+            data.name = "fy";
+            data.age = 28;
+            data.level = "初三五班";
+
+            controller.RecvData(data);
+            controller.UpdateView();
+            
+
+            #endregion
+
 
 
             Console.ReadKey();

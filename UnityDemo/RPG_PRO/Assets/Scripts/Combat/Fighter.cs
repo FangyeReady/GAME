@@ -30,21 +30,12 @@ namespace RPG.Combat {
 
             if (null == target) return;
             if (target.IsDead ()) {
-                //m_ActionScheduler.CancelCurrentAction ();
                 return;
             }
 
             //若不在武器范围内则先移动过去
             if (!GetIsInRange ()) {
-                //这里应该直接移动过去，而不是调用Mover.StartMoveAction(pos)  （事实上MoveAction已经开启）,
-                //Mover.StartMoveAction(pos)其中包含了ActionScheduler.StartAction (this)，
-                //因为Attack中已经调用了 ActionScheduler.StartAction (this)，
-                //如果此时又调用ActionScheduler.StartAction (this)就会调用Figher的Cancel方法， target = null
-                //那么战斗逻辑就会被终止
                 m_Mover.MoveTo (target.transform.position, 1f);
-
-                //:待验证, 在此处开启移动Action
-                //m_Mover.StartMoveAction (target.transform.position);
             } else {
                 AttackBehaviour ();
             }
@@ -59,7 +50,7 @@ namespace RPG.Combat {
             return tgHealth != null && !tgHealth.IsDead ();
         }
 
-        public void Attack (GameObject target) {
+        public void StartAttackAction (GameObject target) {
             m_ActionScheduler.StartAction (this);
             this.target = target.GetComponent<Health> (); // target在update中被使用，一旦被赋值就直接开启战斗逻辑
         }
