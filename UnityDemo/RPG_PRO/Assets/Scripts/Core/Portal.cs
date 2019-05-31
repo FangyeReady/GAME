@@ -37,7 +37,7 @@ namespace  PRG.SceneManageMent
                 spawnPos = portal.transform.Find("spawnPoint").position;
 
             }
-            GameObject.FindGameObjectWithTag("Player").transform.position = spawnPos;
+            GameObject.FindGameObjectWithTag("Player").transform.position = spawnPos;  //即使都是子物体，貌似用position也是ok的
 
             Destroy(this.gameObject);
         }

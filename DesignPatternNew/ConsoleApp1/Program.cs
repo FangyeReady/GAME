@@ -1858,6 +1858,102 @@ namespace DesignPattern
     }
     #endregion
 
+    #region 业务代表模式
+    public abstract class Handler
+    {
+        public abstract void DoJob();
+    }
+
+    public class BusinessHanlder1 : Handler
+    {
+        public override void DoJob()
+        {
+            Console.WriteLine("Hanlder1 handle the job~~~!");
+        }
+    }
+    /// <summary>
+    /// 业务类
+    /// </summary>
+    public class BusinessHanlder2 : Handler
+    {
+        public override void DoJob()
+        {
+            Console.WriteLine("Hanlder2 handle the job~~~!");
+        }
+    }
+
+    public class BusinessHanlderNull : Handler
+    {
+        public override void DoJob()
+        {
+            Console.WriteLine("there is no handler3!!!!!");
+        }
+    }
+
+    /// <summary>
+    /// 得到具体的业务类
+    /// </summary>
+    public class JobManager
+    {
+        public Handler GetHandler(string tp)
+        {
+            if (tp.Equals("hanlder1"))
+            {
+                return new BusinessHanlder1();
+            }
+            else if(tp.Equals("hanlder2"))
+            {
+                return new BusinessHanlder2();
+            }
+            else
+            {
+                return new BusinessHanlderNull();
+            }
+            
+        }
+    }
+
+    /// <summary>
+    /// 业务代表类，作为业务层和表示层的中介
+    /// </summary>
+    public class JobHandlerRepresent
+    {
+        private JobManager JobMa = new JobManager();
+        private Handler handler;
+        private string htype = "hanlder1";
+        public void SetJobType(string tp)
+        {
+            this.htype = tp;
+            handler = JobMa.GetHandler(tp);
+        }
+
+        public void DoJob()
+        {
+            handler.DoJob();
+        }
+    }
+
+    /// <summary>
+    /// 表示层
+    /// </summary>
+    public class Client
+    {
+        private JobHandlerRepresent represent;
+
+        public Client(JobHandlerRepresent represent)
+        {
+            this.represent = represent;
+        }
+
+        public void HandleTheJob()
+        {
+            this.represent.DoJob();
+        }
+    }
+
+
+    #endregion
+
     class Program
     {
         static void Main()
@@ -2288,7 +2384,24 @@ namespace DesignPattern
 
             controller.RecvData(data);
             controller.UpdateView();
-            
+
+
+            #endregion
+
+            #region 业务代表模式
+            //主要用于让表示层和业务层解耦.....嗯，将复杂的全体现在业务代表身上了....
+            //所谓业务代表在此时有点像一个中介者
+            JobHandlerRepresent represent = new JobHandlerRepresent();
+
+            Client clientView = new Client(represent);
+            represent.SetJobType("hanlder1");
+            clientView.HandleTheJob();
+
+            represent.SetJobType("hanlder2");
+            clientView.HandleTheJob();
+
+            represent.SetJobType("hanlder3");
+            clientView.HandleTheJob();
 
             #endregion
 
