@@ -9,6 +9,14 @@ namespace RPG.Core {
 
         [SerializeField] Transform player;
 
+        private void Awake() {
+            if( null == player )
+            {
+                player = GameObject.FindGameObjectWithTag("Player").transform;
+            }
+        }
+
+
         /// <summary>
         /// Excution order of event functions   U3d的事件调用
         /// </summary>

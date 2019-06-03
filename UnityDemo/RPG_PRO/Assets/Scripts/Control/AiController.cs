@@ -10,7 +10,7 @@ namespace RPG.Core {
         [SerializeField] float toPlayerDistance = 5f;
         [SerializeField] float waitTimeToGoBack = 3f;
         [SerializeField] float waitTimeAtPoint = 1.5f;
-        [SerializeField] PartrolPath partrolPath;
+        [SerializeField] PartrolPath partrolPath = null;
         [Range(0, 1)] public float speedChange = 0.5f;
 
         /// <summary>
