@@ -81,8 +81,6 @@ namespace DesignPattern
         }
 
         public abstract void SetData(string name, string flag);
-
-
     }
 
 
@@ -91,6 +89,12 @@ namespace DesignPattern
     /// </summary>
     public abstract class MonsterBuilder
     {
+        public struct BuilData
+        {
+            public string name;
+            public string flag;
+        }
+        protected BuilData data;
         public MonsterBuilder(string name, string flag)
         {
 
@@ -98,12 +102,6 @@ namespace DesignPattern
             data.flag = flag;
         }
 
-        public struct BuilData
-        {
-            public string name;
-            public string flag;
-        }
-        protected BuilData data;
         public abstract Monster CreateMonster();
     }
 
@@ -357,7 +355,6 @@ namespace DesignPattern
 
     public abstract class ColorPrototype
     {
-
         public abstract ColorPrototype Clone();
     }
 
@@ -671,7 +668,7 @@ namespace DesignPattern
 
     #endregion
 
-    #region 合作模式
+    #region 组合模式
 
     /// <summary>
     /// 此处的抽象其实毫无意义。。。。。。
@@ -2099,7 +2096,6 @@ namespace DesignPattern
             //PrintPersonList(age_list);
 
             #endregion
-
 
             #region 组合器
             //--------------------------------------------------------组合器模式：为了表达出同一类对象的层次结构----------------------------------------------
