@@ -29,9 +29,7 @@ namespace RPG.Combat {
             timeSinceLastAttack += Time.deltaTime;
 
             if (null == target) return;
-            if (target.IsDead ()) {
-                return;
-            }
+            if (target.IsDead ()) return;
 
             //若不在武器范围内则先移动过去
             if (!GetIsInRange ()) {

@@ -9,15 +9,13 @@ namespace RPG.Core {
     public class ActionScheduler : MonoBehaviour {
         IAction action;
 
-        public void StartAction (IAction behaviour) {
-            if (action == behaviour) return;
+        public void StartAction (IAction nowAction) {
+            if (action == nowAction) return;
 
             if (null != action) {
-
-                //Debug.Log ("cancel~!  " + action.ToString());
                 action.Cancel ();
             }
-            this.action = behaviour;
+            this.action = nowAction;
         }
 
         /// <summary>

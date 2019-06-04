@@ -88,8 +88,10 @@ GameObject:
   - component: {fileID: 7450880726612517905}
   - component: {fileID: 7450880726612517904}
   - component: {fileID: 7450880726612517919}
+  - component: {fileID: 4603184180860258552}
+  - component: {fileID: 8392512212687607659}
   m_Layer: 5
-  m_Name: SceneFader
+  m_Name: PresistanceObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,5 +199,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 228248d14819d7e4088452d383a524ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4603184180860258552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7450880726612517917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0163e3bb0c746a542ba07742590b7198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8392512212687607659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7450880726612517917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e08e5974e08697419d03265718c8e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

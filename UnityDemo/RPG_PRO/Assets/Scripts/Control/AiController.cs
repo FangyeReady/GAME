@@ -133,7 +133,7 @@ namespace RPG.Core {
         }
 
         /// <summary>
-        /// 画出enemy的警戒范围
+        /// 画出enemy的警戒范围,系统接口
         /// </summary>
         private void OnDrawGizmosSelected () {
             Gizmos.color = Color.red;
