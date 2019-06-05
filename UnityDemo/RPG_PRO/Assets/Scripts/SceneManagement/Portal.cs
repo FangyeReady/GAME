@@ -4,15 +4,18 @@ using UnityEngine.SceneManagement;
 
 namespace RPG.SceneManagement
 {
-    enum SceneType
+    enum PortalPoint
     {
         A,B,C,D,E
     }
 
+    /// <summary>
+    /// Portal:大门，传送门
+    /// </summary>
     public class Portal : MonoBehaviour
     {
         [SerializeField] int SceneIndex = 0;
-        [SerializeField] SceneType sceneType = SceneType.A;
+        [SerializeField] PortalPoint sceneType = PortalPoint.A;
 
         [SerializeField] float timeToFadeOut = 0.5f;
         [SerializeField] float timeToFadeIn = 1f;

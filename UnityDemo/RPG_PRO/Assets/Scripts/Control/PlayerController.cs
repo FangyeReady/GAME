@@ -11,7 +11,7 @@ namespace RPG.Control {
         private Mover m_Mover;
         private Fighter m_Fighter;
         private Health m_Health;
-        [Range(0, 1)] public float speedControll = 1f;
+        [Range(0, 1)] public float speedRatio = 1f;
 
         void Start () {
             m_Mover = this.GetComponent<Mover> ();
@@ -66,7 +66,7 @@ namespace RPG.Control {
             bool hasHit = Physics.Raycast (GetMouseRay (), out hitInfo);
 
             if (hasHit) {
-                m_Mover.StartMoveAction (hitInfo.point, speedControll);
+                m_Mover.StartMoveAction (hitInfo.point, speedRatio);
             }
         }
 

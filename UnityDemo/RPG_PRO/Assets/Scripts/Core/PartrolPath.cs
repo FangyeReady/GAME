@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Core {
+    /// <summary>
+    /// 巡逻路径
+    /// </summary>
     public class PartrolPath : MonoBehaviour {
 
         [SerializeField] float partrolRadius = 0.4f;

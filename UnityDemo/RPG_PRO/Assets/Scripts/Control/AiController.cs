@@ -11,7 +11,7 @@ namespace RPG.Core {
         [SerializeField] float waitTimeToGoBack = 3f;
         [SerializeField] float waitTimeAtPoint = 1.5f;
         [SerializeField] PartrolPath partrolPath = null;
-        [Range(0, 1)] public float speedChange = 0.5f;
+        [Range(0, 1)] public float  speedRatio = 0.5f;
 
         /// <summary>
         /// 失去目标后的停滞时间变量
@@ -71,7 +71,7 @@ namespace RPG.Core {
             }
             else if (lastSawPlayerTime < waitTimeToGoBack)  //如果lastSawPlayerTime增加到等于waitTimeToGoBack，那么就取消当前操作（战斗），然后回到初始position
             {
-                SuspicionBehaviour();
+                CancelBehaviour();
             }
             else
             {
@@ -97,11 +97,11 @@ namespace RPG.Core {
                 }
                 if (lastInPathPoint > waitTimeAtPoint)
                 {
-                    m_Mover.StartMoveAction(nextPosition, speedChange);
+                    m_Mover.StartMoveAction(nextPosition,  speedRatio);
                 }
                 return;
             }
-            m_Mover.StartMoveAction (gardPosition,speedChange);
+            m_Mover.StartMoveAction (gardPosition, speedRatio);
 
         }
 
@@ -118,12 +118,16 @@ namespace RPG.Core {
             return dis < disToPathPoint;
         }
 
-        private void SuspicionBehaviour () {
+        /// <summary>
+        /// 结束当前行为
+        /// </summary>
+        private void CancelBehaviour () {
             m_ActionScheduler.CancelCurrentAction ();
         }
 
         private void AttackBehaviour () {
             lastSawPlayerTime = 0f;
+            this.transform.LookAt(player.transform);
             m_Fighter.StartAttackAction (player);
         }
 

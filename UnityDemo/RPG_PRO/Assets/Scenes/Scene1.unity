@@ -2118,37 +2118,37 @@ PrefabInstance:
     - target: {fileID: 9127249673921595435, guid: 4fbaf314b5705ff48839ea8916462504,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.34906346
+      value: 0.4059368
       objectReference: {fileID: 0}
     - target: {fileID: 9127249673921595435, guid: 4fbaf314b5705ff48839ea8916462504,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.0014169659
       objectReference: {fileID: 0}
     - target: {fileID: 9127249673921595435, guid: 4fbaf314b5705ff48839ea8916462504,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.003190046
       objectReference: {fileID: 0}
     - target: {fileID: 9127249673921595435, guid: 4fbaf314b5705ff48839ea8916462504,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9370991
+      value: 0.91389453
       objectReference: {fileID: 0}
     - target: {fileID: 9127249673921595435, guid: 4fbaf314b5705ff48839ea8916462504,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.023807526
       objectReference: {fileID: 0}
     - target: {fileID: 9127249673921595435, guid: 4fbaf314b5705ff48839ea8916462504,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.718002
+      value: 12.3326435
       objectReference: {fileID: 0}
     - target: {fileID: 9127249673921595435, guid: 4fbaf314b5705ff48839ea8916462504,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.619728
+      value: -6.547291
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fbaf314b5705ff48839ea8916462504, type: 3}
@@ -7653,7 +7653,7 @@ PrefabInstance:
     - target: {fileID: 3933166649627388117, guid: ff76884bf51a3584e97585c520f9715b,
         type: 3}
       propertyPath: m_Name
-      value: CinematicCameraSee
+      value: CinematicCameras
       objectReference: {fileID: 0}
     - target: {fileID: 1194776931152468401, guid: ff76884bf51a3584e97585c520f9715b,
         type: 3}

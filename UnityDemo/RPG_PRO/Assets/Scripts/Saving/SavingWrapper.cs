@@ -4,17 +4,22 @@ namespace  RPG.Saving
 {
     public class SavingWrapper : MonoBehaviour
     {
-        private readonly string defaultFile = "savedata/save.sav";
+        private readonly string defaultFile = "save";
+
+        SavingSystem saveManager;
+        private void Awake() {
+            saveManager = this.GetComponent<SavingSystem>();
+        }
 
         private void Update() {
             if( Input.GetKeyDown( KeyCode.S ))
             {
-                SavingSystem.Save(defaultFile);
+                saveManager.Save(defaultFile);
             }
 
             if(Input.GetKeyDown( KeyCode.L ))
             {
-                SavingSystem.Load(defaultFile);
+                saveManager.Load(defaultFile);
             }
         }
     }
