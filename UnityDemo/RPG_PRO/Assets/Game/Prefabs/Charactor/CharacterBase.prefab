@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1528315424}
   - component: {fileID: 1528315425}
   - component: {fileID: 2616839689541859861}
+  - component: {fileID: 4143647502035352129}
   m_Layer: 0
   m_Name: CharacterBase
   m_TagString: Untagged
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6fca56f42d8314ab2ca6f6ee656d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedChange: 1
+  speedRatio: 1
 --- !u!114 &1528315425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +146,16 @@ CapsuleCollider:
   m_Height: 1.9218054
   m_Direction: 1
   m_Center: {x: 0, y: 0.8884258, z: 0}
+--- !u!114 &4143647502035352129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142201201586912328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da2ba7638a314342b9b56a7e4e6c87d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 

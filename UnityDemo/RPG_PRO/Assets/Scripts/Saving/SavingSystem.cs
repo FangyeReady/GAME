@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 namespace  RPG.Saving
 {
@@ -11,36 +12,73 @@ namespace  RPG.Saving
         public void Save(string file)
         {
             string path = GetSavingFilePath(file);
-            print(path);
+            //print(path);
 
             using( FileStream fs = File.Open(path, FileMode.Create))
             {
+                //第一种方案
                 //byte[] buffer = DoSerializeVector(GetPlayerTransform().position);   //Encoding.UTF8.GetBytes("hello rpg core~!");
                 //fs.Write(buffer, 0, buffer.Length);
 
-                SerializeableVector3 slVector3 = new SerializeableVector3( GetPlayerTransform().position );
+                //第二种方案
+                //SerializeableVector3 slVector3 = new SerializeableVector3( GetPlayerTransform().position );
+                //BinaryFormatter binaryer = new BinaryFormatter();
+                //binaryer.Serialize(fs, slVector3);
+
+
+                //第三种方案
                 BinaryFormatter binaryer = new BinaryFormatter();
-                binaryer.Serialize(fs, slVector3);
+                binaryer.Serialize(fs, CaptureState());
             }
         }
 
         public void Load(string file)
         {
             string path = GetSavingFilePath(file);
-            print(path);
+            //print(path);
 
             using (FileStream fs = File.Open(path, FileMode.Open))
             {
-                byte[] buffer = new byte[fs.Length];
-               // fs.Read(buffer, 0, buffer.Length);
-               // Vector3 positon =  DeSerializeVector(buffer);  //string text = Encoding.UTF8.GetString(buffer);
-            
-                BinaryFormatter binaryer = new BinaryFormatter();  //BinaryFormatter: 二进制格式
-                SerializeableVector3 slVector = (SerializeableVector3) binaryer.Deserialize(fs);
-                Transform playerTransForm = GetPlayerTransform();
-                playerTransForm.position = slVector.GetVector3();     
+                // 第一种方案
+                // byte[] buffer = new byte[fs.Length];
+                // fs.Read(buffer, 0, buffer.Length);
+                // Vector3 positon =  DeSerializeVector(buffer);  //string text = Encoding.UTF8.GetString(buffer);
+
+                // 第二种方案
+                // BinaryFormatter binaryer = new BinaryFormatter();  //BinaryFormatter: 二进制格式
+                // SerializeableVector3 slVector = (SerializeableVector3) binaryer.Deserialize(fs);
+                // Transform playerTransForm = GetPlayerTransform();
+                // playerTransForm.position = slVector.GetVector3(); 
+
+                // 第三种方案
+                BinaryFormatter binaryer = new BinaryFormatter();
+                RestoreState( binaryer.Deserialize(fs)  );
+
             }
         }
+
+        private void RestoreState(object states)
+        {
+           Dictionary<string, object> newStates = ( Dictionary<string, object> )states;
+
+           foreach (SaveableEntity item in FindObjectsOfType<SaveableEntity>())
+           {
+                item.SetState( newStates[item.GetUniqueIdentifier()] );
+           }
+        }
+
+        private object CaptureState()
+        {
+            Dictionary<string, object> states = new Dictionary<string, object>();
+            foreach (SaveableEntity item in FindObjectsOfType<SaveableEntity>())
+            {
+                string uniqueIdentifier = item.GetUniqueIdentifier();
+                states[uniqueIdentifier] = item.GetState();
+            }
+            return states;
+        }
+
+
 
         private string GetSavingFilePath(string file)
         {
@@ -51,6 +89,20 @@ namespace  RPG.Saving
         {
             return GameObject.FindGameObjectWithTag("Player").transform;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         /// <summary>
