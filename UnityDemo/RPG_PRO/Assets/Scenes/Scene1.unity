@@ -1896,6 +1896,11 @@ PrefabInstance:
       propertyPath: uniqueIdentifier
       value: b45485da-07c3-4170-8fc2-763c7882944e
       objectReference: {fileID: 0}
+    - target: {fileID: 8471800218218067044, guid: 993c9b9c01628c84c94eabbf800c6fcd,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: 8a0d3f1e-5a9b-4e27-a7ab-2d8058e15016
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 993c9b9c01628c84c94eabbf800c6fcd, type: 3}
 --- !u!1 &624705964
@@ -2159,6 +2164,11 @@ PrefabInstance:
         type: 3}
       propertyPath: uniqueIdentifier
       value: ab4c4845-8fc9-425b-ab96-400f84811009
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986055318852239439, guid: 4fbaf314b5705ff48839ea8916462504,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: d0c73db2-0ca3-4556-925b-bc9f24dee481
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fbaf314b5705ff48839ea8916462504, type: 3}
@@ -3924,6 +3934,11 @@ PrefabInstance:
       propertyPath: uniqueIdentifier
       value: 5e6dd6ee-d4d7-47e7-8f2a-7b18a257db56
       objectReference: {fileID: 0}
+    - target: {fileID: 8471800218218067044, guid: 993c9b9c01628c84c94eabbf800c6fcd,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: 204920c1-5f5f-48ff-a785-b282924dc46b
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 993c9b9c01628c84c94eabbf800c6fcd, type: 3}
 --- !u!1 &1215061409
@@ -5422,6 +5437,11 @@ PrefabInstance:
         type: 3}
       propertyPath: uniqueIdentifier
       value: a0bb6af4-7251-44e1-b3c1-62ab4dae2efb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471800218218067044, guid: 993c9b9c01628c84c94eabbf800c6fcd,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: 2ceaf87d-3600-432e-8170-384ef3ee5c5b
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 993c9b9c01628c84c94eabbf800c6fcd, type: 3}
@@ -7130,6 +7150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: uniqueIdentifier
       value: d268d1c9-a3ae-48bb-bee3-61654542bded
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471800218218067044, guid: 993c9b9c01628c84c94eabbf800c6fcd,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: 59ce6595-5d3d-4df1-8383-cf5557ed443c
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 993c9b9c01628c84c94eabbf800c6fcd, type: 3}
