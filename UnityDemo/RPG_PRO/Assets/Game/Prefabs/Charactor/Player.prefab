@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cc86a9153267f4d9651b959737c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 1000
 --- !u!1001 &3126852816550394803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -851,6 +851,11 @@ PrefabInstance:
     - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
       propertyPath: weaponDamage
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144643389186981379, guid: a2d8f69a1d45a584282a7f3133c65f68,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}

@@ -1,4 +1,5 @@
 using System.Collections;
+using RPG.Saving;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,10 +38,13 @@ namespace RPG.SceneManagement
             DontDestroyOnLoad(this.gameObject);
            
             Fader presistanceEffect = GameObject.FindObjectOfType<Fader>();
+            SavingWrapper saveWrapper = GameObject.FindObjectOfType<SavingWrapper>();
 
             yield return presistanceEffect.FadeOut( timeToFadeOut );//特效播放完成后才开始加载场景
-            yield return SceneManager.LoadSceneAsync(SceneIndex);
 
+            saveWrapper.Save();
+            yield return SceneManager.LoadSceneAsync(SceneIndex);
+            saveWrapper.Load();
             foreach (Portal portal in FindObjectsOfType( typeof(Portal) ) )
             {
                 if (portal == this) continue;

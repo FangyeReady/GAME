@@ -11,16 +11,31 @@ namespace  RPG.Saving
             saveManager = this.GetComponent<SavingSystem>();
         }
 
+
+        private void Start() {
+            Load();
+        }
+
         private void Update() {
             if( Input.GetKeyDown( KeyCode.S ))
             {
-                saveManager.Save(defaultFile);
+                Save();
             }
 
-            if(Input.GetKeyDown( KeyCode.L ))
+            if (Input.GetKeyDown( KeyCode.L ))
             {
-                saveManager.Load(defaultFile);
+                Load();
             }
+        }
+
+        public void Load()
+        {
+            saveManager.Load(defaultFile);
+        }
+
+        public void Save()
+        {
+            saveManager.Save(defaultFile);
         }
     }
 }

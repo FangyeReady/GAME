@@ -11,71 +11,106 @@ namespace  RPG.Saving
     {
         public void Save(string file)
         {
-            string path = GetSavingFilePath(file);
-            //print(path);
+            // string path = GetSavingFilePath(file);
+            // //print(path);
 
-            using( FileStream fs = File.Open(path, FileMode.Create))
-            {
-                //第一种方案
-                //byte[] buffer = DoSerializeVector(GetPlayerTransform().position);   //Encoding.UTF8.GetBytes("hello rpg core~!");
-                //fs.Write(buffer, 0, buffer.Length);
+            // using( FileStream fs = File.Open(path, FileMode.Create))
+            // {
+            //     //第一种方案
+            //     //byte[] buffer = DoSerializeVector(GetPlayerTransform().position);   //Encoding.UTF8.GetBytes("hello rpg core~!");
+            //     //fs.Write(buffer, 0, buffer.Length);
 
-                //第二种方案
-                //SerializeableVector3 slVector3 = new SerializeableVector3( GetPlayerTransform().position );
-                //BinaryFormatter binaryer = new BinaryFormatter();
-                //binaryer.Serialize(fs, slVector3);
+            //     //第二种方案
+            //     //SerializeableVector3 slVector3 = new SerializeableVector3( GetPlayerTransform().position );
+            //     //BinaryFormatter binaryer = new BinaryFormatter();
+            //     //binaryer.Serialize(fs, slVector3);
 
 
-                //第三种方案
-                BinaryFormatter binaryer = new BinaryFormatter();
-                binaryer.Serialize(fs, CaptureState());
-            }
+            //     //第三种方案
+            //     BinaryFormatter binaryer = new BinaryFormatter();
+            //     binaryer.Serialize(fs, CaptureState());
+            // }
+
+
+            //第四种方案   主要目的是跨场景保存数据
+            Dictionary<string, object> states = LoadFile(file);
+            CaptureState(states);
+            SaveFile(file, states);
         }
 
         public void Load(string file)
         {
+            // string path = GetSavingFilePath(file);
+            // //print(path);
+
+            // using (FileStream fs = File.Open(path, FileMode.Open))
+            // {
+            //     // 第一种方案
+            //     // byte[] buffer = new byte[fs.Length];
+            //     // fs.Read(buffer, 0, buffer.Length);
+            //     // Vector3 positon =  DeSerializeVector(buffer);  //string text = Encoding.UTF8.GetString(buffer);
+
+            //     // 第二种方案
+            //     // BinaryFormatter binaryer = new BinaryFormatter();  //BinaryFormatter: 二进制格式
+            //     // SerializeableVector3 slVector = (SerializeableVector3) binaryer.Deserialize(fs);
+            //     // Transform playerTransForm = GetPlayerTransform();
+            //     // playerTransForm.position = slVector.GetVector3(); 
+
+            //     // 第三种方案
+            //     BinaryFormatter binaryer = new BinaryFormatter();
+            //     RestoreState( binaryer.Deserialize(fs) );
+
+            // }
+
+            //第四种方案   主要目的是跨场景保存数据
+            RestoreState(LoadFile(file));
+        }
+
+        private Dictionary<string, object> LoadFile(string file)
+        {
             string path = GetSavingFilePath(file);
-            //print(path);
+            if(!File.Exists(path))
+                return new Dictionary<string, object>();
 
             using (FileStream fs = File.Open(path, FileMode.Open))
             {
-                // 第一种方案
-                // byte[] buffer = new byte[fs.Length];
-                // fs.Read(buffer, 0, buffer.Length);
-                // Vector3 positon =  DeSerializeVector(buffer);  //string text = Encoding.UTF8.GetString(buffer);
-
-                // 第二种方案
-                // BinaryFormatter binaryer = new BinaryFormatter();  //BinaryFormatter: 二进制格式
-                // SerializeableVector3 slVector = (SerializeableVector3) binaryer.Deserialize(fs);
-                // Transform playerTransForm = GetPlayerTransform();
-                // playerTransForm.position = slVector.GetVector3(); 
-
-                // 第三种方案
-                BinaryFormatter binaryer = new BinaryFormatter();
-                RestoreState( binaryer.Deserialize(fs)  );
-
+               BinaryFormatter binaryer = new BinaryFormatter();
+               return (Dictionary<string, object>)binaryer.Deserialize(fs);
             }
         }
 
-        private void RestoreState(object states)
+        private void SaveFile(string file, object state)
         {
-           Dictionary<string, object> newStates = ( Dictionary<string, object> )states;
+            string path = GetSavingFilePath(file);
+
+            using( FileStream fs = File.Open(path, FileMode.Create))
+            {
+                BinaryFormatter binaryer = new BinaryFormatter();
+                binaryer.Serialize(fs, state);
+            }
+        }
+
+
+
+
+        private void RestoreState(Dictionary<string,object> states)
+        {
 
            foreach (SaveableEntity item in FindObjectsOfType<SaveableEntity>())
            {
-                item.SetState( newStates[item.GetUniqueIdentifier()] );
+               string id = item.GetUniqueIdentifier();
+               if( states.ContainsKey(id) )
+                item.RestoreState( states[id] );
            }
         }
 
-        private object CaptureState()
+        private void CaptureState( Dictionary<string, object> states )
         {
-            Dictionary<string, object> states = new Dictionary<string, object>();
             foreach (SaveableEntity item in FindObjectsOfType<SaveableEntity>())
             {
                 string uniqueIdentifier = item.GetUniqueIdentifier();
-                states[uniqueIdentifier] = item.GetState();
+                states[uniqueIdentifier] = item.CaptureState();
             }
-            return states;
         }
 
 

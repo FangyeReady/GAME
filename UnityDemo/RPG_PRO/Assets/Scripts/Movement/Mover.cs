@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using RPG.Core;
+using RPG.Saving;
 
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour, IAction
+    public class Mover : MonoBehaviour, IAction, ISaveble
     {
         [SerializeField] float maxSpeed = 6f;
 
@@ -76,7 +77,19 @@ namespace RPG.Movement
 
         }
 
+        public void RestoreState(object state)
+        {
+            SerializeableVector3 pos = (SerializeableVector3)state;
+            m_Agent.enabled = false;//防止刚刚开始的一瞬间的移动或攻击等情况发生
+            this.transform.position = pos.ToVector3();
+            m_Agent.enabled = true;
+            m_ActionScheduler.CancelCurrentAction();
+        }
 
+        public object CaptureState()
+        {
+            return new SerializeableVector3(transform.position);
+        }
     }
 }
 

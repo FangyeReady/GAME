@@ -1,22 +1,15 @@
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Core;
+using RPG.Saving;
 
 namespace  RPG.Combat
 {
-    public class Health:MonoBehaviour
+    public class Health:MonoBehaviour ,ISaveble
     {
         [SerializeField] float health = 20;
 
         private bool isDead = false;
-        private ActionScheduler m_ActionScheduler;
-        private NavMeshAgent navAgent;
-
-        private void Start() {
-            m_ActionScheduler = GetComponent<ActionScheduler>();
-            navAgent = GetComponent<NavMeshAgent>();
-        }
-
 
         public void TakeDamage( float damage )
         {
@@ -32,8 +25,8 @@ namespace  RPG.Combat
             
             isDead = true;
             GetComponent<Animator>().SetTrigger("die");
-            m_ActionScheduler.CancelCurrentAction();
-            navAgent.enabled = false;
+            GetComponent<ActionScheduler>().CancelCurrentAction();
+            GetComponent<NavMeshAgent>().enabled = false;
         }
 
         public bool IsDead()
@@ -41,8 +34,17 @@ namespace  RPG.Combat
             return this.isDead;
         }
 
+        public void RestoreState(object state)
+        {
+            health = (float) state;
+            if ( health <= 0 )
+                Die();
+        }
 
-
+        public object CaptureState()
+        {
+           return health;
+        }
     }
 
 
