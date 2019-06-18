@@ -4,6 +4,8 @@ using System.Text;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace  RPG.Saving
 {
@@ -111,6 +113,8 @@ namespace  RPG.Saving
                 string uniqueIdentifier = item.GetUniqueIdentifier();
                 states[uniqueIdentifier] = item.CaptureState();
             }
+            states["lastSceneIndex"] = SceneManager.GetActiveScene().buildIndex;
+           // print("scene saved index:" + SceneManager.GetActiveScene().buildIndex);
         }
 
 
@@ -125,7 +129,22 @@ namespace  RPG.Saving
             return GameObject.FindGameObjectWithTag("Player").transform;
         }
 
-
+        /// <summary>
+        /// load last scene 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public IEnumerator LoadLastScene(string file)
+        {
+            Dictionary<string, object> states = LoadFile(file);
+            if(states.ContainsKey("lastSceneIndex"))
+            {
+                int lastSceneIndex = (int)states["lastSceneIndex"];
+                if(lastSceneIndex != SceneManager.GetActiveScene().buildIndex)
+                    yield return SceneManager.LoadSceneAsync(lastSceneIndex);
+            }
+            RestoreState(states);
+        }
 
 
 

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toPlayerDistance: 5
-  timeToGoBack: 3
-  timeToWait: 1.5
+  waitTimeToGoBack: 3
+  waitTimeAtPoint: 1.5
   partrolPath: {fileID: 0}
-  speedChange: 0.5
+  speedRatio: 0.5
 --- !u!114 &6896078619581403821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,6 +668,24 @@ PrefabInstance:
       propertyPath: weaponDamage
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 0f9d76244a65c964bae90da17ea6db67,
+        type: 2}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: RightHand
+      value: 
+      objectReference: {fileID: 6382681556372631865}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: LeftHand
+      value: 
+      objectReference: {fileID: 6382681556372558139}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 0f9d76244a65c964bae90da17ea6db67,
+        type: 2}
     - target: {fileID: 1528315419, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
       propertyPath: m_Speed
       value: 3

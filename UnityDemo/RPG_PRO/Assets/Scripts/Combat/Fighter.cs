@@ -8,21 +8,38 @@ namespace RPG.Combat {
 
     public class Fighter : MonoBehaviour, IAction {
 
+        [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] Transform RightHand;
+        [SerializeField] Transform LeftHand;
+        [SerializeField] Weapon defaultWeapon;
+
+
         private Health target;
         private Mover m_Mover;
         private ActionScheduler m_ActionScheduler;
         private Animator m_AniController;
-
-        [SerializeField] float weaponRange = 3f;
-        [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] float weaponDamage = 5f;
+        private Weapon currentWeapon;
+       
 
         private float timeSinceLastAttack = 0;
 
-        private void Start () {
-            m_Mover = GetComponent<Mover> ();
-            m_ActionScheduler = GetComponent<ActionScheduler> ();
-            m_AniController = GetComponent<Animator> ();
+        private void Start ()
+        {
+            m_Mover = GetComponent<Mover>();
+            m_ActionScheduler = GetComponent<ActionScheduler>();
+            m_AniController = GetComponent<Animator>();
+
+            EquipWeapon(defaultWeapon);
+        }
+
+        public void EquipWeapon(Weapon weapon)
+        {
+            currentWeapon = weapon;
+            if (currentWeapon != null)
+            {
+                currentWeapon.Spawn(RightHand, LeftHand, m_AniController);
+            }
+              
         }
 
         private void Update () {
@@ -35,6 +52,7 @@ namespace RPG.Combat {
             if (!GetIsInRange ()) {
                 m_Mover.MoveTo (target.transform.position, 1f);
             } else {
+                m_Mover.Cancel();
                 AttackBehaviour ();
             }
         }
@@ -44,6 +62,7 @@ namespace RPG.Combat {
         /// </summary>
         /// <returns></returns>
         public bool CanAttack (GameObject tg) {
+            if(tg == null) return false;
             Health tgHealth = tg.GetComponent<Health> ();
             return tgHealth != null && !tgHealth.IsDead ();
         }
@@ -54,28 +73,54 @@ namespace RPG.Combat {
         }
 
         public void AttackBehaviour () {
-
-            if (timeSinceLastAttack > timeBetweenAttacks) {
+            this.transform.LookAt(target.transform);
+            if (timeSinceLastAttack > timeBetweenAttacks)
+            {
                 timeSinceLastAttack = 0f;
-                m_AniController.ResetTrigger ("stopAttack");
-                m_AniController.SetTrigger ("attack");
+                TriggerAttack();
             }
         }
 
-        void Hit () {
+        private void Hit () {
             if (null == target) return;
-            target.GetComponent<Health> ().TakeDamage (weaponDamage);
+            if (currentWeapon.HasProjectile())
+            {
+                currentWeapon.SpawnLongRangeBullet( RightHand, LeftHand, target );
+            }
+            else
+            {
+                target.GetComponent<Health>().TakeDamage(currentWeapon.GetDamege());
+            }
+           
+        }
+
+
+        private void Shoot()
+        {
+            Hit();
         }
 
         private bool GetIsInRange () {
-            return Vector3.Distance (this.transform.position, target.transform.position) < weaponRange;
+            return Vector3.Distance (this.transform.position, target.transform.position) < currentWeapon.GetRange();
         }
 
-        public void Cancel () {
+        public void Cancel ()
+        {
             target = null;
             m_Mover.Cancel();
-            m_AniController.ResetTrigger ("attack");
-            m_AniController.SetTrigger ("stopAttack");
+            StopAttack();
+        }
+
+        private void StopAttack()
+        {
+            m_AniController.ResetTrigger("attack");
+            m_AniController.SetTrigger("stopAttack");
+        }
+
+        private void TriggerAttack()
+        {
+            m_AniController.ResetTrigger("stopAttack");
+            m_AniController.SetTrigger("attack");
         }
 
     }

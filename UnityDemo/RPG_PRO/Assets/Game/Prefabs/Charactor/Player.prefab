@@ -852,6 +852,28 @@ PrefabInstance:
       propertyPath: weaponDamage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 7275996da7876c749b8b5ee02bd79e0e,
+        type: 2}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: weaponSpawnPos
+      value: 
+      objectReference: {fileID: 3126852816550588983}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: RightHand
+      value: 
+      objectReference: {fileID: 3126852816550588983}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: LeftHand
+      value: 
+      objectReference: {fileID: 3126852816550515295}
+    - target: {fileID: 1528315421, guid: a2d8f69a1d45a584282a7f3133c65f68, type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 0f9d76244a65c964bae90da17ea6db67,
+        type: 2}
     - target: {fileID: 2144643389186981379, guid: a2d8f69a1d45a584282a7f3133c65f68,
         type: 3}
       propertyPath: uniqueIdentifier

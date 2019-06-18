@@ -34,7 +34,6 @@ namespace DesignPattern
         {
             return instance;
         }
-
     }
 
     /// <summary>
@@ -112,7 +111,6 @@ namespace DesignPattern
             this._name = name;
             this._flag = flag;
         }
-
     }
 
     /// <summary>
@@ -120,7 +118,6 @@ namespace DesignPattern
     /// </summary>
     public class DamageMonsterBuilder : MonsterBuilder
     {
-
         public DamageMonsterBuilder(string name, string flag) : base(name, flag) { }
 
         public override Monster CreateMonster()
@@ -257,7 +254,6 @@ namespace DesignPattern
     public abstract class IFactory
     {
         public abstract IProduct CreateProduct(Items type);  //product type
-
     }
 
     /// <summary>
@@ -2372,14 +2368,14 @@ namespace DesignPattern
             #endregion
 
             #region MVC模式
-            StudentController controller = new StudentController();
-            StudenData data;
-            data.name = "fy";
-            data.age = 28;
-            data.level = "初三五班";
+            //StudentController controller = new StudentController();
+            //StudenData data;
+            //data.name = "fy";
+            //data.age = 28;
+            //data.level = "初三五班";
 
-            controller.RecvData(data);
-            controller.UpdateView();
+            //controller.RecvData(data);
+            //controller.UpdateView();
 
 
             #endregion
@@ -2387,17 +2383,17 @@ namespace DesignPattern
             #region 业务代表模式
             //主要用于让表示层和业务层解耦.....嗯，将复杂的全体现在业务代表身上了....
             //所谓业务代表在此时有点像一个中介者
-            JobHandlerRepresent represent = new JobHandlerRepresent();
+            //JobHandlerRepresent represent = new JobHandlerRepresent();
 
-            Client clientView = new Client(represent);
-            represent.SetJobType("hanlder1");
-            clientView.HandleTheJob();
+            //Client clientView = new Client(represent);
+            //represent.SetJobType("hanlder1");
+            //clientView.HandleTheJob();
 
-            represent.SetJobType("hanlder2");
-            clientView.HandleTheJob();
+            //represent.SetJobType("hanlder2");
+            //clientView.HandleTheJob();
 
-            represent.SetJobType("hanlder3");
-            clientView.HandleTheJob();
+            //represent.SetJobType("hanlder3");
+            //clientView.HandleTheJob();
 
             #endregion
 

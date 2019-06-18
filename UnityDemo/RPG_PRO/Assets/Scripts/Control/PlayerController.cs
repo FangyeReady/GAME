@@ -47,10 +47,11 @@ namespace RPG.Control {
             RaycastHit[] hits = Physics.RaycastAll (GetMouseRay ());
             foreach (RaycastHit hit in hits) {
                 GameObject target = hit.transform.gameObject;
+                if(target == null) continue;
                 if (!m_Fighter.CanAttack (target)) continue;
               
                 if (Input.GetMouseButton (0)) {
-                    this.transform.LookAt (target.transform);
+                    //this.transform.LookAt (target.transform);
                     m_Fighter.StartAttackAction (target);
                 }
                 return true;

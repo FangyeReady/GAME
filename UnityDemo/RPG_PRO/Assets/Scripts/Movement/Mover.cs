@@ -13,7 +13,7 @@ namespace RPG.Movement
         private Animator m_Animator;
         private ActionScheduler m_ActionScheduler;
         private Ray posRay;
-        void Start()
+        void Awake()
         {
             m_Agent = GetComponent<NavMeshAgent>();
             m_Animator = GetComponent<Animator>();

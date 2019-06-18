@@ -11,7 +11,7 @@ namespace RPG.Core {
         [SerializeField] float waitTimeToGoBack = 3f;
         [SerializeField] float waitTimeAtPoint = 1.5f;
         [SerializeField] PartrolPath partrolPath = null;
-        [Range(0, 1)] public float  speedRatio = 0.5f;
+        [Range(0, 1)] [SerializeField] float  speedRatio = 0.5f;
 
         /// <summary>
         /// 失去目标后的停滞时间变量
