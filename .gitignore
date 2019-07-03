@@ -28,6 +28,12 @@ New Unity Project/obj/
 UnityDemo/RPG_PRO/Library/
 UnityDemo/RPG_PRO/Temp/
 
+UnityDemo/AssetBundle/Library/
+UnityDemo/AssetBundle/Temp/
+
+UnityDemo/Test/Library/
+UnityDemo/Test/Temp/
+
 ExportedObj/
 .consulo/
 *.csproj
@@ -42,6 +48,7 @@ ExportedObj/
 *.svd
 *.pdb
 *.opendb
+*.info
 
 # Unity3D generated meta files
 *.pidb.meta

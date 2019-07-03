@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1777871267417781807, guid: 993c9b9c01628c84c94eabbf800c6fcd,
         type: 3}
       propertyPath: m_Name
-      value: Archer1
+      value: Archer
       objectReference: {fileID: 0}
     - target: {fileID: 1777871267417781807, guid: 993c9b9c01628c84c94eabbf800c6fcd,
         type: 3}
@@ -1463,6 +1463,11 @@ PrefabInstance:
       propertyPath: LeftHand
       value: 
       objectReference: {fileID: 6580169717256153040}
+    - target: {fileID: 7517260554240521338, guid: 993c9b9c01628c84c94eabbf800c6fcd,
+        type: 3}
+      propertyPath: weaponName
+      value: Bow Blue
+      objectReference: {fileID: 0}
     - target: {fileID: 6382681556385998187, guid: 993c9b9c01628c84c94eabbf800c6fcd,
         type: 3}
       propertyPath: m_Bones.Array.data[0]
@@ -1713,6 +1718,11 @@ PrefabInstance:
       propertyPath: m_RootBone
       value: 
       objectReference: {fileID: 6580169717256072174}
+    - target: {fileID: 3648322318407799749, guid: 993c9b9c01628c84c94eabbf800c6fcd,
+        type: 3}
+      propertyPath: type
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 993c9b9c01628c84c94eabbf800c6fcd, type: 3}
 --- !u!4 &6580169717256029412 stripped

@@ -6,9 +6,8 @@
     "configurations": [
         
         {
-            "name": "Unity Editor RPG",
+            "name": "Unity Editor",
             "type": "unity",
-            "path": "/c:/Users/fy/Desktop/GAME/My/UnityDemo/RPG_PRO/Library/EditorInstance.json",
             "request": "launch"
         },
         {

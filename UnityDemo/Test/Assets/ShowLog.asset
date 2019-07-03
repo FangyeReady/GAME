@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 239e1585ef3b6c94198b7ed900b8ea79, type: 3}
-  m_Name: Unarmed
+  m_Script: {fileID: 11500000, guid: 3a8bc6947e8e1c749ae9765aa4de62d7, type: 3}
+  m_Name: ShowLog
   m_EditorClassIdentifier: 
-  equipPrefab: {fileID: 0}
-  weaponOverrideController: {fileID: 0}
-  weaponRange: 3
-  weaponDamage: 5

@@ -102,7 +102,6 @@ namespace RPG.Core {
                 return;
             }
             m_Mover.StartMoveAction (gardPosition, speedRatio);
-
         }
 
         private Vector3 GetCurrentWayPoint () {

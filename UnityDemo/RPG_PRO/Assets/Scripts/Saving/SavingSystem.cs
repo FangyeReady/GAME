@@ -97,7 +97,6 @@ namespace  RPG.Saving
 
         private void RestoreState(Dictionary<string,object> states)
         {
-
            foreach (SaveableEntity item in FindObjectsOfType<SaveableEntity>())
            {
                string id = item.GetUniqueIdentifier();
@@ -164,7 +163,7 @@ namespace  RPG.Saving
         /// </summary>
         private byte[] DoSerializeVector(Vector3 vec3)
         {
-            byte[] bytes = new byte[ 3 * 4 ];//要存x,y,z  一个字符占32位  就是  4个字节   一个字节是8位
+            byte[] bytes = new byte[ 3 * 4 ];//要存x,y,z  一个字符占32位  就是  4个字节   8位是一个字节
             BitConverter.GetBytes(vec3.x).CopyTo(bytes, 0);//BitConverter  要用system命名空间
             BitConverter.GetBytes(vec3.y).CopyTo(bytes, 4);
             BitConverter.GetBytes(vec3.z).CopyTo(bytes, 8);

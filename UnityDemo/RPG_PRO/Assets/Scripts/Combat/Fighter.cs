@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Saving;
 using UnityEngine;
 
 namespace RPG.Combat {
 
-    public class Fighter : MonoBehaviour, IAction {
+    public class Fighter : MonoBehaviour, IAction, ISaveble {
 
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform RightHand;
         [SerializeField] Transform LeftHand;
         [SerializeField] Weapon defaultWeapon;
 
+        [SerializeField] string weaponName = "Unarmed";
+
 
         private Health target;
         private Mover m_Mover;
         private ActionScheduler m_ActionScheduler;
         private Animator m_AniController;
-        private Weapon currentWeapon;
+        private Weapon currentWeapon = null;
        
 
         private float timeSinceLastAttack = 0;
@@ -28,18 +31,20 @@ namespace RPG.Combat {
             m_Mover = GetComponent<Mover>();
             m_ActionScheduler = GetComponent<ActionScheduler>();
             m_AniController = GetComponent<Animator>();
-
-            EquipWeapon(defaultWeapon);
+            if( currentWeapon == null)
+                EquipWeapon(defaultWeapon);
+            else
+                weaponName = currentWeapon.name;
         }
 
         public void EquipWeapon(Weapon weapon)
         {
             currentWeapon = weapon;
+            weaponName = currentWeapon.name;
             if (currentWeapon != null)
             {
-                currentWeapon.Spawn(RightHand, LeftHand, m_AniController);
-            }
-              
+                currentWeapon.Spawn(RightHand, LeftHand, GetComponent<Animator>());
+            }     
         }
 
         private void Update () {
@@ -123,5 +128,16 @@ namespace RPG.Combat {
             m_AniController.SetTrigger("attack");
         }
 
+        public void RestoreState(object state)
+        {
+            weaponName = (string)state;
+            Weapon temp = Resources.Load<Weapon>(weaponName);
+            EquipWeapon(temp);
+        }
+
+        public object CaptureState()
+        {
+            return weaponName;
+        }
     }
 }

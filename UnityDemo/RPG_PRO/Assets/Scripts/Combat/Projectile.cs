@@ -6,10 +6,11 @@ namespace  RPG.Combat
     {
         [SerializeField] float speed = 10f;
         [SerializeField] bool isHoming = false;
-        [SerializeField] GameObject[] firstDestoryObjs;
-        [SerializeField] GameObject hitImpactPrefab;
         [SerializeField] float maxLifeTime = 10f;
         [SerializeField] float timeToWait = 0.05f;
+        [SerializeField] GameObject[] firstDestoryObjs;
+        [SerializeField] GameObject hitImpactPrefab;
+     
 
         Health target;
         float damage = 10;
@@ -43,7 +44,7 @@ namespace  RPG.Combat
         {
             CapsuleCollider collider = target.GetComponent<CapsuleCollider>();
             if( null == collider ) return target.transform.position;
-            return target.transform.position +( Vector3.up * collider.height * 0.5f );
+            return target.transform.position + ( Vector3.up * collider.height * 0.5f );
         }
 
         private void OnTriggerEnter(Collider other) {
@@ -55,15 +56,11 @@ namespace  RPG.Combat
                 if (hitImpactPrefab != null)
                 {
                   Instantiate(hitImpactPrefab, GetAttackPoint(), Quaternion.Euler(0,180,0));
-                }
-                    
-
+                }                   
                 for (int i = 0; i < firstDestoryObjs.Length; i++)
                 {
                     Destroy(firstDestoryObjs[i]);
                 }
-
-
                 Destroy(this.gameObject, timeToWait);
             }
         }

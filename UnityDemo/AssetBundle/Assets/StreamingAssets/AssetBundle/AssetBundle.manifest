@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 1231120225
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: cubeab.assetbundle
+      Dependencies: {}
+    Info_1:
+      Name: imageab.assetbundle
+      Dependencies: {}
