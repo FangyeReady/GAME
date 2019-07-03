@@ -2,14 +2,21 @@ using UnityEngine;
 using UnityEngine.AI;
 using RPG.Core;
 using RPG.Saving;
+using RPG.Stats;
 
-namespace  RPG.Combat
+namespace  RPG.Resources
 {
     public class Health:MonoBehaviour ,ISaveble
     {
         [SerializeField] float health = 20;
 
         private bool isDead = false;
+
+
+
+        private void Start() {
+            this.health = GetComponent<BaseStats>().GetHealthVal();
+        }
 
         public void TakeDamage( float damage )
         {

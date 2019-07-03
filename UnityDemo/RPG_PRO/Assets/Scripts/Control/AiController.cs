@@ -2,7 +2,7 @@ using System;
 using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
-
+using RPG.Resources;
 namespace RPG.Core {
 
     public class AiController : MonoBehaviour {

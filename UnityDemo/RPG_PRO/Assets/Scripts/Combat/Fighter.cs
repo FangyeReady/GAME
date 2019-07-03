@@ -4,7 +4,7 @@ using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
 using UnityEngine;
-
+using RPG.Resources;
 namespace RPG.Combat {
 
     public class Fighter : MonoBehaviour, IAction, ISaveble {
@@ -131,7 +131,7 @@ namespace RPG.Combat {
         public void RestoreState(object state)
         {
             weaponName = (string)state;
-            Weapon temp = Resources.Load<Weapon>(weaponName);
+            Weapon temp = UnityEngine.Resources.Load<Weapon>(weaponName);
             EquipWeapon(temp);
         }
 

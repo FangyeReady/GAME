@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using RPG.Resources;
 namespace  RPG.Combat
 {
     public class Projectile : MonoBehaviour
