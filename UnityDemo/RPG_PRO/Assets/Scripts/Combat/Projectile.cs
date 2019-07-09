@@ -13,6 +13,7 @@ namespace  RPG.Combat
      
 
         Health target;
+        GameObject instigator;
         float damage = 10;
 
         private void Start() {
@@ -25,16 +26,15 @@ namespace  RPG.Combat
             {
                 this.transform.LookAt(GetAttackPoint());
             }
-            print("target is not null");
             this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
 
-        public void SetTarget(Health target, float damage)
+        public void SetTarget( Health target, float damage , GameObject instigator)
         {
             this.target = target;
             this.damage = damage;
-
+            this.instigator = instigator;
             Destroy(this.gameObject, maxLifeTime);
             print("set target~!" + target.name);
         }
@@ -51,7 +51,7 @@ namespace  RPG.Combat
             Health hp = other.GetComponent<Health>();
             if ( hp != null && !hp.IsDead() )
             {
-                hp.TakeDamage(damage);
+                hp.TakeDamage( this.instigator , damage);
 
                 if (hitImpactPrefab != null)
                 {

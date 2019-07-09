@@ -64,11 +64,11 @@ namespace RPG.Combat
             return projectilePrefab != null;
         }
 
-        public void SpawnLongRangeBullet(Transform rightHand, Transform leftHand, Health target)
+        public void SpawnLongRangeBullet(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
         {
             Transform equipPos = GetHandTransform(rightHand, leftHand).transform;
             Projectile projectile = Instantiate(projectilePrefab, equipPos.position, Quaternion.identity).GetComponent<Projectile>();
-            projectile.SetTarget(target, weaponDamage);
+            projectile.SetTarget(target, weaponDamage, instigator);
         }
 
         public float GetDamege()

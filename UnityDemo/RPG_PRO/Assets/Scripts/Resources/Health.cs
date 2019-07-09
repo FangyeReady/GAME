@@ -15,14 +15,23 @@ namespace  RPG.Resources
 
 
         private void Start() {
-            this.health = GetComponent<BaseStats>().GetHealthVal();
+            this.health = GetComponent<BaseStats>().GetProgressionVal( Stat.Health );
         }
 
-        public void TakeDamage( float damage )
+        public void TakeDamage( GameObject instigator ,float damage )
         {
             health = Mathf.Max(health - damage, 0);
 
-           if( 0 == health) Die();
+           if( 0 == health) 
+            {
+                Die();
+                AwardExperience(instigator);
+            }
+        }
+
+        public float GetHealth()
+        {
+            return health;
         }
 
         private void Die()
@@ -33,6 +42,15 @@ namespace  RPG.Resources
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
             GetComponent<NavMeshAgent>().enabled = false;
+        }
+
+        private void AwardExperience(GameObject instigator)
+        {
+            Experience exp = instigator.GetComponent<Experience>();
+            if (exp != null)
+            {
+                exp.GainExperience( GetComponent<BaseStats>().GetProgressionVal( Stat.RewardRxp )  );
+            }
         }
 
         public bool IsDead()

@@ -8,15 +8,20 @@ namespace RPG.Stats
         [SerializeField] CharacterBaseInfo[] characterBaseInfo;
 
 
-        public float GetHealthByType(CharacterType type, int level)
+        public float GetProgressionValueByStat(CharacterType type, int level, Stat st)
         {
             foreach (var item in characterBaseInfo)
             {
                 if (item.characterType == type)
                 {
-                    int index = Mathf.Clamp(level - 1, 0, item.health.Length - 1);
-                    Debug.Log(index);
-                    return item.health[index];
+                    foreach (var info in item.infos)
+                    {
+                        if( info.st == st && info.values.Length > 0)//&& info.values.Length > level)
+                        {
+                            int index = Mathf.Clamp(level, 0, info.values.Length - 1);
+                            return info.values[index];
+                        }
+                    }
                 }
             }
             return 0;
@@ -25,8 +30,17 @@ namespace RPG.Stats
         [System.Serializable]
         class CharacterBaseInfo
         {
+            [Header("---------------CharacterType-----------------")]
            public CharacterType characterType;
-           public float[] health;
+            [Header("---------------------------------------------")]
+           public Info[] infos;
+        }
+
+        [System.Serializable]
+        class Info
+        {
+           public Stat st;
+           public float[] values;
         }
     }
 }

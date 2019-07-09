@@ -34,6 +34,9 @@ UnityDemo/AssetBundle/Temp/
 UnityDemo/Test/Library/
 UnityDemo/Test/Temp/
 
+UnityDemo/SeeU.2019/Library/
+UnityDemo/SeeU.2019/Temp/
+
 ExportedObj/
 .consulo/
 *.csproj

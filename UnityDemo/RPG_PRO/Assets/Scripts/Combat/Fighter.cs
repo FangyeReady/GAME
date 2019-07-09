@@ -62,6 +62,12 @@ namespace RPG.Combat {
             }
         }
 
+
+        public Health GetCurTarget()
+        {
+            return this.target;
+        }
+
         /// <summary>
         /// 是否能够攻击  
         /// </summary>
@@ -90,11 +96,11 @@ namespace RPG.Combat {
             if (null == target) return;
             if (currentWeapon.HasProjectile())
             {
-                currentWeapon.SpawnLongRangeBullet( RightHand, LeftHand, target );
+                currentWeapon.SpawnLongRangeBullet( RightHand, LeftHand, target, this.gameObject );
             }
             else
             {
-                target.GetComponent<Health>().TakeDamage(currentWeapon.GetDamege());
+                target.GetComponent<Health>().TakeDamage( this.gameObject ,currentWeapon.GetDamege());
             }
            
         }
